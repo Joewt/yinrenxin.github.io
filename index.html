@@ -149,93 +149,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-nginx-install" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/03/nginx-install/">Nginx安装</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/03/nginx-install/" class="archive-article-date">
-  	<time datetime="2018-02-03T08:51:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一、Nginx的安装"><a href="#一、Nginx的安装" class="headerlink" title="一、Nginx的安装"></a>一、Nginx的安装</h3><p>这里推荐使用yum安装如果是debian系列使用apt-get</p>
-<p>进入<a href="http://www.nginx.org" target="_blank" rel="noopener">官网</a>可以下载二进制包自行编译安装<br>这里推荐一个快捷方法</p>
-<ol>
-<li><p>创建一个文件 /etc/yum.repos.d/nginx.repo<br>文件内容如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[nginx]</span><br><span class="line">name=nginx repo</span><br><span class="line">baseurl=http://nginx.org/packages/OS/OSRELEASE/$basearch/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>“OS” 用 “rhel” 或 “centos”取代<br>“OSRELEASE”根据自己的系统版本号设置如果是6.x的改为6同理7.x的类似</p>
-</li>
-<li>执行yum install nginx安装即可  </li>
-</ol>
-<p>Nginx一些目录的类型和作用</p>
-<table><br>  <tr><br>    <th width="50%," bgcolor="#be77ff">路径</th><br>    <th width="15%," bgcolor="#be77ff">类型</th><br>    <th width="35%" ,="" bgcolor="#921aff">作用</th><br>  </tr><br>  <tr><br>    <td bgcolor="#eeeeee"> /etc/nginx/koi-utf<br>/etc/nginx/koi-win<br>/etc/nginx/win-utf </td><br>    <td> 配置文件  </td><br>    <td>  编码转换映射转化文件   </td><br>  </tr><br>  <tr><br>    <td bgcolor="#eeeeee"> /etc/nginx<br>/etc/nginx/nginx.conf<br>/etc/nginx/conf.d<br>/etc/nginx/conf.d/default.conf </td><br>    <td> 目录、配置文件  </td><br>    <td>  Nginx主配置文件   </td><br>  </tr><br>  <tr><br>    <td bgcolor="#eeeeee"> /etc/nginx/fastcgi_params<br>/etc/nginx/uwsgi_params<br>/etc/nginx/scgi_params</td><br>    <td> 配置文件  </td><br>    <td>  cgi配置相关，fastcgi配置   </td><br>  </tr><br>  <tr><br>    <td bgcolor="#eeeeee"><br>    /etc/nginx/mime.types</td><br>    <td>配置文件</td><br>    <td>设置http协议d额Content-Type与扩展名对应关系</td><br>  </tr><br>  <tr><br>    <td bgcolor="#eeeeee"><br>    /usr/sbin/nginx<br>/usr/sbin/nginx-debug</td><br>    <td><br>    命令<br>    </td><br>    <td><br>    Nginx服务的启动管理的终端命令<br>    </td><br>  </tr><br></table>
-
-<h3 id="二、Nginx的基本使用"><a href="#二、Nginx的基本使用" class="headerlink" title="二、Nginx的基本使用"></a>二、Nginx的基本使用</h3><p>nginx -V 可以查看nginx安装了哪些模块<br>nginx -tc /etc/nginx/nginx.conf 检查配置文件是否出错<br>nginx -s reload -c /etc/nginx/nginx.conf 平滑重启nginx</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">nginx</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/03/nginx-install/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-apue-deploy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -409,10 +322,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
-              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UNIX</a>

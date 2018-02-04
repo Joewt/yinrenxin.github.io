@@ -86,7 +86,7 @@
 <meta property="og:url" content="http://yinrenxin.github.io/2018/02/04/std-IO/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
 <meta property="og:description" content="前言UNIX一切皆文件，掌握文件的操作尤其重要。以下的内容主要是apue上面第五章内容，介绍了标准I/O库的一些内容。  流和FILE对象标准I/O库，他们的操作都是围绕流进行的字符分为单字节和多字节，流的定向决定了是所读、写的字符是单字节还是多字节的。当一个流被创建时，并没有定向。使用多字节I/O函数，流的定向就被设置为宽定向，单字节同理。只有两个函数可以改变流的定向，freopen和fwide">
-<meta property="og:updated_time" content="2018-02-04T09:34:59.046Z">
+<meta property="og:updated_time" content="2018-02-04T09:45:11.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="标准I&#x2F;O库(五)">
 <meta name="twitter:description" content="前言UNIX一切皆文件，掌握文件的操作尤其重要。以下的内容主要是apue上面第五章内容，介绍了标准I/O库的一些内容。  流和FILE对象标准I/O库，他们的操作都是围绕流进行的字符分为单字节和多字节，流的定向决定了是所读、写的字符是单字节还是多字节的。当一个流被创建时，并没有定向。使用多字节I/O函数，流的定向就被设置为宽定向，单字节同理。只有两个函数可以改变流的定向，freopen和fwide">
@@ -99,13 +99,13 @@
     root: '/',
     scheme: 'Muse',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Penulis'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -185,7 +185,27 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Beranda
+            Accueil
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
           </a>
         </li>
       
@@ -195,7 +215,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Arsip
+            Archives
           </a>
         </li>
       
@@ -259,7 +279,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-04T17:18:44+08:00">
                 2018-02-04
@@ -367,15 +387,15 @@
 <tr>
 <td style="text-align:left">w或wb</td>
 <td style="text-align:left">把文件截断至0长，或为写而创建</td>
-<td style="text-align:left">O_WRONLY\</td>
-<td>O_CREAT\</td>
+<td style="text-align:left">O_WRONLY</td>
+<td>O_CREAT</td>
 <td>O_TRUNC</td>
 </tr>
 <tr>
 <td style="text-align:left">a或ab</td>
 <td style="text-align:left">追加；为在文件尾而写打开，或为写而创建</td>
-<td style="text-align:left">O_WRONLY\</td>
-<td>O_CREAT\</td>
+<td style="text-align:left">O_WRONLY</td>
+<td>O_CREAT</td>
 <td>O_APPEND</td>
 </tr>
 <tr>
@@ -386,15 +406,15 @@
 <tr>
 <td style="text-align:left">w+或w+b或w+</td>
 <td style="text-align:left">把文件截断为0长，或为读和写而打开</td>
-<td style="text-align:left">O_RDWR\</td>
-<td>O_CREAT\</td>
+<td style="text-align:left">O_RDWR</td>
+<td>O_CREAT</td>
 <td>O_TRUNC</td>
 </tr>
 <tr>
 <td style="text-align:left">a+或a+b或ab+</td>
 <td style="text-align:left">为在文件尾读和写而打开或创建</td>
-<td style="text-align:left">O_RDWR\</td>
-<td>O_CREAT\</td>
+<td style="text-align:left">O_RDWR</td>
+<td>O_CREAT</td>
 <td>O_APPEND</td>
 </tr>
 </tbody>
@@ -544,10 +564,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Daftar Isi
+            Table Des Matières
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Ikhtisar
+            Ensemble
           </li>
         </ul>
       
@@ -568,7 +588,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">posting</span>
+                  <span class="site-state-item-name">articles</span>
                 </a>
               </div>
             
@@ -579,10 +599,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
-                
+                </a>
               </div>
             
 
@@ -590,6 +610,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yinrenxin" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:joewttx@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -651,7 +687,7 @@
 
 
 
-  <div class="theme-info">Tema &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Thème &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -671,6 +707,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

@@ -98,13 +98,13 @@
     root: '/',
     scheme: 'Muse',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Penulis'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -185,7 +185,27 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Beranda
+            Accueil
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
           </a>
         </li>
       
@@ -195,7 +215,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Arsip
+            Archives
           </a>
         </li>
       
@@ -261,7 +281,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-04T17:18:44+08:00">
                 2018-02-04
@@ -371,15 +391,15 @@
 <tr>
 <td style="text-align:left">w或wb</td>
 <td style="text-align:left">把文件截断至0长，或为写而创建</td>
-<td style="text-align:left">O_WRONLY\</td>
-<td>O_CREAT\</td>
+<td style="text-align:left">O_WRONLY</td>
+<td>O_CREAT</td>
 <td>O_TRUNC</td>
 </tr>
 <tr>
 <td style="text-align:left">a或ab</td>
 <td style="text-align:left">追加；为在文件尾而写打开，或为写而创建</td>
-<td style="text-align:left">O_WRONLY\</td>
-<td>O_CREAT\</td>
+<td style="text-align:left">O_WRONLY</td>
+<td>O_CREAT</td>
 <td>O_APPEND</td>
 </tr>
 <tr>
@@ -390,15 +410,15 @@
 <tr>
 <td style="text-align:left">w+或w+b或w+</td>
 <td style="text-align:left">把文件截断为0长，或为读和写而打开</td>
-<td style="text-align:left">O_RDWR\</td>
-<td>O_CREAT\</td>
+<td style="text-align:left">O_RDWR</td>
+<td>O_CREAT</td>
 <td>O_TRUNC</td>
 </tr>
 <tr>
 <td style="text-align:left">a+或a+b或ab+</td>
 <td style="text-align:left">为在文件尾读和写而打开或创建</td>
-<td style="text-align:left">O_RDWR\</td>
-<td>O_CREAT\</td>
+<td style="text-align:left">O_RDWR</td>
+<td>O_CREAT</td>
 <td>O_APPEND</td>
 </tr>
 </tbody>
@@ -521,7 +541,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-03T21:54:28+08:00">
                 2018-02-03
@@ -657,7 +677,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-03T08:55:00+08:00">
                 2018-02-03
@@ -797,7 +817,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">posting</span>
+                  <span class="site-state-item-name">articles</span>
                 </a>
               </div>
             
@@ -808,10 +828,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
-                
+                </a>
               </div>
             
 
@@ -819,6 +839,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yinrenxin" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:joewttx@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -864,7 +900,7 @@
 
 
 
-  <div class="theme-info">Tema &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Thème &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -884,6 +920,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="JOE&#39;S BLOG">
 <meta property="og:description" content="apue 配置问题mac 系统配置执行 make all 将 ./apue.3e/include/下的  apue.h 复制到 /usr/local/include/下将 ./apue.3e/lib/下的 error.c 复制到 /usr/local/include/ 下然后修改 apue.h文件  在最后添加 #include “error.c”   Linux 系统的配置如上使用的是cento">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-04T11:14:58.250Z">
+<meta property="og:updated_time" content="2018-02-04T13:17:31.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="apue配置">
 <meta name="twitter:description" content="apue 配置问题mac 系统配置执行 make all 将 ./apue.3e/include/下的  apue.h 复制到 /usr/local/include/下将 ./apue.3e/lib/下的 error.c 复制到 /usr/local/include/ 下然后修改 apue.h文件  在最后添加 #include “error.c”   Linux 系统的配置如上使用的是cento">
@@ -360,7 +360,7 @@
         <h3 id="apue-配置问题"><a href="#apue-配置问题" class="headerlink" title="apue 配置问题"></a>apue 配置问题</h3><h5 id="mac-系统配置"><a href="#mac-系统配置" class="headerlink" title="mac 系统配置"></a>mac 系统配置</h5><p>执行 make all</p>
 <p>将 ./apue.3e/include/下的  apue.h 复制到 /usr/local/include/下<br>将 ./apue.3e/lib/下的 error.c 复制到 /usr/local/include/ 下<br>然后修改 apue.h文件  在最后添加 #include “error.c”  </p>
 <h5 id="Linux-系统的配置如上"><a href="#Linux-系统的配置如上" class="headerlink" title="Linux 系统的配置如上"></a>Linux 系统的配置如上</h5><p>使用的是centos7 系统 编译源码的时候发现如下错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gcc -ansi -I../include -Wall -DLINUX -D_GNU_SOURCE  barrier.c -o barrier  -L../lib -lapue -pthread -lrt -lbsd</span><br><span class="line">/tmp/ccF6O2ef.o: In function `thr_fn&apos;:</span><br><span class="line">barrier.c:(.text+0x80): undefined reference to `heapsort&apos;</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br><span class="line">make[1]: *** [barrier] Error 1</span><br><span class="line">make[1]: Leaving directory `/home/learnApue/apue.3e/threads&apos;</span><br><span class="line">make: *** [all] Error 1</span><br></pre></td></tr></table></figure></p>
-<p>解决办法 <a href="https://pkgs.org/" target="_blank" rel="noopener">这里</a> 下载两个包<br>下载的为libbsd-devel-0.6.0-3.el7.elrepo.x86_64.rpm和libbsd-devel-0.6.0-3.el7.elrepo.x86_64.rpm<br>按照顺序按照<br>安装方法 rpm -Uvh xxxx.rpm  </p>
+<p>解决办法 <a href="https://pkgs.org/" target="_blank" rel="noopener">这里</a> 下载两个包<br>按照顺序安装<br>安装方法 rpm -Uvh xxxx.rpm  </p>
 <p>这样就可以使用了</p>
 
       

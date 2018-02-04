@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="JOE&#39;S BLOG">
 <meta property="og:description" content="前言UNIX一切皆文件，掌握文件的操作尤其重要。以下的内容主要是apue上面第五章内容，介绍了标准I/O库的一些内容。  流和FILE对象标准I/O库，他们的操作都是围绕流进行的字符分为单字节和多字节，流的定向决定了是所读、写的字符是单字节还是多字节的。当一个流被创建时，并没有定向。使用多字节I/O函数，流的定向就被设置为宽定向，单字节同理。只有两个函数可以改变流的定向，freopen和fwide">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-04T11:15:29.921Z">
+<meta property="og:updated_time" content="2018-02-04T14:24:20.869Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="标准I&#x2F;O库(五)">
 <meta name="twitter:description" content="前言UNIX一切皆文件，掌握文件的操作尤其重要。以下的内容主要是apue上面第五章内容，介绍了标准I/O库的一些内容。  流和FILE对象标准I/O库，他们的操作都是围绕流进行的字符分为单字节和多字节，流的定向决定了是所读、写的字符是单字节还是多字节的。当一个流被创建时，并没有定向。使用多字节I/O函数，流的定向就被设置为宽定向，单字节同理。只有两个函数可以改变流的定向，freopen和fwide">
@@ -360,6 +360,7 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>UNIX一切皆文件，掌握文件的操作尤其重要。以下的内容主要是apue上面第五章内容，介绍了标准I/O库的一些内容。</p>
 <hr>
 <h2 id="流和FILE对象"><a href="#流和FILE对象" class="headerlink" title="流和FILE对象"></a>流和FILE对象</h2><p>标准I/O库，他们的操作都是围绕流进行的<br>字符分为单字节和多字节，流的定向决定了是所读、写的字符是单字节还是多字节的。当一个流被创建时，并没有定向。使用多字节I/O函数，流的定向就被设置为宽定向，单字节同理。只有两个函数可以改变流的定向，freopen和fwide  </p>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;wchar.h&gt;</span><br><span class="line">int fwide(FILE *fp, int mode);</span><br><span class="line">//若流是宽定向的，返回正值；若流是单字节定向的返回负值，流未定向，返回0</span><br></pre></td></tr></table></figure>
 <p>mode参数的说明  </p>
 <ul>

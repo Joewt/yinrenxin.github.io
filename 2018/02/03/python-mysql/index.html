@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="JOE&#39;S BLOG">
 <meta property="og:description" content="Python 安装mysql出问题 使用的是mamp 用的里面的mysql 当我使用pip install mysql-python安装的时候出现 mysql_config没有找到的错误.解决办法：环境变量添加 export PATH=”/Application/MAMP/Library/bin:$PATH” 通过 brew install mysql-connector-c  pip insta">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-03T13:56:00.122Z">
+<meta property="og:updated_time" content="2018-02-04T14:26:11.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python-mysql">
 <meta name="twitter:description" content="Python 安装mysql出问题 使用的是mamp 用的里面的mysql 当我使用pip install mysql-python安装的时候出现 mysql_config没有找到的错误.解决办法：环境变量添加 export PATH=”/Application/MAMP/Library/bin:$PATH” 通过 brew install mysql-connector-c  pip insta">
@@ -337,7 +337,8 @@
       
         <h4 id="Python-安装mysql出问题"><a href="#Python-安装mysql出问题" class="headerlink" title="Python 安装mysql出问题"></a>Python 安装mysql出问题</h4><ol>
 <li>使用的是mamp 用的里面的mysql 当我使用pip install mysql-python安装的时候出现 mysql_config没有找到的错误.<br>解决办法：环境变量添加 export PATH=”/Application/MAMP/Library/bin:$PATH”</li>
-<li>通过 brew install mysql-connector-c  pip install mysql-python 安装出现IndexError:string index out of range<br>解决办法：By finding out the information that mysql-connector-cmight come to the conclusion that the configuration by brew installation may be incorrect , open the /usr/local/bin/mysql_config script to modify some of the contents of it:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#Create options</span><br><span class="line">Libs = &quot;-L $ pkglibdir &quot;</span><br><span class="line">Libs = &quot; $ libs   -l&quot;</span><br></pre></td></tr></table></figure>
+<li>通过 brew install mysql-connector-c  pip install mysql-python 安装出现IndexError:string index out of range<a id="more"></a>
+解决办法：By finding out the information that mysql-connector-cmight come to the conclusion that the configuration by brew installation may be incorrect , open the /usr/local/bin/mysql_config script to modify some of the contents of it:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#Create options</span><br><span class="line">Libs = &quot;-L $ pkglibdir &quot;</span><br><span class="line">Libs = &quot; $ libs   -l&quot;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>change into:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#Create options</span><br><span class="line">Libs = &quot;- L $ pkglibdir&quot;</span><br><span class="line">Libs = &quot;$ libs -lmysqlclient -lssl -lcrypto&quot;</span><br></pre></td></tr></table></figure></p>

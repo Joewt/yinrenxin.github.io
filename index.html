@@ -104,7 +104,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: 'Penulis'
     },
     algolia: {
       applicationID: '',
@@ -185,7 +185,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Beranda
           </a>
         </li>
       
@@ -195,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Arsip
           </a>
         </li>
       
@@ -261,7 +261,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Diposting di</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-04T17:18:44+08:00">
                 2018-02-04
@@ -353,7 +353,56 @@
 <li>fdopen函数取一个已有的文件描述符(我们可能从open、dup、dup2、fcntl、pipe、socket、socketpair或accept函数得到此文件描述符)，并使一个标准I/O流与该描述符相结合。此函数常用于由创建管道和网络通信通道函数返回的描述符。因为这些特殊类型文件不能使用标准I/O函数fopen打开，所以我们必须先调用设备专用函数以获得一个文件描述符，然后用fdopen使一个标准I/O流与该描述符相结合。</li>
 </ol>
 <p>fdopn是 POSIX.1 具有的</p>
-<p>type参数说明如下<br>|type|说明|open(2)标志|<br>|:–|:–|:–|<br>|r或rb   |为读而打开   |O_RDONLY|<br>|w或wb   |把文件截断至0长，或为写而创建   |O_WRONLY|O_CREAT|O_TRUNC|<br>|a或ab   |追加；为在文件尾而写打开，或为写而创建   |O_WRONLY|O_CREAT|O_APPEND|<br>|r+或r+b或rb+   |为读和写打开   |O_RDWR|<br>|w+或w+b或w+   |把文件截断为0长，或为读和写而打开   |O_RDWR|O_CREAT|O_TRUNC|<br>|a+或a+b或ab+   |为在文件尾读和写而打开或创建   |O_RDWR|O_CREAT|O_APPEND|</p>
+<p>type参数说明如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">type</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">open(2)标志</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">r或rb</td>
+<td style="text-align:left">为读而打开</td>
+<td style="text-align:left">O_RDONLY</td>
+</tr>
+<tr>
+<td style="text-align:left">w或wb</td>
+<td style="text-align:left">把文件截断至0长，或为写而创建</td>
+<td style="text-align:left">O_WRONLY\</td>
+<td>O_CREAT\</td>
+<td>O_TRUNC</td>
+</tr>
+<tr>
+<td style="text-align:left">a或ab</td>
+<td style="text-align:left">追加；为在文件尾而写打开，或为写而创建</td>
+<td style="text-align:left">O_WRONLY\</td>
+<td>O_CREAT\</td>
+<td>O_APPEND</td>
+</tr>
+<tr>
+<td style="text-align:left">r+或r+b或rb+</td>
+<td style="text-align:left">为读和写打开</td>
+<td style="text-align:left">O_RDWR</td>
+</tr>
+<tr>
+<td style="text-align:left">w+或w+b或w+</td>
+<td style="text-align:left">把文件截断为0长，或为读和写而打开</td>
+<td style="text-align:left">O_RDWR\</td>
+<td>O_CREAT\</td>
+<td>O_TRUNC</td>
+</tr>
+<tr>
+<td style="text-align:left">a+或a+b或ab+</td>
+<td style="text-align:left">为在文件尾读和写而打开或创建</td>
+<td style="text-align:left">O_RDWR\</td>
+<td>O_CREAT\</td>
+<td>O_APPEND</td>
+</tr>
+</tbody>
+</table>
 <hr>
 <h2 id="读和写流"><a href="#读和写流" class="headerlink" title="读和写流"></a>读和写流</h2><p>一旦打开了流，则可在3种不同类型的非格式化I/O中进行选择，对其进行读、写操作  </p>
 <ol>
@@ -472,7 +521,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Diposting di</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-03T21:54:28+08:00">
                 2018-02-03
@@ -608,7 +657,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Diposting di</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-03T08:55:00+08:00">
                 2018-02-03
@@ -748,7 +797,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">posting</span>
                 </a>
               </div>
             
@@ -761,7 +810,7 @@
               <div class="site-state-item site-state-tags">
                 
                   <span class="site-state-item-count">4</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">tags</span>
                 
               </div>
             
@@ -807,7 +856,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -815,7 +864,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Tema &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 

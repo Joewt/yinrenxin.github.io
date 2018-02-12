@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="UNIX,C," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="引言本章主要介绍了UNIX系统的进程控制  创建新进程、执行程序和进程终止 进程属性的各种ID，他们如何受到进程控制原语的影响 解释器文件和system函数 进程会计机制">
+<meta name="keywords" content="UNIX,C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程控制(八)">
+<meta property="og:url" content="http://yinrenxin.github.io/2018/02/12/progress-control/index.html">
+<meta property="og:site_name" content="JOE&#39;S BLOG">
+<meta property="og:description" content="引言本章主要介绍了UNIX系统的进程控制  创建新进程、执行程序和进程终止 进程属性的各种ID，他们如何受到进程控制原语的影响 解释器文件和system函数 进程会计机制">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure8.1.png">
+<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure3.9.png">
+<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure8.2.png">
+<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure8.8.png">
+<meta property="og:updated_time" content="2018-02-12T14:22:31.836Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程控制(八)">
+<meta name="twitter:description" content="引言本章主要介绍了UNIX系统的进程控制  创建新进程、执行程序和进程终止 进程属性的各种ID，他们如何受到进程控制原语的影响 解释器文件和system函数 进程会计机制">
+<meta name="twitter:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure8.1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yinrenxin.github.io/2018/02/12/progress-control/"/>
+
+
+
+
+
+  <title>进程控制(八) | JOE'S BLOG</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JOE'S BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">好记性不如烂键盘</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yinrenxin.github.io/2018/02/12/progress-control/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JOE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/img/favicon1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JOE'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">进程控制(八)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-12T21:44:44+08:00">
+                2018-02-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX环境高级编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX环境高级编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/12/progress-control/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/02/12/progress-control/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>本章主要介绍了UNIX系统的进程控制</p>
+<ul>
+<li>创建新进程、执行程序和进程终止</li>
+<li>进程属性的各种ID，他们如何受到进程控制原语的影响</li>
+<li>解释器文件和system函数</li>
+<li>进程会计机制</li>
+</ul>
+<a id="more"></a>
+<h2 id="进程标识"><a href="#进程标识" class="headerlink" title="进程标识"></a>进程标识</h2><p>每个进程都有一个非负整数表示的唯一进程ID，该ID唯一，但进程ID是可以复用的。当一个进程终止后，其进程ID就成为复用的候选者。大多数UNIX系统实现延迟复用算法，使得赋予新建进程的ID不同于最近终止进程所使用的ID。防止将新进程误认为是使用同一ID的某个已终止的先前进程。<br>一些专用进程  </p>
+<ul>
+<li>ID为0，通常是调度进程，也被称为交换进程。</li>
+<li>ID为1，通常是init进程，在自举过程结束时由内核调用。此进程负责在自举内核后启动一个UNIX系统。init通常读取与系统有关的初始化文件(/etc/rc*或/etc/inittab或/etc/init.d文件)。并将系统引导到一个状态(如多用户)。init进程决不会终止。它是一个普通的用户进程(不是内核中的系统进程)，但是它以超级用户特权运行。</li>
+<li>某些UNIX的虚拟存储器实现中，进程ID2是页守护进程(page daemon)，此进程负责支持虚拟存储器系统的分页操作。</li>
+</ul>
+<p>除了进程ID，每个进程还有一些其他标识符。下列函数返回这些标识符。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">pid_t getpid(void);     //调用进程的进程ID</span><br><span class="line">pid_t getppid(void);    //调用进程的父进程ID</span><br><span class="line">pid_t getuid(void);     //调用进程的实际用户ID</span><br><span class="line">pid_t geteuid(void);    //调用进程的有效用户ID</span><br><span class="line">pid_t getgid(void);     //调用进程的实际组ID</span><br><span class="line">pid_t getegid(void);    //调用进程的有效组ID</span><br></pre></td></tr></table></figure></p>
+<h2 id="函数fork"><a href="#函数fork" class="headerlink" title="函数fork"></a>函数fork</h2><p>一个现有的进程可以调用fork函数创建一个新进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">pid_t fork(void);</span><br><span class="line">//返回值：子进程返回0，父进程返回子进程ID；若出错返回-1</span><br></pre></td></tr></table></figure></p>
+<p>由fork创建的新进程被称为子进程(child process)。fork函数被调用一次，但返回两次。子进程返回0，父进程返回子进程的进程ID。   </p>
+<p>父进程返回子进程的ID的原因：  </p>
+<ul>
+<li>因为一个进程的子进程可以有多个，并且没有一个函数使一个进程可以获得其所有子进程的进程ID。  </li>
+</ul>
+<p>子进程返回0的原因：</p>
+<ul>
+<li>一个进程只会有一个父进程，所以子进程总是可以调用getppid以获取其父进程的进程ID(进程ID0总是由内核交换程序使用，所以一个子进程的进程ID不可能为0)  </li>
+</ul>
+<p>子进程和父进程继续执行fork调用之后的指令。子进程是父进程的副本。例如，子进程获得父进程数据空间、堆和栈的副本。注意，这是子进程所拥有的副本。父进程和子进程并不共享这些存储空间。父进程和子进程共享正文段<br>由于在fork之后经常跟随着exec，所以现在的很多实现并不执行一个父进程数据段、堆和栈的完全副本。作为替代，使用了写时复制技术。这些区域由父进程和子进程共享，而且内核将它们的访问权限改变为只读。如果父进程和子进程中的任一个试图修改这些区域，则内核只为修改区域的那块内存制作一个副本，通常是虚拟存储系统中的一“页”。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">int globvar = 6;</span><br><span class="line">char buf[] = &quot;a write to stdout\n&quot;;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    int     var;</span><br><span class="line">    pid_t   pid;</span><br><span class="line"></span><br><span class="line">    var = 99;</span><br><span class="line">    if (write(STDOUT_FILENO, buf, sizeof(buf)-1) != sizeof(buf)-1)</span><br><span class="line">        err_sys(&quot;write error&quot;);</span><br><span class="line">    printf(&quot;before fork\n&quot;);</span><br><span class="line">    if((pid = fork())&lt;0) &#123;</span><br><span class="line">        err_sys(&quot;fork error&quot;);</span><br><span class="line">    &#125; else if(pid == 0) &#123;</span><br><span class="line">        printf(&quot;这是子进程:\n&quot;);</span><br><span class="line">        globvar++;</span><br><span class="line">        var++;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        printf(&quot;这是父进程:\n&quot;);</span><br><span class="line">        sleep(2);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;pid = %ld, glob = %d, var = %d\n&quot;, (long)getpid(), globvar, var);</span><br><span class="line">    exit(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://ojg7pw3bl.bkt.clouddn.com/figure8.1.png" alt="figure8.1"><br>一般来说子进程和父进程的执行顺序是不确定的，这取决于内核所使用的调度算法。如果要求父进程和子进程之间相互同步，则要求某种形式的进程间通信。在上面的程序中父进程使进程休眠2s，以使子进程先执行。但不保证2s足够，第二次 的结果父进程并没有休眠2s。父进程先执行了。在10章将会说明在fork之后如何使用信号使父进程和子进程同步。<br>当写标准输出时，我们将buf长度减1作为输出字节数，这是为了避免将终止null字节写出。strlen计算不包含终止null字节的字符串长度，而sizeof计算包括终止null字节的缓冲区长度。两者之间的另一个区别是，使用strlen需进行一次函数调用，而对于sizeof而言，因为缓冲区已用已知字符串进行初始化，其长度是固定的，所以sizeof是在编译时计算缓冲区长度。  </p>
+<h4 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h4><p>对图中程序注意的另一点是：在重定向父进程的标准输出时，子进程的标准输出也被重定向。实际上，fork的一个特性是父进程的所有打开文件描述符都被复制到子进程中。我们说“复制”是因为对每个文件描述符来说，就好像执行了dup函数。父进程和子进程每个相同的打开描述符共享一个文件表项(如下图所示)。<br><img src="http://ojg7pw3bl.bkt.clouddn.com/figure3.9.png" alt=""><br>考虑下述情况，一个进程具有3个不同的打开文件，它们是标准输入、标准输出和标准错误。在从fork返回时，我们有了如下图中所示的结构。<br><img src="http://ojg7pw3bl.bkt.clouddn.com/figure8.2.png" alt=""><br>父进程和子进程共享同一个文件偏移量。考虑如下情况:  </p>
+<ul>
+<li>一个进程fork了一个子进程，然后等待子进程终止。假定，作为普通处理的一部分，父进程和子进程都向标准输出进行写操作。如果父进程的标准输出已重定向(很可能是由shell实现的)，那么子进程写到该标准输出时，它将更新与父进程共享的该文件的偏移量。在这个例子中，当父进程等待子进程时，子进程写到标准输出；而在子进程终止后，父进程也写到标准输出上，并且知道其输出会追加在子进程所写数据之后。如果父进程和子进程不共享同一文件偏移量，要实现这种形式的交互就要困难很多，可能需要父进程显示地动作。</li>
+<li>如果父进程和子进程写同一描述符指向的文件，但又没有任何形式的同步(如使父进程等待子进程)，那么他们的输出就会相互混合(假定所用的描述符是在fork之前打开的)。虽然这种情况是可能发生的，但这并不是常见的操作模式。  </li>
+</ul>
+<p>在fork之后处理文件描述符有以下两种常见的情况。</p>
+<ol>
+<li>父进程等待子进程完成。在这种情况下，父进程无需对其描述符做任何处理。当子进程终止后，它曾进行过读、写操作的任一共享描述符的文件偏移量已做了相应更新。</li>
+<li><p>父进程和子进程各自执行不同的程序段。在这种情况下，在fork之后，父进程和子进程各自关闭它们不需要使用的文件描述符，这样就不会干扰对方使用的文件描述符。这种方法是网络服务进程经常使用的。<br> 除了打开文件之外，父进程的很多其他属性也有子进程继承，包括:</p>
+<ul>
+<li>实际用户ID、实际组ID、有效用户ID、有效组ID</li>
+<li>附属组ID</li>
+<li>进程组ID</li>
+<li>会话ID</li>
+<li>终端控制</li>
+<li>设置用户ID标志和设置组ID标志</li>
+<li>当前工作目录</li>
+<li>根目录</li>
+<li>文件模式创建屏蔽字</li>
+<li>信号屏蔽和安排</li>
+<li>对任一打开描述符的执行时关闭(close-on-exec)标志</li>
+<li>环境</li>
+<li>连接的共享存储段</li>
+<li>存储映像</li>
+<li><p>资源限制  </p>
+<p>父进程和子进程之间的具体区别如下:</p>
+</li>
+<li>fork的返回值不同</li>
+<li>进程ID不同</li>
+<li>这两个进程的父进程ID不同:子进程的父进程ID是创建它的进程的ID，而父进程的父进程ID则不变</li>
+<li>子进程的tms_utime、tms_stime、tms_cutime和tms_ustime的值设置为0(在下面的小结中介绍)</li>
+<li>子进程不继承父进程设置的文件锁</li>
+<li>子进程的未处理闹钟被清除</li>
+<li>子进程的未处理信号集设置为空集</li>
+</ul>
+</li>
+</ol>
+<p>使fork失败的两个主要原因是:</p>
+<ol>
+<li>系统中已经有了太多的进程(通常意味着某个方面出了问题)</li>
+<li>该实际用户ID的进程总数超过了系统限制(CHAILD_MAX规定了每个实际用户ID在任意时刻可拥有的最大进程数)  </li>
+</ol>
+<p>fork有以下两种用法  </p>
+<ol>
+<li>一个父进程希望复制自己，使父进程和子进程同时执行不同的代码段。这在网络服务进程中是常见的—父进程等待客户端的服务请求。当这种请求到达时，父进程调用fork，使子进程批处理此请求。父进程则继续等待下一个服务请求</li>
+<li>一个进程要执行一个不同的程序。这对shell是最常见的。在这种情况下，子进程从fork返回后立即调用exec  </li>
+</ol>
+<p>某些系统将第二种用法中的两个操作(fork之后执行exec)组合成一个操作，称为spawn。UNIX系统将这两个操作分开，因为在很多场合需要单独使用fork，其后并不跟随exec。另外，将这两个操作分开，使得子进程在fork和exec之间可以更改自己的属性，如I/O重定向、用户ID。信号安排等。在第15章有更多的例子。  </p>
+<h2 id="函数vfork"><a href="#函数vfork" class="headerlink" title="函数vfork"></a>函数vfork</h2><p>vfork函数的调用序列和返回值与fork相同，但两者的语义不同。  </p>
+<ul>
+<li>可移植的应用程序不应该使用这个函数</li>
+</ul>
+<p>vfork和fork的区别:  </p>
+<ul>
+<li>vfork函数用于创建一个新进程，而该新进程的目的是exec一个新程序。vfork和fork一样都创建一个子进程，但是它并不将父进程的地址空间完全复制到子进程中，因为子进程会立即调用exec(或exit)，于是也就不会引用该地址空间。不过在子进程调用exec或exit之前，它在父进程的空间中运行。这种优化工作方式在某些UNIX系统中提高了工作效率，但如果子进程修改数据、进行函数调用、或者没有调用exec或exit就返回都可能会带来未知的结果。  </li>
+<li>vfork保证子进程先运行，在它调用exec或exit之后父进程才可能被调度运行，当子进程调用这两个函数中的任意一个时，父进程会恢复运行。(如果在调用这两个函数之前子进程依赖于父进程的进一步动作，则会导致死锁)  </li>
+</ul>
+<h2 id="函数exit"><a href="#函数exit" class="headerlink" title="函数exit"></a>函数exit</h2><p>如第7章所述，进程有5种正常终止及3种异常终止方式。<br>5种正常终止方式具体如下:</p>
+<ol>
+<li>在main函数内执行return函数。等效于exit</li>
+<li>调用exit函数。此函数由ISO C定义，其操作包括调用各终止处理程序(终止处理程序在调用atexit函数时登记)，然后关闭所有标准I/O流等。因为ISO C并不处理文件描述符、多进程以及作业控制，所以这一定义对UNIX系统而言是不完整的。</li>
+<li>调用_exit或_Exit函数。ISO C定义_Exit,其目的是为进程提供一种无需运行终止处理程序或信号处理程序而终止的方法。对标准I/O流是否进行冲洗，这取决于实现。在UNIX系统中，<code>_Exit</code>和<code>_exit</code>是同义的，并不冲洗标准I/O流。<code>_exit</code>函数由<code>exit</code>调用。<code>_exit</code>函数由<code>exit</code>调用，它处理UNIX系统特定的细节。<code>_exit</code>是由POSIX.1说明的。  </li>
+<li>进程的最后一个线程在其启动例程中执行return语句。但是，该线程的返回值不用作进程的返回值。当最后一个线程从其启动例程返回时，该进程以终止状态0返回。</li>
+<li>进程的最后一个线程调用pthread_exit函数，在这种状态下，进程终止状态总是0，这与传递给pthread_exit的参数无关。</li>
+</ol>
+<p>3种异常终止具体如下:</p>
+<ol>
+<li>调用abort。它产生SIGABRT信号，这是下一种异常终止的一种特例。</li>
+<li>当进程接收到某种信号时。信号可由进程自身(如调用abort函数)、其他进程或内核产生。例如，若进程引用地址空间之外的存储单元、或者除以0，内核就会为该进程产生相应的信号。</li>
+<li>最后一个线程对“取消”请求作出响应。默认情况下，“取消”以延迟方式发生:一个线程要求取消另一个线程，若干时间之后，目标线程终止  </li>
+</ol>
+<p>不管进程如何终止，最后都会执行内核中的同一段代码。这段代码为相应进程关闭所有打开描述符，释放它所使用的存储器等。对于上述任意一种终止情形，我们希望终止进程能够通知其父进程它是如何终止的:  </p>
+<ul>
+<li>对于3个终止函数(exit,<code>_exit</code>,<code>_Exit</code>),实现这一点的方法是，将其退出状态(exit status)作为参数传递给函数。</li>
+<li>在异常终止情况，内核(不是进程本身)产生一个指示其异常终止原因的终止状态。</li>
+<li>在任意一种情况下，该终止进程的父进程都能用wait或waitpid函数取得其终止状态  </li>
+</ul>
+<p>如果父进程在子进程之前终止:</p>
+<ul>
+<li>对于父进程已经终止的所有进程，它们的父进程都改为init进程。我们称这些进程由init进程收养。其操作过程:<ul>
+<li>在一个进程终止时，内核逐个检查所有活动进程，以判断它是否是正要终止进程的子进程，如果是，则该进程的父进程ID就更改为1.这种处理方法保证了每个进程有有一个父进程。</li>
+</ul>
+</li>
+</ul>
+<p>如果子进程在父进程之前终止:</p>
+<ul>
+<li>内核为每个终止子进程保存了一定量的信息，所以当终止进程的父进程调用wait或waitpid时，可以得到这些信息。</li>
+</ul>
+<p>一个由init进程收养的进程终止时会发生什么:</p>
+<ul>
+<li>init被编写成无论何时只要有一个子进程终止，init就会调用一个wait函数取得其终止状态。防止了在系统中塞满僵尸进程。</li>
+</ul>
+<h2 id="函数wait和waitpid"><a href="#函数wait和waitpid" class="headerlink" title="函数wait和waitpid"></a>函数wait和waitpid</h2><p>当一个进程正常或异常终止时，内核就向其父进程发送SIGCHLD信号。子进程终止是一个异步事件(这可以在父进程运行的任何时候发生)，所以这种信号也是内核向父进程发的异步通知。<br>调用wait或waitpid会发生什么:  </p>
+<ol>
+<li>如果其所有子进程都还在运行，则阻塞。</li>
+<li>如果一个子进程已终止，正等待父进程获取其终止状态，则取得该子进程的终止状态立即返回。</li>
+<li>如果它没有任何子进程，则立即出错返回。</li>
+</ol>
+<p>如果进程由于接收到SIGCHLD信号而调用wait，我们期望wait会立即返回。但是如果在随机时间点调用wait，则进程可能会阻塞。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/wait.h&gt;</span><br><span class="line">pid_t wait(int *statloc);</span><br><span class="line">pid_t waitpid(pid_t pid, int *statloc, int options);</span><br><span class="line">//成功，返回进程ID；出错返回0或-1</span><br></pre></td></tr></table></figure></p>
+<p>两个函数的区别:</p>
+<ul>
+<li>在一个子进程终止前，wait使其调用者阻塞，而waitpid有一个选项，可使调用者不阻塞。</li>
+<li>waitpid并不等待在其调用之后的第一个终止子进程，它有若干个选项，可以控制它所等待的进程。  </li>
+<li>如果子进程已经终止，并且是一个僵尸进程，则wait立即返回并取得该子进程的状态；否则wait使其调用者阻塞，直到一个子进程终止。</li>
+<li>如调用者阻塞而且它有多个子进程，则在其某一个进程终止时，wait就立即返回。</li>
+<li>因为wait返回终止子进程的进程ID，所以它总能了解是哪一个子进程终止了。</li>
+</ul>
+<p>对于statloc参数:</p>
+<ul>
+<li>statloc是一个整形指针。如果statloc不是一个空指针，则终止进程的终止状态就存放在它所指向的单元内。如果不关心终止状态，则可将参数指定为空指针。</li>
+</ul>
+<p>POSIX.1 定义了waitpid函数,函数中pid参数说明如下:</p>
+<ul>
+<li>pid == -1   等待任一子进程。此种情况下，waitpid与wait等效</li>
+<li>pid &gt; 0     等待进程ID与pid相等的子进程</li>
+<li>pid == 0    等待组ID等于调用进程组ID的任一子进程</li>
+<li>pid &lt; -1    等待组ID等于pid绝对值的任一子进程  </li>
+</ul>
+<p>waitpid和wait出错返回</p>
+<ul>
+<li>waitpid函数返回终止子进程的进程ID，并将该子进程的终止状态存放在由statloc指向的存储单元中。对于wait。</li>
+<li>wait，其唯一的出错是调用进程没有子进程。而waitpid，如果指定的进程或进程组不存在，或者参数pid指定的进程不是调用进程的子进程，都可能出错。</li>
+</ul>
+<p>options参数或者是0，或者是如下图中常量按位或运算的结果:  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">常量</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">WCONTINUED</td>
+<td style="text-align:left">若实现支持作业控制，那么由pid指定的任一子进程在停止后已经继续，但其状态尚未报告，则返回其状态(POSIX.1的XSI扩展)</td>
+</tr>
+<tr>
+<td style="text-align:left">WNOHANG</td>
+<td style="text-align:left">若由pid指定的子进程并不是理解可用的，则waitpid不阻塞，此时其返回值为0</td>
+</tr>
+<tr>
+<td style="text-align:left">WUNTRACED</td>
+<td style="text-align:left">若某实现支持作业控制，而由pid指定的任一子进程已处于停止状态，并且其状态自停止以来还未报告过，则返回其状态。WIFSTOPPED宏确定返回值是否对应于一个停止的子进程</td>
+</tr>
+</tbody>
+</table>
+<p>waitpid函数提供了wait函数没有提供的3个功能。  </p>
+<ol>
+<li>waitpid可等待一个特定的进程，而wait则返回任一终止子进程的状态。</li>
+<li>waitpid提供了一个wait的非阻塞版本。有时希望获取一个子进程的状态，但不想阻塞</li>
+<li>waitpid通过WUNTRACED和WCONTINUED选项支持作业控制</li>
+</ol>
+<p>fork两次避免僵尸进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &lt;sys/wait.h&gt;</span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    pid_t pid;</span><br><span class="line"></span><br><span class="line">    if ((pid = fork())&lt;0)&#123;</span><br><span class="line">        err_sys(&quot;fork error&quot;);</span><br><span class="line">    &#125; else if (pid == 0)&#123;</span><br><span class="line">        //子进程</span><br><span class="line">        if ((pid = fork()) &lt; 0)</span><br><span class="line">            err_sys(&quot;fork error&quot;);</span><br><span class="line">        else if (pid &gt; 0)  //子进程 或 孙进程的父进程</span><br><span class="line">            exit(0);</span><br><span class="line"></span><br><span class="line">        //孙进程</span><br><span class="line">        sleep(2);</span><br><span class="line">        //打印孙进程的 父ID</span><br><span class="line">        printf(&quot;second child, parent pid = %ld\n&quot;,(long)getppid());</span><br><span class="line">        exit(0);</span><br><span class="line">    &#125;</span><br><span class="line">    //父进程</span><br><span class="line">    if (waitpid(pid, NULL, 0) != pid)</span><br><span class="line">        err_sys(&quot;waitpid error&quot;);</span><br><span class="line"></span><br><span class="line">    exit(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ojg7pw3bl.bkt.clouddn.com/figure8.8.png" alt=""><br>孙进程(用了更加形象的描述，原书中是第二个子进程)调用sleep以保证在打印其父ID时子进程已终止。在fork之后，父进程和子进程都可继续执行，并且我们无法预知哪一个会先执行。在fork之后，如果不使孙进程休眠，那么它可能比其父进程(也就是子进程)先执行，于是它打印的父进程ID将是创建它的父进程，而不是init进程(进程ID1)。  </p>
+<h2 id="函数waitid"><a href="#函数waitid" class="headerlink" title="函数waitid"></a>函数waitid</h2><p>waitid类似于waitpid，但更加灵活<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/wait.h&gt;</span><br><span class="line">int waitid(idtype_t idtype, id_t id, siginfo_t *infop, int options);</span><br><span class="line">//成功，返回0；出错，返回-1</span><br></pre></td></tr></table></figure></p>
+<p>该函数与waitpid类似，waitid允许一个进程指定要等待的子进程。<br>id参数的作用与idtype的值相关，idtype类型在下表中  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">常量</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">P_PID</td>
+<td style="text-align:left">等待一特定进程：id包含要等待子进程的进程ID</td>
+</tr>
+<tr>
+<td style="text-align:left">P_PGID</td>
+<td style="text-align:left">等待一特定进程组的任一子进程：id包含要等待子进程的进程组ID</td>
+</tr>
+<tr>
+<td style="text-align:left">P_ALL</td>
+<td style="text-align:left">等待任一子进程：忽略id</td>
+</tr>
+</tbody>
+</table>
+<p>options参数是如下图中个标志的按位或运算  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">常量</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">WCONTINUED</td>
+<td style="text-align:left">等待一进程，它以前曾被停止，此后又继续，但其状态尚未报告</td>
+</tr>
+<tr>
+<td style="text-align:left">WEXITED</td>
+<td style="text-align:left">等待已退出的进程</td>
+</tr>
+<tr>
+<td style="text-align:left">WNOHANG</td>
+<td style="text-align:left">如无可用的子进程退出状态，立即返回而非阻塞</td>
+</tr>
+<tr>
+<td style="text-align:left">WNOWAIT</td>
+<td style="text-align:left">不破坏子进程退出状态。该子进程退出状态可由后续的wait、waitid或waitpid调用取得</td>
+</tr>
+<tr>
+<td style="text-align:left">WSTOPPED</td>
+<td style="text-align:left">等待一进程，它已经停止，但其状态尚未报告</td>
+</tr>
+</tbody>
+</table>
+<p>infop参数是指向siginfo结构的指针。该结构包含了造成子进程状态改变有关信号的详细信息。  </p>
+<h2 id="函数wait3和wait4"><a href="#函数wait3和wait4" class="headerlink" title="函数wait3和wait4"></a>函数wait3和wait4</h2><p>这俩函数比上面3个函数提供的功能多一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/wait.h&gt;</span><br><span class="line">#include &lt;sys/time.h&gt;</span><br><span class="line">#include &lt;sys/resource.h&gt;</span><br><span class="line">pid_t wait3(int *statloc, int options, struct rusage *rusage);</span><br><span class="line">pid_t wait4(pid_t pid, int *statloc, int options, struct rusage *rusage);</span><br><span class="line">//成功，返回进程ID；失败，返回-1</span><br></pre></td></tr></table></figure></p>
+<p>返回的信息包括用户CPU时间总量、系统CPU时间总量、缺页次数、接收到信号的次数等。  </p>
+<h2 id="竞争条件"><a href="#竞争条件" class="headerlink" title="竞争条件"></a>竞争条件</h2><p>竞争发生的原因：当多个进程都企图对共享数据进行某种处理，而最后结果又取决于进程运行的顺序时。<br>在上一小节中的程序。当孙进程打印其父ID时，有一个潜在的竞争条件:  </p>
+<ul>
+<li>如果孙进程在子进程之前运行，孙进程的父进程就是子进程。但是如果子进程先运行，并有足够的时间到达并执行exit，则孙进程的父进程就是init。</li>
+</ul>
+<p>如果一个进程希望等待一个子进程终止，则它必须调用wait函数中的一个。如果一个进程要等待其父进程终止，则可使用下列形式的循环  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">while (getppid() != 1)</span><br><span class="line">    sleep(1);</span><br></pre></td></tr></table></figure>
+<p>这种形式的循环称为轮询(polling),它的问题是浪费CPU时间，因为调用者每隔1S都被唤醒，然后进行条件测试。<br>为了避免竞争条件和轮询，在多个进程之间需要有某种形式的信号发送和接收的方法。在UNIX中可以使用信号机制(第10章会介绍),进程间通信在15、17章介绍。  </p>
+<h2 id="函数exec"><a href="#函数exec" class="headerlink" title="函数exec"></a>函数exec</h2><p>fork函数创建新的子进程后，子进程往往要调用一种exec函数以执行另一个程序。当进程调用一种exec函数时，该进程执行的程序完全替换为新程序，而新程序则从其main函数开始执行。调用exec并不创建新进程，所以前后的进程ID并未改变。exec只是用磁盘上的一个新程序替换了当前进程的正文段、数据段、堆段和栈段。  </p>
+<p>7种不同的exec函数原型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">int execl(const char *pathname, const char *arg0, ...);</span><br><span class="line">int execv(const char *pathname, char *const argv[]);</span><br><span class="line">int execle(const char *pathname, const char *arg0, ...);</span><br><span class="line">int execve(const char *pathname, char *const argv[], char *const envp[]);</span><br><span class="line">int execlp(const char *filename, const char *arg0, ...);</span><br><span class="line">int execvp(const char *filename, char *const argv[]);</span><br><span class="line">int fexecve(int fd, char *const argv[], char *const envp[]);</span><br><span class="line">//出错返回-1，成功不返回</span><br></pre></td></tr></table></figure>
+<p>(未完待续)</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢土豪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/assets/img/alipay.png" alt="JOE Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/UNIX/" rel="tag"># UNIX</a>
+          
+            <a href="/tags/C/" rel="tag"># C</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/11/decompression/" rel="next" title="常用的解压缩命令">
+                <i class="fa fa-chevron-left"></i> 常用的解压缩命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/assets/img/favicon1.png"
+                alt="JOE" />
+            
+              <p class="site-author-name" itemprop="name">JOE</p>
+              <p class="site-description motion-element" itemprop="description">爱生活，爱coding，更爱妹子</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yinrenxin" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:joewttx@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程标识"><span class="nav-number">2.</span> <span class="nav-text">进程标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数fork"><span class="nav-number">3.</span> <span class="nav-text">函数fork</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件共享"><span class="nav-number">3.0.1.</span> <span class="nav-text">文件共享</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数vfork"><span class="nav-number">4.</span> <span class="nav-text">函数vfork</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数exit"><span class="nav-number">5.</span> <span class="nav-text">函数exit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数wait和waitpid"><span class="nav-number">6.</span> <span class="nav-text">函数wait和waitpid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数waitid"><span class="nav-number">7.</span> <span class="nav-text">函数waitid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数wait3和wait4"><span class="nav-number">8.</span> <span class="nav-text">函数wait3和wait4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#竞争条件"><span class="nav-number">9.</span> <span class="nav-text">竞争条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数exec"><span class="nav-number">10.</span> <span class="nav-text">函数exec</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JOE</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://yinrenxin-github-io.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yinrenxin.github.io/2018/02/12/progress-control/';
+          this.page.identifier = '2018/02/12/progress-control/';
+          this.page.title = '进程控制(八)';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://yinrenxin-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

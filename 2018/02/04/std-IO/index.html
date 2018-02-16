@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="JOE&#39;S BLOG">
 <meta property="og:description" content="前言UNIX一切皆文件，掌握文件的操作尤其重要。以下的内容主要是apue上面第五章内容，介绍了标准I/O库的一些内容。  流和FILE对象标准I/O库，他们的操作都是围绕流进行的字符分为单字节和多字节，流的定向决定了是所读、写的字符是单字节还是多字节的。当一个流被创建时，并没有定向。使用多字节I/O函数，流的定向就被设置为宽定向，单字节同理。只有两个函数可以改变流的定向，freopen和fwide">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-04T14:24:20.869Z">
+<meta property="og:updated_time" content="2018-02-14T12:35:48.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="标准I&#x2F;O库(五)">
 <meta name="twitter:description" content="前言UNIX一切皆文件，掌握文件的操作尤其重要。以下的内容主要是apue上面第五章内容，介绍了标准I/O库的一些内容。  流和FILE对象标准I/O库，他们的操作都是围绕流进行的字符分为单字节和多字节，流的定向决定了是所读、写的字符是单字节还是多字节的。当一个流被创建时，并没有定向。使用多字节I/O函数，流的定向就被设置为宽定向，单字节同理。只有两个函数可以改变流的定向，freopen和fwide">
@@ -473,7 +473,7 @@
 <h2 id="每次一行I-O"><a href="#每次一行I-O" class="headerlink" title="每次一行I/O"></a>每次一行I/O</h2><p>下面两个函数提供每次输入一行的功能<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">char *fgets(char *restrict buf, int n, FILE *restrict fp);</span><br><span class="line">char *gets(char *buf);</span><br><span class="line">//成功返回buf；若已到达文件尾端或出错，返回NULL</span><br></pre></td></tr></table></figure></p>
 <p>推荐使用fgets<br>每个输入都有对应的输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int fputs(const char* restrict str, FILE *restrict fp);</span><br><span class="line">int puts(const char *str);</span><br><span class="line">//成功返回非负值，失败返回EOF</span><br></pre></td></tr></table></figure></p>
 <hr>
-<h2 id="二进制I-O"><a href="#二进制I-O" class="headerlink" title="二进制I/O"></a>二进制I/O</h2><p>系统提供了一下函数执行二进制I/O操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">size_t fread(void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);</span><br><span class="line">size_t fwrite(const void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);</span><br><span class="line">//两个函数的返回值：读或写的对象数</span><br></pre></td></tr></table></figure></p>
+<h2 id="二进制I-O"><a href="#二进制I-O" class="headerlink" title="二进制I/O"></a>二进制I/O</h2><p>系统提供了以下函数执行二进制I/O操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">size_t fread(void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);</span><br><span class="line">size_t fwrite(const void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);</span><br><span class="line">//两个函数的返回值：读或写的对象数</span><br></pre></td></tr></table></figure></p>
 <hr>
 <h2 id="定位流"><a href="#定位流" class="headerlink" title="定位流"></a>定位流</h2><p>有3种方式定位标准I/O流  </p>
 <ol>

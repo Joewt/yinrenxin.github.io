@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure3.9.png">
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure8.2.png">
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure8.8.png">
-<meta property="og:updated_time" content="2018-02-16T06:21:51.154Z">
+<meta property="og:updated_time" content="2018-02-19T03:44:34.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程控制(八)">
 <meta name="twitter:description" content="引言本章主要介绍了UNIX系统的进程控制  创建新进程、执行程序和进程终止 进程属性的各种ID，他们如何受到进程控制原语的影响 解释器文件和system函数 进程会计机制">
@@ -611,7 +611,7 @@
 <p>这种形式的循环称为轮询(polling),它的问题是浪费CPU时间，因为调用者每隔1S都被唤醒，然后进行条件测试。<br>为了避免竞争条件和轮询，在多个进程之间需要有某种形式的信号发送和接收的方法。在UNIX中可以使用信号机制(第10章会介绍),进程间通信在15、17章介绍。  </p>
 <h2 id="函数exec"><a href="#函数exec" class="headerlink" title="函数exec"></a>函数exec</h2><p>fork函数创建新的子进程后，子进程往往要调用一种exec函数以执行另一个程序。当进程调用一种exec函数时，该进程执行的程序完全替换为新程序，而新程序则从其main函数开始执行。调用exec并不创建新进程，所以前后的进程ID并未改变。exec只是用磁盘上的一个新程序替换了当前进程的正文段、数据段、堆段和栈段。  </p>
 <p>7种不同的exec函数原型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">int execl(const char *pathname, const char *arg0, ...);</span><br><span class="line">int execv(const char *pathname, char *const argv[]);</span><br><span class="line">int execle(const char *pathname, const char *arg0, ...);</span><br><span class="line">int execve(const char *pathname, char *const argv[], char *const envp[]);</span><br><span class="line">int execlp(const char *filename, const char *arg0, ...);</span><br><span class="line">int execvp(const char *filename, char *const argv[]);</span><br><span class="line">int fexecve(int fd, char *const argv[], char *const envp[]);</span><br><span class="line">//出错返回-1，成功不返回</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">int execl(const char *pathname, const char *arg0, ... /* (char *)0 */);</span><br><span class="line">int execv(const char *pathname, char *const argv[]);</span><br><span class="line">int execle(const char *pathname, const char *arg0, ... /* (char *)0, char *const envp[] */);</span><br><span class="line">int execve(const char *pathname, char *const argv[], char *const envp[]);</span><br><span class="line">int execlp(const char *filename, const char *arg0, ... /* (char *)0 */);</span><br><span class="line">int execvp(const char *filename, char *const argv[]);</span><br><span class="line">int fexecve(int fd, char *const argv[], char *const envp[]);</span><br><span class="line">//出错返回-1，成功不返回</span><br></pre></td></tr></table></figure>
 <p>这些函数的区别如下:</p>
 <ul>
 <li>前4个函数取路径名作为参数，后2个函数取文件名作为参数，最后一个取文件描述符作为参数。当指定filename作为参数时<ul>

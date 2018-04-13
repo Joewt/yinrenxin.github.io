@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Linux," />
+  <meta name="keywords" content="swoole,PHP," />
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
-<meta name="keywords" content="Linux">
+<meta name="description" content="环境准备各个环境下有所区别，我使用的是mac系统，首先说的是mac系统下的安装   mac系统 自带的有php，这里并不用自带的。使用mamp,php的目录在如下的目录下 1/Applications/mamp/bin/php">
+<meta name="keywords" content="swoole,PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用的命令总结">
-<meta property="og:url" content="http://yinrenxin.github.io/2018/02/11/decompression/index.html">
+<meta property="og:title" content="swoole安装">
+<meta property="og:url" content="http://yinrenxin.github.io/2018/04/13/swoole-install/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
-<meta property="og:description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
+<meta property="og:description" content="环境准备各个环境下有所区别，我使用的是mac系统，首先说的是mac系统下的安装   mac系统 自带的有php，这里并不用自带的。使用mamp,php的目录在如下的目录下 1/Applications/mamp/bin/php">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-13T02:24:10.096Z">
+<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/swoole-install-finish.png">
+<meta property="og:updated_time" content="2018-04-13T02:55:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="常用的命令总结">
-<meta name="twitter:description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
+<meta name="twitter:title" content="swoole安装">
+<meta name="twitter:description" content="环境准备各个环境下有所区别，我使用的是mac系统，首先说的是mac系统下的安装   mac系统 自带的有php，这里并不用自带的。使用mamp,php的目录在如下的目录下 1/Applications/mamp/bin/php">
+<meta name="twitter:image" content="http://ojg7pw3bl.bkt.clouddn.com/swoole-install-finish.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yinrenxin.github.io/2018/02/11/decompression/"/>
+  <link rel="canonical" href="http://yinrenxin.github.io/2018/04/13/swoole-install/"/>
 
 
 
 
 
-  <title>常用的命令总结 | JOE'S BLOG</title>
+  <title>swoole安装 | JOE'S BLOG</title>
   
 
 
@@ -257,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yinrenxin.github.io/2018/02/11/decompression/">
+    <link itemprop="mainEntityOfPage" href="http://yinrenxin.github.io/2018/04/13/swoole-install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JOE">
@@ -274,7 +276,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">常用的命令总结</h1>
+          <h1 class="post-title" itemprop="name headline">swoole安装</h1>
         
 
         <div class="post-meta">
@@ -286,8 +288,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-11T20:48:31+08:00">
-                2018-02-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-13T10:08:51+08:00">
+                2018-04-13
               </time>
             
 
@@ -297,28 +299,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux命令/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux命令</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -327,9 +307,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/11/decompression/#comments" itemprop="discussionUrl">
+                <a href="/2018/04/13/swoole-install/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/11/decompression/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/04/13/swoole-install/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -357,42 +337,19 @@
       
 
       
-        <h1 id="常用解压缩命令"><a href="#常用解压缩命令" class="headerlink" title="常用解压缩命令"></a>常用解压缩命令</h1><p>平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧   </p>
-<h2 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h2><p>压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ zip -r xxx.zip  xxx.c</span><br></pre></td></tr></table></figure></p>
+        <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>各个环境下有所区别，我使用的是mac系统，首先说的是mac系统下的安装  </p>
+<p>mac系统 自带的有php，这里并不用自带的。使用mamp,php的目录在如下的目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Applications/mamp/bin/php</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ zip xxx.zip</span><br></pre></td></tr></table></figure></p>
-<h2 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h2><p>.tar 压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -cvf xxx.tar xxx</span><br></pre></td></tr></table></figure></p>
-<p>.tar 解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xvf xxx.tar</span><br></pre></td></tr></table></figure></p>
-<p>.tar.gz 压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zcvf xxx.tar.gz xxx</span><br></pre></td></tr></table></figure></p>
-<p>.tar.gz 解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf xxx.tar.gz</span><br></pre></td></tr></table></figure></p>
-<p>.tar.bz2 压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -jcvf xxx.tar.gz2 xxx</span><br></pre></td></tr></table></figure></p>
-<p>.tar.bz2 解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -jxvf xxx.tar.gz2</span><br></pre></td></tr></table></figure></p>
-<h2 id="rar"><a href="#rar" class="headerlink" title="rar"></a>rar</h2><p>.rar 压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rar -a xxx.rar xxx</span><br></pre></td></tr></table></figure></p>
-<p>.rar 解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rar -x xxx.rar</span><br></pre></td></tr></table></figure></p>
-<h1 id="资源查看"><a href="#资源查看" class="headerlink" title="资源查看"></a>资源查看</h1><p>查看文件大小<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ du -ah --max-depth=1</span><br></pre></td></tr></table></figure></p>
-<p>监控系统资源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vmstat 1 3</span><br></pre></td></tr></table></figure></p>
-<p>查看内存使用状况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ free -m</span><br></pre></td></tr></table></figure>
-<p>查看CPU</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /proc/cpuinfo</span><br></pre></td></tr></table></figure>
-<p>判断系统位数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ file /bin/ls</span><br></pre></td></tr></table></figure>
-<p>查看Linux系统发行版</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release -a</span><br></pre></td></tr></table></figure>
-<p>列出当前系统打开文件的工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lsof abc.txt 				//显示开启文件abc.txt的进程</span><br><span class="line">lsof -c abc  				//显示abc进程现在打开的文件</span><br><span class="line">lsof -c -p  				//1234 列出进程号为1234的进程所打开的文件</span><br><span class="line">lsof -g gid  				//显示归属gid的进程情况</span><br><span class="line">lsof +d /usr/local/  	    //显示目录下被进程开启的文件</span><br><span class="line">lsof +D /usr/local/ 	    //同上，但是会搜索目录下的目录，时间较长</span><br><span class="line">lsof -d 4 					//显示使用fd为4的进程</span><br><span class="line">lsof -i 					//用以显示符合条件的进程情况</span><br></pre></td></tr></table></figure></p>
-<p>获取 IPv4流量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -i 4</span><br></pre></td></tr></table></figure></p>
-<p>仅显示TCP流量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -iTCP</span><br></pre></td></tr></table></figure></p>
-<p>显示指定用户打开了什么<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -u mysql</span><br></pre></td></tr></table></figure></p>
-<p>杀死指定用户所做的一切事情</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 `lsof -t -u nginx`</span><br></pre></td></tr></table></figure>
-<p>查看指定的命令正在使用的文件和网络连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -c mysql</span><br></pre></td></tr></table></figure>
-<p>查看指定进程ID已打开的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -p 12356</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>lsof <code>which httpd</code> //那个进程在使用apache的可执行文件<br>lsof /etc/passwd //那个进程在占用/etc/passwd<br>lsof /dev/hda6 //那个进程在占用hda6<br>lsof /dev/cdrom //那个进程在占用光驱<br>lsof -c sendmail //查看sendmail进程的文件使用情况<br>lsof -c courier -u ^zahn //显示出那些文件被以courier打头的进程打开，但是并不属于用户zahn<br>lsof -p 30297 //显示那些文件被pid为30297的进程打开<br>lsof -D /tmp 显示所有在/tmp文件夹中打开的instance和文件的进程。但是symbol文件并不在列<br>lsof -u1000 //查看uid是100的用户的进程的文件使用情况<br>lsof -utony //查看用户tony的进程的文件使用情况<br>lsof -u^tony //查看不是用户tony的进程的文件使用情况(^是取反的意思)<br>lsof -i //显示所有打开的端口<br>lsof -i:80 //显示所有打开80端口的进程<br>lsof -i -U //显示所有打开的端口和UNIX domain文件<br>lsof -i UDP@[url]www.akadia.com:123 //显示那些进程打开了到www.akadia.com的UDP的123(ntp)端口的链接<br>lsof -i tcp@ohaha.ks.edu.tw:ftp -r //不断查看目前ftp连接的情况(-r，lsof会永远不断的执行，直到收到中断信号,+r，lsof会一直执行，直到没有档案被显示,缺省是15s刷新)<br>lsof -i tcp@ohaha.ks.edu.tw:ftp -n //lsof -n 不将IP转换为hostname，缺省是不加上-n参数</p>
-</blockquote>
-<h2 id="没了"><a href="#没了" class="headerlink" title="没了"></a>没了</h2>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="https://github.com/swoole/swoole-src/releases" target="_blank" rel="noopener">swoole</a></p>
+<p>下载最新的版本即可</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载完解压后，目录下会有一个make.sh 这是个简易的安装脚本<br>需要改下phpize，改成mamp下的phpize，在<code>/Applicatons/mamp/bin/php/php7.xxx/bin/</code>目录下<br>./configure 有一些编译参数，根据自己的情况而定<br><a href="https://wiki.swoole.com/wiki/page/437.html" target="_blank" rel="noopener">这里查看</a></p>
+<p>之后执行脚本即可</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>安装成功后，修改php.ini<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extension=swoole.so</span><br></pre></td></tr></table></figure></p>
+<p>之后通过php -m 查看扩展是否安装成功,使用mamp下的php命令</p>
+<h2 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a>简单案例</h2><p>一个官方的案例–创建TCP服务器<br>server.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//创建Server对象，监听 127.0.0.1:9501端口</span><br><span class="line">$serv = new swoole_server(&quot;127.0.0.1&quot;, 9501); </span><br><span class="line"></span><br><span class="line">//监听连接进入事件</span><br><span class="line">$serv-&gt;on(&apos;connect&apos;, function ($serv, $fd) &#123;  </span><br><span class="line">    echo &quot;Client: Connect.\n&quot;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//监听数据接收事件</span><br><span class="line">$serv-&gt;on(&apos;receive&apos;, function ($serv, $fd, $from_id, $data) &#123;</span><br><span class="line">    $serv-&gt;send($fd, &quot;Server: &quot;.$data);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//监听连接关闭事件</span><br><span class="line">$serv-&gt;on(&apos;close&apos;, function ($serv, $fd) &#123;</span><br><span class="line">    echo &quot;Client: Close.\n&quot;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//启动服务器</span><br><span class="line">$serv-&gt;start();</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ojg7pw3bl.bkt.clouddn.com/swoole-install-finish.png" alt=""></p>
+
       
     </div>
     
@@ -433,7 +390,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/swoole/" rel="tag"># swoole</a>
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
           
         </div>
       
@@ -446,8 +405,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/08/Progress-env/" rel="next" title="进程环境(七)">
-                <i class="fa fa-chevron-left"></i> 进程环境(七)
+              <a href="/2018/03/07/css-layout/" rel="next" title="CSS布局">
+                <i class="fa fa-chevron-left"></i> CSS布局
               </a>
             
           </div>
@@ -455,10 +414,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/12/progress-control/" rel="prev" title="进程控制(八)">
-                进程控制(八) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -642,7 +597,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用解压缩命令"><span class="nav-number">1.</span> <span class="nav-text">常用解压缩命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">1.1.</span> <span class="nav-text">zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar"><span class="nav-number">1.2.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rar"><span class="nav-number">1.3.</span> <span class="nav-text">rar</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#资源查看"><span class="nav-number">2.</span> <span class="nav-text">资源查看</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#没了"><span class="nav-number">2.1.</span> <span class="nav-text">没了</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载地址"><span class="nav-number">2.</span> <span class="nav-text">下载地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">4.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单案例"><span class="nav-number">5.</span> <span class="nav-text">简单案例</span></a></li></ol></div>
             
 
           </div>
@@ -814,9 +769,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yinrenxin.github.io/2018/02/11/decompression/';
-          this.page.identifier = '2018/02/11/decompression/';
-          this.page.title = '常用的命令总结';
+          this.page.url = 'http://yinrenxin.github.io/2018/04/13/swoole-install/';
+          this.page.identifier = '2018/04/13/swoole-install/';
+          this.page.title = 'swoole安装';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://yinrenxin-github-io.disqus.com/embed.js';

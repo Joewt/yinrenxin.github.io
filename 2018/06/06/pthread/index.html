@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="C," />
+  <meta name="keywords" content="UNIX,C," />
 
 
 
@@ -81,22 +81,21 @@
 
 
 
-<meta name="description" content="指针和数组的爱恨情仇指针和数组他们之间没有任何关系    指针就是指针，指针变量在32位系统下，永远占4个byte，其值为某一个内存的地址。指针可以指向任何地方，但是不是任何地方你都能通过这个指针变量访问到。 数组就是数组，其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数。数组可以存放任何类型的数据，但不能存函数。    如何分辨数组指针和指针数组 指针数组：首先它是一个数组，数">
-<meta name="keywords" content="C">
+<meta name="description" content="线程 线程的一些基础知识，包括线程的创建、线程终止  线程的概念典型的UNIX进程可以看成只有一个控制线程；一个进程在某一时刻只能做一件事情。有了多个控制线程后，在程序设计时就可以把进程设计成在某一时刻做不止一件事，每个线程处理各自独立的任务。这种方法有很多好处    简化处理异步事件的代码 分解复杂的问题提高整个程序的吞吐量 使用多线程改善响应时间">
+<meta name="keywords" content="UNIX,C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="指针和数组">
-<meta property="og:url" content="https://joewt.com/2018/02/27/pointer-and-array/index.html">
+<meta property="og:title" content="线程(十一)上">
+<meta property="og:url" content="https://joewt.com/2018/06/06/pthread/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
-<meta property="og:description" content="指针和数组的爱恨情仇指针和数组他们之间没有任何关系    指针就是指针，指针变量在32位系统下，永远占4个byte，其值为某一个内存的地址。指针可以指向任何地方，但是不是任何地方你都能通过这个指针变量访问到。 数组就是数组，其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数。数组可以存放任何类型的数据，但不能存函数。    如何分辨数组指针和指针数组 指针数组：首先它是一个数组，数">
+<meta property="og:description" content="线程 线程的一些基础知识，包括线程的创建、线程终止  线程的概念典型的UNIX进程可以看成只有一个控制线程；一个进程在某一时刻只能做一件事情。有了多个控制线程后，在程序设计时就可以把进程设计成在某一时刻做不止一件事，每个线程处理各自独立的任务。这种方法有很多好处    简化处理异步事件的代码 分解复杂的问题提高整个程序的吞吐量 使用多线程改善响应时间">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/7AB30FB4610D9CD6E007B4CE48D73270.png">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/D28B21B0082E0FBB411BBCEFA515B45E.png">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/FC89DCB14091449DBE1B2B8A345E07EA.png">
-<meta property="og:updated_time" content="2018-02-27T13:16:51.982Z">
+<meta property="og:image" content="https://joewt.com/img/chapter-11/figure11.2.png">
+<meta property="og:image" content="https://joewt.com/img/chapter-11/figure11.3.png">
+<meta property="og:updated_time" content="2018-06-05T16:38:43.579Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="指针和数组">
-<meta name="twitter:description" content="指针和数组的爱恨情仇指针和数组他们之间没有任何关系    指针就是指针，指针变量在32位系统下，永远占4个byte，其值为某一个内存的地址。指针可以指向任何地方，但是不是任何地方你都能通过这个指针变量访问到。 数组就是数组，其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数。数组可以存放任何类型的数据，但不能存函数。    如何分辨数组指针和指针数组 指针数组：首先它是一个数组，数">
-<meta name="twitter:image" content="http://ojg7pw3bl.bkt.clouddn.com/7AB30FB4610D9CD6E007B4CE48D73270.png">
+<meta name="twitter:title" content="线程(十一)上">
+<meta name="twitter:description" content="线程 线程的一些基础知识，包括线程的创建、线程终止  线程的概念典型的UNIX进程可以看成只有一个控制线程；一个进程在某一时刻只能做一件事情。有了多个控制线程后，在程序设计时就可以把进程设计成在某一时刻做不止一件事，每个线程处理各自独立的任务。这种方法有很多好处    简化处理异步事件的代码 分解复杂的问题提高整个程序的吞吐量 使用多线程改善响应时间">
+<meta name="twitter:image" content="https://joewt.com/img/chapter-11/figure11.2.png">
 
 
 
@@ -126,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://joewt.com/2018/02/27/pointer-and-array/"/>
+  <link rel="canonical" href="https://joewt.com/2018/06/06/pthread/"/>
 
 
 
 
 
-  <title>指针和数组 | JOE'S BLOG</title>
+  <title>线程(十一)上 | JOE'S BLOG</title>
   
 
 
@@ -261,7 +260,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://joewt.com/2018/02/27/pointer-and-array/">
+    <link itemprop="mainEntityOfPage" href="https://joewt.com/2018/06/06/pthread/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JOE">
@@ -278,7 +277,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">指针和数组</h1>
+          <h1 class="post-title" itemprop="name headline">线程(十一)上</h1>
         
 
         <div class="post-meta">
@@ -290,8 +289,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-27T20:46:49+08:00">
-                2018-02-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T00:29:40+08:00">
+                2018-06-06
               </time>
             
 
@@ -313,19 +312,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C语言/" itemprop="url" rel="index">
-                    <span itemprop="name">C语言</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C语言/C语言深度解剖/" itemprop="url" rel="index">
-                    <span itemprop="name">C语言深度解剖</span>
+                  <a href="/categories/UNIX环境高级编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX环境高级编程</span>
                   </a>
                 </span>
 
@@ -342,8 +330,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/27/pointer-and-array/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/02/27/pointer-and-array/" itemprop="commentsCount"></span>
+                <a href="/2018/06/06/pthread/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/06/06/pthread/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -407,39 +395,45 @@
       
 
       
-        <h1 id="指针和数组的爱恨情仇"><a href="#指针和数组的爱恨情仇" class="headerlink" title="指针和数组的爱恨情仇"></a>指针和数组的爱恨情仇</h1><p>指针和数组他们之间没有任何关系  </p>
-<ul>
-<li>指针就是指针，指针变量在32位系统下，永远占4个byte，其值为某一个内存的地址。指针可以指向任何地方，但是不是任何地方你都能通过这个指针变量访问到。</li>
-<li>数组就是数组，其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数。数组可以存放任何类型的数据，但不能存函数。  </li>
-</ul>
-<h2 id="如何分辨数组指针和指针数组"><a href="#如何分辨数组指针和指针数组" class="headerlink" title="如何分辨数组指针和指针数组"></a>如何分辨数组指针和指针数组</h2><ul>
-<li>指针数组：首先它是一个数组，数组的元素都是指针，数组占多少个字节由数组本身决定。它是“存储指针的数组”的简称</li>
-<li>数组指针：首先它是一个指针，他指向一个数组。在32位系统下永远是占4个字节，至于它指向的数组占多少个字节，不知道。它是“指向数组的指针”的简称<a id="more"></a>
-考虑下，下面2个哪个是指针数组，哪个是数组指针<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A). int *p1[10];</span><br><span class="line">B). int (*p2)[10];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>根据右左法则，先找到未定义标识符，p1右边是[]因为[]比<code>*</code>的优先级高，p1先与[]结合，所以它是一个数组。<code>int *</code>修饰的是数组的内容。<br>再看p2，因为”()”比”[]”优先级高，所以<code>(*p2)</code>表示这是一个指针，指针变量名为p2,int修饰的数组内容，即数组的每个元素。数组在这里没有名字，是匿名数组。所以p2是一个数组指针，指向一个包含10个int类型数据的数组。</p>
-<h2 id="多维数组和多级指针"><a href="#多维数组和多级指针" class="headerlink" title="多维数组和多级指针"></a>多维数组和多级指针</h2><p>考虑下面一个例子<br>&amp;p[4][2]-&amp;a[4][2]的值为多少<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a[5][5];</span><br><span class="line">    int (*p)[4];</span><br><span class="line">    p = a;</span><br><span class="line">    printf(&quot;a_ptr=%#p,p_ptr=%#p\n&quot;,&amp;a[4][2],&amp;p[4][2]);</span><br><span class="line">    printf(&quot;%p,%d\n&quot;,&amp;p[4][2]-&amp;a[4][2],&amp;p[4][2]-&amp;a[4][2]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行结果如下：<br><img src="http://ojg7pw3bl.bkt.clouddn.com/7AB30FB4610D9CD6E007B4CE48D73270.png" alt=""><br>文字解析，不如看图来的好<br><img src="http://ojg7pw3bl.bkt.clouddn.com/D28B21B0082E0FBB411BBCEFA515B45E.png" alt="">  </p>
-<h2 id="数组参数与指针参数"><a href="#数组参数与指针参数" class="headerlink" title="数组参数与指针参数"></a>数组参数与指针参数</h2><h3 id="一维数组参数"><a href="#一维数组参数" class="headerlink" title="一维数组参数"></a>一维数组参数</h3><h4 id="能否向函数传递一个数组？"><a href="#能否向函数传递一个数组？" class="headerlink" title="能否向函数传递一个数组？"></a>能否向函数传递一个数组？</h4><p>考虑以下程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void fun(char a[10])</span><br><span class="line">&#123;</span><br><span class="line">    char c = a[3];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    char b[10] = &quot;abcdefg&quot;;</span><br><span class="line">    fun(b[10]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面的调用，fun(b[10]);将b[10]这个数组传递到fun函数。这样显然不对。<br>b[0]代表是数组的一个元素，那么b[10]也是，只是这里越界了。但在编译阶段，编译器并不会真正计算b[10]的地址并取值，所在在编译阶段不会报错，但是编译器会给出警告：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//在我的Mac上编译出现这个</span><br><span class="line">warning: incompatible integer to pointer conversion passing &apos;char&apos; to parameter of type &apos;char *&apos;; take the address with &amp; [-Wint-conversion]  </span><br><span class="line">warning: array index 10 is past the end of the array (which contains 10 elements) [-Warray-bounds]</span><br><span class="line">//在作者的电脑上给出的警告是这样的  </span><br><span class="line">warning C4047: &apos;function&apos; : &apos;char *&apos; differs in levels of indirection from &apos;char &apos;</span><br><span class="line">warning C4024: &apos;fun&apos; : different types for formal and actual parameter 1</span><br></pre></td></tr></table></figure></p>
-<p>虽然编译没问题，但运行肯定有问题。<br>具体分析如下:  </p>
-<ol>
-<li>b[10]并不存在，在编译的时候由于没有去实际地址取值，所以没有出错，但是在运行时，将计算b[10]的实际地址，并且取值。这时发生越界错误</li>
-<li>编译器的警告已经告诉我们编译器需要的是一个char*类型的参数，而传递过去的是一个char类型的参数，这时候fun函数会将传入的char类型的数据当地址处理，同样会发生错误</li>
-<li>对第二个错误的理解，fun函数明明传递的是一个数组啊，编译器怎么会说是char*类型呢？  </li>
-</ol>
-<p>将fun(b[10])改为fun(b)，编译后不会出现警告了。</p>
-<h4 id="无法向函数传递一个数组"><a href="#无法向函数传递一个数组" class="headerlink" title="无法向函数传递一个数组"></a>无法向函数传递一个数组</h4><p>可以简单验证下，代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void fun(char a[10])</span><br><span class="line">&#123;</span><br><span class="line">    int i=sizeof(a);</span><br><span class="line">    printf(&quot;i:%d\n&quot;,i);</span><br><span class="line">    char c=a[3];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    char b[10] = &quot;abcdefg&quot;;</span><br><span class="line">    int j = sizeof(b);</span><br><span class="line">    printf(&quot;j:%d\n&quot;,j);</span><br><span class="line">    fun(b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://ojg7pw3bl.bkt.clouddn.com/FC89DCB14091449DBE1B2B8A345E07EA.png" alt=""><br>如果数组b真正传递到函数内部，那么i的值应该为10，但我测试后发现i的值为8(作者测的值为4)。造成这样的原因是这样一条规则:   </p>
-<ul>
-<li>C语言中，当一维数组作为函数参数的时候，编译器总是把它解析成一个指向其首元素首地址的指针</li>
-</ul>
-<blockquote>
-<p>这么做是有原因的。在 C 语言中，所有非数组形式的数据实参均以传值形式（对实参<br>做一份拷贝并传递给被调用的函数，函数不能修改作为实参的实际变量的值，而只能修改<br>传递给它的那份拷贝）调用。然而，如果要拷贝整个数组，无论在空间上还是在时间上，<br>其开销都是非常大的。更重要的是，在绝大部分情况下，你其实并不需要整个数组的拷贝，<br>你只想告诉函数在那一刻对哪个特定的数组感兴趣。这样的话，为了节省时间和空间，提<br>高程序运行的效率，于是就有了上述的规则。同样的，函数的返回值也不能是一个数组，<br>而只能是指针。这里要明确的一个概念就是：函数本身是没有类型的，只有函数的返回值<br>才有类型。很多书都把这点弄错了，甚至出现“XXX 类型的函数”这种说法。简直是荒唐<br>至极！</p>
+        <h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><blockquote>
+<p>线程的一些基础知识，包括线程的创建、线程终止</p>
 </blockquote>
-<p>所以我们写代码的时候，可以写成这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void fun(char a[])</span><br><span class="line">&#123;</span><br><span class="line">    char c=a[3];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    char b[10] = &quot;abcdefg&quot;;</span><br><span class="line">    fun(b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>或者也可以<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void fun(char *p)</span><br><span class="line">&#123;</span><br><span class="line">    char c=p[3];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="线程的概念"><a href="#线程的概念" class="headerlink" title="线程的概念"></a>线程的概念</h2><p>典型的UNIX进程可以看成只有一个控制线程；一个进程在某一时刻只能做一件事情。有了多个控制线程后，在程序设计时就可以把进程设计成在某一时刻做不止一件事，每个线程处理各自独立的任务。这种方法有很多好处  </p>
+<ol>
+<li>简化处理异步事件的代码</li>
+<li>分解复杂的问题提高整个程序的吞吐量</li>
+<li>使用多线程改善响应时间  </li>
+</ol>
+<a id="more"></a>
+<p>每个线程都包含有表示执行环境所必须的信息。其中包括进程中标识线程的线程ID、一组寄存器值、栈、调度优先级和策略、信号屏蔽字、errno变量以及线程私有数据。  </p>
+<h2 id="线程标识"><a href="#线程标识" class="headerlink" title="线程标识"></a>线程标识</h2><p>每个线程都有一个线程ID。但跟进程不一样，进程ID在整个系统中是唯一的，线程ID只有在它所属的进程上下文中才有意义。  </p>
+<p>线程ID通过使用pthread_t数据类型表示，必须要使用一个函数对两个线程ID进行比较。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line">int pthread_equal(pthread_t tid1, pthread_t tid2);</span><br><span class="line">// 相等返回非零，不同返回0</span><br></pre></td></tr></table></figure></p>
+<p>线程通过调用pthread_self函数获得自身的线程ID<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line">pthread_t pthread_self(void);</span><br></pre></td></tr></table></figure></p>
+<h2 id="线程创建"><a href="#线程创建" class="headerlink" title="线程创建"></a>线程创建</h2><p>新增的线程可以通过调用pthread_create函数创建。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line">int pthread_create(pthread_t *restrict tidp, </span><br><span class="line">                   const pthread_attr_t *restrict attr,</span><br><span class="line">                   void *(*start_rtn)(void *), void *restrict arg);</span><br><span class="line">//成功返回0，失败返回错误编号</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>当pthread_create成功返回时，新创建线程的线程ID会被设置成tidp指向的内存单元。attr用于定制各种不同的线程属性(第12章介绍)，设置为NULL，表示创建一个具有默认属性的线程。</li>
+<li>新创建的线程从start_rtn函数的地址开始执行，该函数只有一个无类型指针参数arg。如果有多个参数传递，需要把这些参数放到一个结构中，然后传递这个结构的地址进去。</li>
+<li>线程创建时不能保证执行顺序  </li>
+</ul>
+<p>如下程序创建了一个线程，打印了进程ID、新线程的线程ID以及初始线程的线程ID。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line"></span><br><span class="line">pthread_t ntid;</span><br><span class="line">void printids(const char *s)&#123;</span><br><span class="line">    pid_t   pid;</span><br><span class="line">    pthread_t tid;</span><br><span class="line">    pid = getpid();</span><br><span class="line">    tid = pthread_self();</span><br><span class="line">    printf(&quot;%s pid %lu tid %lu (0x%lx)\n&quot;,s,(unsigned long)pid, (unsigned long)tid, (unsigned long)tid);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void * thr_fn(void *arg)&#123;</span><br><span class="line">    printids(&quot;new thread:&quot;);</span><br><span class="line">    return ((void *)0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int err;</span><br><span class="line">    err = pthread_create(&amp;ntid, NULL, thr_fn, NULL);</span><br><span class="line">    if(err !=0 )</span><br><span class="line">        err_exit(err, &quot;can&apos;t create thread&quot;);</span><br><span class="line">    printids(&quot;main thread:&quot;);</span><br><span class="line">    sleep(1);</span><br><span class="line">    exit(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果如图所示<br><img src="/img/chapter-11/figure11.2.png" alt=""><br>可以看到打印出了相同的进程ID，但在mac系统上线程ID不在相同地址段范围  </p>
+<h2 id="线程终止"><a href="#线程终止" class="headerlink" title="线程终止"></a>线程终止</h2><p>如果进程中的任意线程调用了exit、<code>_Exit</code>或者<code>_exit</code>，那么整个进程就会终止。<br>单个线程可以通过3种方式退出，可以在不终止整个进程的情况下，停止它的控制流。 </p>
+<ol>
+<li>线程可以简单的从启动例程中返回，返回值是线程的退出码。</li>
+<li>线程可以被同一进程中的其他线程取消。</li>
+<li>线程调用pthread_exit。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line">void pthread_exit(void *rval_ptr);</span><br></pre></td></tr></table></figure>
+<p>rval_ptr参数是一个无类型指针，进程中的其他线程可以通过调用pthread_join函数访问到这个指针</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line">int pthread_join(pthread_t thread, void **rval_ptr);</span><br><span class="line">//成功返回0，失败返回错误编号</span><br></pre></td></tr></table></figure>
+<ul>
+<li>调用线程将一直阻塞，直到指定的线程调用pthread_exit、从启动例程中返回或者被取消。如果线程简单地从它的启动例程返回，rval_ptr就包含返回码。如果线程被取消，由rval_ptr指定的内存单元就设置为PTHREAD_CANCELED。  </li>
+<li>通过调用pthread_join自动把线程置于分离状态，这样资源就可以恢复。如果线程已经处于分离状态，pthread_join就会调用失败，返回EINVAL  </li>
+</ul>
+<p>如下程序展示了如何获取已经终止线程的退出码  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line"></span><br><span class="line">void *thr_fn1(void *arg)</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;thread 1 returning\n&quot;);</span><br><span class="line">    return((void *)0);</span><br><span class="line">&#125;</span><br><span class="line">void *thr_fn2(void *arg)</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;thread 2 exiting\n&quot;);</span><br><span class="line">    pthread_exit((void *)2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    int         err;</span><br><span class="line">    pthread_t   tid1,tid2;</span><br><span class="line">    void        *tret;</span><br><span class="line">    err = pthread_create(&amp;tid1,NULL,thr_fn1,NULL);</span><br><span class="line">    if (err != 0)</span><br><span class="line">        err_exit(err, &quot;can&apos;t create thread 1&quot;);</span><br><span class="line">    err = pthread_create(&amp;tid2,NULL,thr_fn2,NULL);</span><br><span class="line">    if (err != 0)</span><br><span class="line">        err_exit(err, &quot;can&apos;t create thread 2&quot;);</span><br><span class="line">    err = pthread_join(tid1, &amp;tret);</span><br><span class="line">    if(err != 0)</span><br><span class="line">        err_exit(err, &quot;can&apos;t join with thread 1&quot;);</span><br><span class="line">    printf(&quot;thread 1 exit code %ld\n&quot;,(long)tret);</span><br><span class="line">    err = pthread_join(tid2, &amp;tret);</span><br><span class="line">    if (err != 0)</span><br><span class="line">        err_exit(err, &quot;can&apos;t join with thread 2&quot;);</span><br><span class="line">    printf(&quot;thred 2 exit code %ld\n&quot;,(long)tret);</span><br><span class="line">    exit(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果如下:<br><img src="/img/chapter-11/figure11.3.png" alt="">  </p>
 
       
     </div>
@@ -484,7 +478,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="https://joewt.com/2018/02/27/pointer-and-array/" title="指针和数组">https://joewt.com/2018/02/27/pointer-and-array/</a>
+    <a href="https://joewt.com/2018/06/06/pthread/" title="线程(十一)上">https://joewt.com/2018/06/06/pthread/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -498,6 +492,8 @@
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/UNIX/" rel="tag"># UNIX</a>
           
             <a href="/tags/C/" rel="tag"># C</a>
           
@@ -527,8 +523,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/12/progress-control/" rel="next" title="进程控制(八)">
-                <i class="fa fa-chevron-left"></i> 进程控制(八)
+              <a href="/2018/05/06/ReadingBooks/" rel="next" title="如何真正消化一本书？">
+                <i class="fa fa-chevron-left"></i> 如何真正消化一本书？
               </a>
             
           </div>
@@ -536,10 +532,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/07/css-layout/" rel="prev" title="CSS布局">
-                CSS布局 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -739,7 +731,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#指针和数组的爱恨情仇"><span class="nav-number">1.</span> <span class="nav-text">指针和数组的爱恨情仇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何分辨数组指针和指针数组"><span class="nav-number">1.1.</span> <span class="nav-text">如何分辨数组指针和指针数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多维数组和多级指针"><span class="nav-number">1.2.</span> <span class="nav-text">多维数组和多级指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组参数与指针参数"><span class="nav-number">1.3.</span> <span class="nav-text">数组参数与指针参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一维数组参数"><span class="nav-number">1.3.1.</span> <span class="nav-text">一维数组参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#能否向函数传递一个数组？"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">能否向函数传递一个数组？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无法向函数传递一个数组"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">无法向函数传递一个数组</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程"><span class="nav-number">1.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的概念"><span class="nav-number">1.1.</span> <span class="nav-text">线程的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程标识"><span class="nav-number">1.2.</span> <span class="nav-text">线程标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程创建"><span class="nav-number">1.3.</span> <span class="nav-text">线程创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程终止"><span class="nav-number">1.4.</span> <span class="nav-text">线程终止</span></a></li></ol></li></ol></div>
             
 
           </div>

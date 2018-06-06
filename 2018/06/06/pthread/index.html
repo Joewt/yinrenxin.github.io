@@ -91,7 +91,8 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://joewt.com/img/chapter-11/figure11.2.png">
 <meta property="og:image" content="https://joewt.com/img/chapter-11/figure11.3.png">
-<meta property="og:updated_time" content="2018-06-05T16:38:43.579Z">
+<meta property="og:image" content="https://joewt.com/img/chapter-11/figure11.5.png">
+<meta property="og:updated_time" content="2018-06-06T03:09:47.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程(十一)上">
 <meta name="twitter:description" content="线程 线程的一些基础知识，包括线程的创建、线程终止  线程的概念典型的UNIX进程可以看成只有一个控制线程；一个进程在某一时刻只能做一件事情。有了多个控制线程后，在程序设计时就可以把进程设计成在某一时刻做不止一件事，每个线程处理各自独立的任务。这种方法有很多好处    简化处理异步事件的代码 分解复杂的问题提高整个程序的吞吐量 使用多线程改善响应时间">
@@ -434,6 +435,78 @@
 <p>如下程序展示了如何获取已经终止线程的退出码  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line"></span><br><span class="line">void *thr_fn1(void *arg)</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;thread 1 returning\n&quot;);</span><br><span class="line">    return((void *)0);</span><br><span class="line">&#125;</span><br><span class="line">void *thr_fn2(void *arg)</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;thread 2 exiting\n&quot;);</span><br><span class="line">    pthread_exit((void *)2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    int         err;</span><br><span class="line">    pthread_t   tid1,tid2;</span><br><span class="line">    void        *tret;</span><br><span class="line">    err = pthread_create(&amp;tid1,NULL,thr_fn1,NULL);</span><br><span class="line">    if (err != 0)</span><br><span class="line">        err_exit(err, &quot;can&apos;t create thread 1&quot;);</span><br><span class="line">    err = pthread_create(&amp;tid2,NULL,thr_fn2,NULL);</span><br><span class="line">    if (err != 0)</span><br><span class="line">        err_exit(err, &quot;can&apos;t create thread 2&quot;);</span><br><span class="line">    err = pthread_join(tid1, &amp;tret);</span><br><span class="line">    if(err != 0)</span><br><span class="line">        err_exit(err, &quot;can&apos;t join with thread 1&quot;);</span><br><span class="line">    printf(&quot;thread 1 exit code %ld\n&quot;,(long)tret);</span><br><span class="line">    err = pthread_join(tid2, &amp;tret);</span><br><span class="line">    if (err != 0)</span><br><span class="line">        err_exit(err, &quot;can&apos;t join with thread 2&quot;);</span><br><span class="line">    printf(&quot;thred 2 exit code %ld\n&quot;,(long)tret);</span><br><span class="line">    exit(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行结果如下:<br><img src="/img/chapter-11/figure11.3.png" alt="">  </p>
+<p>线程可以通过调用pthread_cancel函数来请求取消同一进程中的其他线程  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line">int pthread_cancel(pthread_t tid);</span><br><span class="line">//成功返回0，失败返回错误编号</span><br></pre></td></tr></table></figure>
+<p>pthread_cancel并不等待线程终止，它仅仅提出请求  </p>
+<p>线程可以安排它退出时需要调用的函数(线程清理处理程序)。一个线程可以建立多个清理处理程序。处理程序记录在栈中，他们的执行顺序与他们注册时相反。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line">void pthread_cleanup_push(void (*rtn)(void *), void *arg);</span><br><span class="line">void pthread_cleanup_pop(int execute);</span><br></pre></td></tr></table></figure>
+<p>当线程执行以下动作时，清理函数rtn是由pthread_cleanup_push函数调度的，调用时只有一个参数arg:  </p>
+<ul>
+<li>调用pthread_exit时</li>
+<li>响应取消请求时</li>
+<li>用非零execute参数调用pthread_cleanup_pop时  </li>
+</ul>
+<p>如果execute参数设置为0，清理函数将不被调用。  </p>
+<p>如下程序是使用线程清理处理程序的例子  </p>
+<pre><code>#include &quot;apue.h&quot;
+#include &lt;pthread.h&gt;
+
+void cleanup(void *arg)
+{
+    printf(&quot;cleanup: %s\n&quot;,(char *)arg);
+}
+
+void *thr_fn1(void *arg)
+{
+    printf(&quot;thread 1 start\n&quot;);
+    pthread_cleanup_push(cleanup, &quot;thread 1 first handler&quot;);
+    pthread_cleanup_push(cleanup, &quot;thread 1 second handler&quot;);
+    printf(&quot;thread 1 push complete\n&quot;);
+    if (arg)
+        return ((void *)1);
+    pthread_cleanup_pop(0);
+    pthread_cleanup_pop(0);
+    return ((void *)1);
+}
+
+void *thr_fn2(void *arg)
+{
+
+    printf(&quot;thread 2 start\n&quot;);
+    pthread_cleanup_push(cleanup, &quot;thread 2 first handler&quot;);
+    pthread_cleanup_push(cleanup, &quot;thread 2 second handler&quot;);
+    printf(&quot;thread 2 push complete\n&quot;);
+    if (arg)
+        return ((void *)2);
+    pthread_cleanup_pop(0);
+    pthread_cleanup_pop(0);
+    return ((void *)2);
+
+}
+
+int main(int argc, const char *args[])
+{
+    int             err;
+    pthread_t       tid1,tid2;
+    void            *tret;
+    err = pthread_create(&amp;tid1, NULL, thr_fn1, (void*)1);
+    if (err !=0 )
+        err_exit(err, &quot;can&apos;t create thread 1&quot;);
+    err = pthread_create(&amp;tid2, NULL, thr_fn2, (void*)1);
+    if (err !=0 )
+        err_exit(err, &quot;can&apos;t create thread 2&quot;);
+    err = pthread_join(tid1, &amp;tret);
+    if (err !=0 )
+        err_exit(err, &quot;can&apos;t join with thread 1&quot;);
+    printf(&quot;thread 1 exit code %ld\n&quot;, (long)tret);
+    err = pthread_join(tid2, &amp;tret);
+    if (err !=0 )
+        err_exit(err, &quot;can&apos;t join with thread 2&quot;);
+    printf(&quot;thread 2 exit code %ld\n&quot;, (long)tret);
+    exit(0);
+}
+</code></pre><p>运行结果如下<br><img src="/img/chapter-11/figure11.5.png" alt="">  </p>
+<p>mac 下会产生core文件。这是因为在mac平台上，pthread_cleanup_push是用宏实现的，而宏把某些上下文存放到栈上。当线程1在调用pthread_cleanup_push和调用pthread_cleanup_pop之间返回时，栈已被改写，而这个平台在调用清理处理程序时就用了这个被改写的上下文。在Single UNIX Specification中，函数如果在调用pthread_cleanup_push和pthread_cleanup_pop之间返回，会产生未定义行为。唯一的可移植方法是调用pthread_exit.  </p>
 
       
     </div>

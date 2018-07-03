@@ -81,13 +81,13 @@
 
 
 
-<meta name="description" content="环境准备thinkphp5.1和swoole   tp5的安装使用composer安装，使用以下命令安装1composer create-project topthink/think  tp5  --prefer-dist swoole的安装参考我写的swoole安装教程 swoole简单使用">
+<meta name="description" content="环境准备thinkphp5.1和swoole   tp5的安装使用composer安装，使用以下命令安装1composer create-project topthink/think  tp5  --prefer-dist  thinkphp5.1.18更新,完善了swoole的支持,不用再自己更改Request类了    ThinkPHP5.1.18版本发布——完善Swoole/Workerma">
 <meta name="keywords" content="swoole,PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TP5集成Swoole">
 <meta property="og:url" content="https://joewt.com/2018/06/20/thinkphpMeetsSwoole/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
-<meta property="og:description" content="环境准备thinkphp5.1和swoole   tp5的安装使用composer安装，使用以下命令安装1composer create-project topthink/think  tp5  --prefer-dist swoole的安装参考我写的swoole安装教程 swoole简单使用">
+<meta property="og:description" content="环境准备thinkphp5.1和swoole   tp5的安装使用composer安装，使用以下命令安装1composer create-project topthink/think  tp5  --prefer-dist  thinkphp5.1.18更新,完善了swoole的支持,不用再自己更改Request类了    ThinkPHP5.1.18版本发布——完善Swoole/Workerma">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure1.1.png">
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure1.2.png">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure1.4.png">
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure1.6.png">
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure1.7.png">
-<meta property="og:updated_time" content="2018-06-29T15:01:07.306Z">
+<meta property="og:updated_time" content="2018-07-03T02:02:45.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TP5集成Swoole">
-<meta name="twitter:description" content="环境准备thinkphp5.1和swoole   tp5的安装使用composer安装，使用以下命令安装1composer create-project topthink/think  tp5  --prefer-dist swoole的安装参考我写的swoole安装教程 swoole简单使用">
+<meta name="twitter:description" content="环境准备thinkphp5.1和swoole   tp5的安装使用composer安装，使用以下命令安装1composer create-project topthink/think  tp5  --prefer-dist  thinkphp5.1.18更新,完善了swoole的支持,不用再自己更改Request类了    ThinkPHP5.1.18版本发布——完善Swoole/Workerma">
 <meta name="twitter:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure1.1.png">
 
 
@@ -401,7 +401,11 @@
       
         <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>thinkphp5.1和swoole  </p>
 <p>tp5的安装使用composer安装，使用以下命令安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer create-project topthink/think  tp5  --prefer-dist</span><br></pre></td></tr></table></figure></p>
-<p>swoole的安装参考我写的swoole安装教程</p>
+<blockquote>
+<p>thinkphp5.1.18更新,完善了swoole的支持,不用再自己更改Request类了  </p>
+</blockquote>
+<p><a href="http://www.thinkphp.cn/topic/57791.html" target="_blank" rel="noopener"><br>ThinkPHP5.1.18版本发布——完善Swoole/Workerman支持</a></p>
+<p>swoole的安装参考我写的swoole安装教程  </p>
 <h2 id="swoole简单使用"><a href="#swoole简单使用" class="headerlink" title="swoole简单使用"></a>swoole简单使用</h2><a id="more"></a>
 <p>一般来说我们的浏览器发起一个请求先走nginx或apache，然后通过fast_CGI交给php来执行php代码,FPM是fast_cgi的进程管理器,FPM通过一些配置管理很多的fast_cgi进程。<br>当我们使用swoole来开启一个http服务的话就不需要使用fpm了。</p>
 <p>首先看官方文档的一个例子  </p>

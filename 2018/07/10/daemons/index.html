@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="C," />
+  <meta name="keywords" content="UNIX,C," />
 
 
 
@@ -81,22 +81,22 @@
 
 
 
-<meta name="description" content="指针和数组的爱恨情仇指针和数组他们之间没有任何关系    指针就是指针，指针变量在32位系统下，永远占4个byte，其值为某一个内存的地址。指针可以指向任何地方，但是不是任何地方你都能通过这个指针变量访问到。 数组就是数组，其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数。数组可以存放任何类型的数据，但不能存函数。    如何分辨数组指针和指针数组 指针数组：首先它是一个数组，数">
-<meta name="keywords" content="C">
+<meta name="description" content="前言守护进程(daemon)是在系统引导装入时启动，仅在系统关闭时才终止。守护进程是在后台运行的。   守护进程特征在命令行下输入 ps -axj(BSD系统)  查看系统中各个进程的状态。">
+<meta name="keywords" content="UNIX,C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="指针和数组">
-<meta property="og:url" content="https://joewt.com/2018/02/27/pointer-and-array/index.html">
+<meta property="og:title" content="守护进程(十三)">
+<meta property="og:url" content="https://joewt.com/2018/07/10/daemons/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
-<meta property="og:description" content="指针和数组的爱恨情仇指针和数组他们之间没有任何关系    指针就是指针，指针变量在32位系统下，永远占4个byte，其值为某一个内存的地址。指针可以指向任何地方，但是不是任何地方你都能通过这个指针变量访问到。 数组就是数组，其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数。数组可以存放任何类型的数据，但不能存函数。    如何分辨数组指针和指针数组 指针数组：首先它是一个数组，数">
+<meta property="og:description" content="前言守护进程(daemon)是在系统引导装入时启动，仅在系统关闭时才终止。守护进程是在后台运行的。   守护进程特征在命令行下输入 ps -axj(BSD系统)  查看系统中各个进程的状态。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/7AB30FB4610D9CD6E007B4CE48D73270.png">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/D28B21B0082E0FBB411BBCEFA515B45E.png">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/FC89DCB14091449DBE1B2B8A345E07EA.png">
-<meta property="og:updated_time" content="2018-02-27T13:16:51.982Z">
+<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-1.png">
+<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-2.png">
+<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-3.png">
+<meta property="og:updated_time" content="2018-07-09T16:20:39.321Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="指针和数组">
-<meta name="twitter:description" content="指针和数组的爱恨情仇指针和数组他们之间没有任何关系    指针就是指针，指针变量在32位系统下，永远占4个byte，其值为某一个内存的地址。指针可以指向任何地方，但是不是任何地方你都能通过这个指针变量访问到。 数组就是数组，其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数。数组可以存放任何类型的数据，但不能存函数。    如何分辨数组指针和指针数组 指针数组：首先它是一个数组，数">
-<meta name="twitter:image" content="http://ojg7pw3bl.bkt.clouddn.com/7AB30FB4610D9CD6E007B4CE48D73270.png">
+<meta name="twitter:title" content="守护进程(十三)">
+<meta name="twitter:description" content="前言守护进程(daemon)是在系统引导装入时启动，仅在系统关闭时才终止。守护进程是在后台运行的。   守护进程特征在命令行下输入 ps -axj(BSD系统)  查看系统中各个进程的状态。">
+<meta name="twitter:image" content="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-1.png">
 
 
 
@@ -126,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://joewt.com/2018/02/27/pointer-and-array/"/>
+  <link rel="canonical" href="https://joewt.com/2018/07/10/daemons/"/>
 
 
 
 
 
-  <title>指针和数组 | JOE'S BLOG</title>
+  <title>守护进程(十三) | JOE'S BLOG</title>
   
 
 
@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://joewt.com/2018/02/27/pointer-and-array/">
+    <link itemprop="mainEntityOfPage" href="https://joewt.com/2018/07/10/daemons/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JOE">
@@ -278,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">指针和数组</h1>
+          <h1 class="post-title" itemprop="name headline">守护进程(十三)</h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-27T20:46:49+08:00">
-                2018-02-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T00:17:42+08:00">
+                2018-07-10
               </time>
             
 
@@ -313,19 +313,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C语言/" itemprop="url" rel="index">
-                    <span itemprop="name">C语言</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C语言/C语言深度解剖/" itemprop="url" rel="index">
-                    <span itemprop="name">C语言深度解剖</span>
+                  <a href="/categories/UNIX环境高级编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX环境高级编程</span>
                   </a>
                 </span>
 
@@ -342,8 +331,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/27/pointer-and-array/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/02/27/pointer-and-array/" itemprop="commentsCount"></span>
+                <a href="/2018/07/10/daemons/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/07/10/daemons/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -407,39 +396,58 @@
       
 
       
-        <h1 id="指针和数组的爱恨情仇"><a href="#指针和数组的爱恨情仇" class="headerlink" title="指针和数组的爱恨情仇"></a>指针和数组的爱恨情仇</h1><p>指针和数组他们之间没有任何关系  </p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>守护进程(daemon)是在系统引导装入时启动，仅在系统关闭时才终止。守护进程是在后台运行的。  </p>
+<h2 id="守护进程特征"><a href="#守护进程特征" class="headerlink" title="守护进程特征"></a>守护进程特征</h2><p>在命令行下输入 ps -axj(BSD系统)  查看系统中各个进程的状态。  </p>
+<a id="more"></a>
+<p><img src="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-1.png" alt="">  </p>
+<p>父ID为0的个进程通常是内核进程，内核进程存在于系统的整个生命周期，他们以超级用户特权运行，无控制终端，无命令行。  </p>
+<p>在ps的输出中，内核守护进程的名字出现在方括号中。  </p>
+<p><img src="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-2.png" alt="">  </p>
+<p>可以看到Linux使用了kthreadd的特殊内核进程来创建其他的内核进程，所以其他内核进程的父进程为2 也就是kthreadd进程。对于需要在进程上下文执行工作但却不被用户层进程上下文调用的每一个内核组件，通常有它自己的内核守护进程。如在Linux中。  </p>
 <ul>
-<li>指针就是指针，指针变量在32位系统下，永远占4个byte，其值为某一个内存的地址。指针可以指向任何地方，但是不是任何地方你都能通过这个指针变量访问到。</li>
-<li>数组就是数组，其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数。数组可以存放任何类型的数据，但不能存函数。  </li>
+<li>kswapd 内存换页守护进程。它支持虚拟内存子系统在经过一段时间后将脏页面慢慢写会磁盘。</li>
+<li>flush  守护进程在可用内存达到设置的最小阀值时将脏页面冲洗至磁盘。同时它还定期将脏页面冲洗会磁盘防止数据丢失。</li>
+<li>sync_supers 定期将文件系统元数据冲洗至磁盘。</li>
+<li>jbd 帮助实现了ext4文件系统中的日志功能。</li>
 </ul>
-<h2 id="如何分辨数组指针和指针数组"><a href="#如何分辨数组指针和指针数组" class="headerlink" title="如何分辨数组指针和指针数组"></a>如何分辨数组指针和指针数组</h2><ul>
-<li>指针数组：首先它是一个数组，数组的元素都是指针，数组占多少个字节由数组本身决定。它是“存储指针的数组”的简称</li>
-<li>数组指针：首先它是一个指针，他指向一个数组。在32位系统下永远是占4个字节，至于它指向的数组占多少个字节，不知道。它是“指向数组的指针”的简称<a id="more"></a>
-考虑下，下面2个哪个是指针数组，哪个是数组指针<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A). int *p1[10];</span><br><span class="line">B). int (*p2)[10];</span><br></pre></td></tr></table></figure>
-</li>
+<hr>
+<ul>
+<li>进程1通常是init进程，它是系统守护进程，主要负责启动各运行层次特定的系统服务。  </li>
+<li>rpcbind守护进程提供将RPC程序号映射为网络端口号的服务。  </li>
+<li>rsyslogd守护进程可以被由管理员启用的将系统日志记录的任何程序使用  </li>
+<li>inetd守护进程。侦听系统网络接口，以便取得来自网络的对各种网络服务进程的请求  </li>
+<li>nfsd、nfsiod、lockd、rpciod、rpc.idmapd、rpc.statd、rpc.mountd提供了网络文件系统的支持。  </li>
 </ul>
-<p>根据右左法则，先找到未定义标识符，p1右边是[]因为[]比<code>*</code>的优先级高，p1先与[]结合，所以它是一个数组。<code>int *</code>修饰的是数组的内容。<br>再看p2，因为”()”比”[]”优先级高，所以<code>(*p2)</code>表示这是一个指针，指针变量名为p2,int修饰的数组内容，即数组的每个元素。数组在这里没有名字，是匿名数组。所以p2是一个数组指针，指向一个包含10个int类型数据的数组。</p>
-<h2 id="多维数组和多级指针"><a href="#多维数组和多级指针" class="headerlink" title="多维数组和多级指针"></a>多维数组和多级指针</h2><p>考虑下面一个例子<br>&amp;p[4][2]-&amp;a[4][2]的值为多少<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a[5][5];</span><br><span class="line">    int (*p)[4];</span><br><span class="line">    p = a;</span><br><span class="line">    printf(&quot;a_ptr=%#p,p_ptr=%#p\n&quot;,&amp;a[4][2],&amp;p[4][2]);</span><br><span class="line">    printf(&quot;%p,%d\n&quot;,&amp;p[4][2]-&amp;a[4][2],&amp;p[4][2]-&amp;a[4][2]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行结果如下：<br><img src="http://ojg7pw3bl.bkt.clouddn.com/7AB30FB4610D9CD6E007B4CE48D73270.png" alt=""><br>文字解析，不如看图来的好<br><img src="http://ojg7pw3bl.bkt.clouddn.com/D28B21B0082E0FBB411BBCEFA515B45E.png" alt="">  </p>
-<h2 id="数组参数与指针参数"><a href="#数组参数与指针参数" class="headerlink" title="数组参数与指针参数"></a>数组参数与指针参数</h2><h3 id="一维数组参数"><a href="#一维数组参数" class="headerlink" title="一维数组参数"></a>一维数组参数</h3><h4 id="能否向函数传递一个数组？"><a href="#能否向函数传递一个数组？" class="headerlink" title="能否向函数传递一个数组？"></a>能否向函数传递一个数组？</h4><p>考虑以下程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void fun(char a[10])</span><br><span class="line">&#123;</span><br><span class="line">    char c = a[3];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    char b[10] = &quot;abcdefg&quot;;</span><br><span class="line">    fun(b[10]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面的调用，fun(b[10]);将b[10]这个数组传递到fun函数。这样显然不对。<br>b[0]代表是数组的一个元素，那么b[10]也是，只是这里越界了。但在编译阶段，编译器并不会真正计算b[10]的地址并取值，所在在编译阶段不会报错，但是编译器会给出警告：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//在我的Mac上编译出现这个</span><br><span class="line">warning: incompatible integer to pointer conversion passing &apos;char&apos; to parameter of type &apos;char *&apos;; take the address with &amp; [-Wint-conversion]  </span><br><span class="line">warning: array index 10 is past the end of the array (which contains 10 elements) [-Warray-bounds]</span><br><span class="line">//在作者的电脑上给出的警告是这样的  </span><br><span class="line">warning C4047: &apos;function&apos; : &apos;char *&apos; differs in levels of indirection from &apos;char &apos;</span><br><span class="line">warning C4024: &apos;fun&apos; : different types for formal and actual parameter 1</span><br></pre></td></tr></table></figure></p>
-<p>虽然编译没问题，但运行肯定有问题。<br>具体分析如下:  </p>
+<h2 id="编写规则"><a href="#编写规则" class="headerlink" title="编写规则"></a>编写规则</h2><p>编写一个守护进程需要遵循一些规则，防止产生不必要的交互。  </p>
 <ol>
-<li>b[10]并不存在，在编译的时候由于没有去实际地址取值，所以没有出错，但是在运行时，将计算b[10]的实际地址，并且取值。这时发生越界错误</li>
-<li>编译器的警告已经告诉我们编译器需要的是一个char*类型的参数，而传递过去的是一个char类型的参数，这时候fun函数会将传入的char类型的数据当地址处理，同样会发生错误</li>
-<li>对第二个错误的理解，fun函数明明传递的是一个数组啊，编译器怎么会说是char*类型呢？  </li>
+<li>调用umask将文件模式创建屏蔽字设置为一个已知值通常为0</li>
+<li>调用fork，然后父进程exit</li>
+<li>调用setsid创建一个新会话</li>
+<li>当前工作目录更改为根目录</li>
+<li>关闭不需要的文件描述符</li>
+<li>某些守护进程打开/dev/null 使其具有文件描述符0、1、2</li>
 </ol>
-<p>将fun(b[10])改为fun(b)，编译后不会出现警告了。</p>
-<h4 id="无法向函数传递一个数组"><a href="#无法向函数传递一个数组" class="headerlink" title="无法向函数传递一个数组"></a>无法向函数传递一个数组</h4><p>可以简单验证下，代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void fun(char a[10])</span><br><span class="line">&#123;</span><br><span class="line">    int i=sizeof(a);</span><br><span class="line">    printf(&quot;i:%d\n&quot;,i);</span><br><span class="line">    char c=a[3];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    char b[10] = &quot;abcdefg&quot;;</span><br><span class="line">    int j = sizeof(b);</span><br><span class="line">    printf(&quot;j:%d\n&quot;,j);</span><br><span class="line">    fun(b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://ojg7pw3bl.bkt.clouddn.com/FC89DCB14091449DBE1B2B8A345E07EA.png" alt=""><br>如果数组b真正传递到函数内部，那么i的值应该为10，但我测试后发现i的值为8(作者测的值为4)。造成这样的原因是这样一条规则:   </p>
+<h2 id="出错记录"><a href="#出错记录" class="headerlink" title="出错记录"></a>出错记录</h2><p>守护进程出错处理，大多数守护进程都使用 BSD的syslog设施。  </p>
+<p><img src="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-3.png" alt="">  </p>
+<p> 有3种产生日志消息的方式  </p>
+<ol>
+<li>内核例程可以调用log函数。</li>
+<li>大多数用户进程(守护进程)调用syslog(3)函数来产生日志消息，</li>
+<li>无论一个用户进程是在此主机上，还是在通过TPC/IP网络连接到此主机的其他主机上，都可以讲日志消息发送到UDP的514端口。  </li>
+</ol>
+<p> 通常，syslogd守护进程读取所有3种格式的日志消息。启动时读取一个配置文件，通常是/etc/syslogd.conf该文件决定了不同种类的消息应送到何处。  </p>
+<p> syslog设施的接口是syslog函数  </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;syslog.h&gt;</span><br><span class="line">void openlog(const char *ident, int option, int facility);</span><br><span class="line">void syslog(int priority, const char *format, ...);</span><br><span class="line">void closelog(void);</span><br><span class="line">int setlogmask(int maskpri);</span><br></pre></td></tr></table></figure>
+<h2 id="单实例守护进程"><a href="#单实例守护进程" class="headerlink" title="单实例守护进程"></a>单实例守护进程</h2><p> 某些守护进程会实现为，在任意时刻只运行该守护进程的一个副本。对于cron守护进程而言，如果有多个实例运行，那么每个副本都可能试图开始某个预定的操作，会造成重复执行，这可能会出错。  </p>
+<p> 如果守护进程需要访问一个设备，而该设备驱动程序有时会阻止想要多次打开/dev 目录下相应设备节点的尝试。这就限制了在一个时刻只能运行守护进程的一个副本。但如果没有这种设备可供使用，那么就需要自行处理。   </p>
+<p> 文件和记录锁机制为一种方法提供了基础，该方法保证一个守护进程只有一个副本在运行。如果每一个守护进程创建一个固定名字的文件，并在该文件的整体上加一把写锁，那么只允许创建一把这样的锁。在此之后创建写锁的尝试都会失败，这向后续进程副本指明已有一个副本正在运行。  </p>
+<h2 id="守护进程惯例"><a href="#守护进程惯例" class="headerlink" title="守护进程惯例"></a>守护进程惯例</h2><p> 在UNIX系统中，守护进程遵循以下通用惯例  </p>
 <ul>
-<li>C语言中，当一维数组作为函数参数的时候，编译器总是把它解析成一个指向其首元素首地址的指针</li>
+<li>若守护进程使用锁文件，那么该文件通常存储在/var/run目录中。</li>
+<li>若守护进程支持配置选项，那么配置文件一般位于/etc下，如/etc/syslog.conf  </li>
+<li>守护进程可以由命令行启动，但通常它们是由系统启动脚本之一启动的<code>/etc/rc*或/etc/init.d/*</code>。</li>
+<li>配置文件一般只在启动时读取，如果更改配置文件，就要重启进程。</li>
 </ul>
-<blockquote>
-<p>这么做是有原因的。在 C 语言中，所有非数组形式的数据实参均以传值形式（对实参<br>做一份拷贝并传递给被调用的函数，函数不能修改作为实参的实际变量的值，而只能修改<br>传递给它的那份拷贝）调用。然而，如果要拷贝整个数组，无论在空间上还是在时间上，<br>其开销都是非常大的。更重要的是，在绝大部分情况下，你其实并不需要整个数组的拷贝，<br>你只想告诉函数在那一刻对哪个特定的数组感兴趣。这样的话，为了节省时间和空间，提<br>高程序运行的效率，于是就有了上述的规则。同样的，函数的返回值也不能是一个数组，<br>而只能是指针。这里要明确的一个概念就是：函数本身是没有类型的，只有函数的返回值<br>才有类型。很多书都把这点弄错了，甚至出现“XXX 类型的函数”这种说法。简直是荒唐<br>至极！</p>
-</blockquote>
-<p>所以我们写代码的时候，可以写成这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void fun(char a[])</span><br><span class="line">&#123;</span><br><span class="line">    char c=a[3];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    char b[10] = &quot;abcdefg&quot;;</span><br><span class="line">    fun(b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>或者也可以<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void fun(char *p)</span><br><span class="line">&#123;</span><br><span class="line">    char c=p[3];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -484,7 +492,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="https://joewt.com/2018/02/27/pointer-and-array/" title="指针和数组">https://joewt.com/2018/02/27/pointer-and-array/</a>
+    <a href="https://joewt.com/2018/07/10/daemons/" title="守护进程(十三)">https://joewt.com/2018/07/10/daemons/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -498,6 +506,8 @@
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/UNIX/" rel="tag"># UNIX</a>
           
             <a href="/tags/C/" rel="tag"># C</a>
           
@@ -527,8 +537,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/12/progress-control/" rel="next" title="进程控制(八)">
-                <i class="fa fa-chevron-left"></i> 进程控制(八)
+              <a href="/2018/06/20/thinkphpMeetsSwoole/" rel="next" title="TP5集成Swoole">
+                <i class="fa fa-chevron-left"></i> TP5集成Swoole
               </a>
             
           </div>
@@ -536,10 +546,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/07/css-layout/" rel="prev" title="CSS布局">
-                CSS布局 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -739,7 +745,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#指针和数组的爱恨情仇"><span class="nav-number">1.</span> <span class="nav-text">指针和数组的爱恨情仇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何分辨数组指针和指针数组"><span class="nav-number">1.1.</span> <span class="nav-text">如何分辨数组指针和指针数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多维数组和多级指针"><span class="nav-number">1.2.</span> <span class="nav-text">多维数组和多级指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组参数与指针参数"><span class="nav-number">1.3.</span> <span class="nav-text">数组参数与指针参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一维数组参数"><span class="nav-number">1.3.1.</span> <span class="nav-text">一维数组参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#能否向函数传递一个数组？"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">能否向函数传递一个数组？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无法向函数传递一个数组"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">无法向函数传递一个数组</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护进程特征"><span class="nav-number">2.</span> <span class="nav-text">守护进程特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写规则"><span class="nav-number">3.</span> <span class="nav-text">编写规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#出错记录"><span class="nav-number">4.</span> <span class="nav-text">出错记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单实例守护进程"><span class="nav-number">5.</span> <span class="nav-text">单实例守护进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护进程惯例"><span class="nav-number">6.</span> <span class="nav-text">守护进程惯例</span></a></li></ol></div>
             
 
           </div>

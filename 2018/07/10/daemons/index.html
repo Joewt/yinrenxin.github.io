@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-1.png">
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-2.png">
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-3.png">
-<meta property="og:updated_time" content="2018-07-09T16:20:39.321Z">
+<meta property="og:updated_time" content="2018-07-09T16:27:55.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="守护进程(十三)">
 <meta name="twitter:description" content="前言守护进程(daemon)是在系统引导装入时启动，仅在系统关闭时才终止。守护进程是在后台运行的。   守护进程特征在命令行下输入 ps -axj(BSD系统)  查看系统中各个进程的状态。">
@@ -433,7 +433,7 @@
 <ol>
 <li>内核例程可以调用log函数。</li>
 <li>大多数用户进程(守护进程)调用syslog(3)函数来产生日志消息，</li>
-<li>无论一个用户进程是在此主机上，还是在通过TPC/IP网络连接到此主机的其他主机上，都可以讲日志消息发送到UDP的514端口。  </li>
+<li>无论一个用户进程是在此主机上，还是在通过TPC/IP网络连接到此主机的其他主机上，都可以将日志消息发送到UDP的514端口。  </li>
 </ol>
 <p> 通常，syslogd守护进程读取所有3种格式的日志消息。启动时读取一个配置文件，通常是/etc/syslogd.conf该文件决定了不同种类的消息应送到何处。  </p>
 <p> syslog设施的接口是syslog函数  </p>

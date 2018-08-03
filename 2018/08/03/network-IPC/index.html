@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="引言UNIX系统提供的经典进程间通信机制(IPC): 管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。本章内容主要是研究在不同计算机上的进程相互通信的机制: 网络进程间通信(network IPC)。   套接字描述符套接字描述符在UNIX系统上被当做一种文件描述符，UNIX系统一切皆文件。调用socket函数，创建一个套接字   123#incl">
+<meta name="description" content="引言UNIX系统提供的经典进程间通信机制(IPC): 管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。本章内容主要是研究在不同计算机上的进程相互通信的机制: 网络进程间通信(network IPC)。">
 <meta name="keywords" content="UNIX,C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络IPC: 套接字(十六)">
 <meta property="og:url" content="https://joewt.com/2018/08/03/network-IPC/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
-<meta property="og:description" content="引言UNIX系统提供的经典进程间通信机制(IPC): 管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。本章内容主要是研究在不同计算机上的进程相互通信的机制: 网络进程间通信(network IPC)。   套接字描述符套接字描述符在UNIX系统上被当做一种文件描述符，UNIX系统一切皆文件。调用socket函数，创建一个套接字   123#incl">
+<meta property="og:description" content="引言UNIX系统提供的经典进程间通信机制(IPC): 管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。本章内容主要是研究在不同计算机上的进程相互通信的机制: 网络进程间通信(network IPC)。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-03T08:43:27.619Z">
+<meta property="og:updated_time" content="2018-08-03T08:50:12.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络IPC: 套接字(十六)">
-<meta name="twitter:description" content="引言UNIX系统提供的经典进程间通信机制(IPC): 管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。本章内容主要是研究在不同计算机上的进程相互通信的机制: 网络进程间通信(network IPC)。   套接字描述符套接字描述符在UNIX系统上被当做一种文件描述符，UNIX系统一切皆文件。调用socket函数，创建一个套接字   123#incl">
+<meta name="twitter:description" content="引言UNIX系统提供的经典进程间通信机制(IPC): 管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。本章内容主要是研究在不同计算机上的进程相互通信的机制: 网络进程间通信(network IPC)。">
 
 
 
@@ -403,6 +403,7 @@
 
       
         <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>UNIX系统提供的经典进程间通信机制(IPC): 管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。本章内容主要是研究在不同计算机上的进程相互通信的机制: 网络进程间通信(network IPC)。  </p>
+<a id="more"></a>
 <h2 id="套接字描述符"><a href="#套接字描述符" class="headerlink" title="套接字描述符"></a>套接字描述符</h2><p>套接字描述符在UNIX系统上被当做一种文件描述符，UNIX系统一切皆文件。<br>调用socket函数，创建一个套接字  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">int socket(int damain, int type, int protocol);</span><br><span class="line">//成功：返回描述符，出错：返回-1</span><br></pre></td></tr></table></figure>
 <p>参数domain确定通信特征，包括地址格式  </p>

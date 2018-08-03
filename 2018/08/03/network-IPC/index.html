@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Linux," />
+  <meta name="keywords" content="UNIX,C," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
-<meta name="keywords" content="Linux">
+<meta name="description" content="引言UNIX系统提供的经典进程间通信机制(IPC): 管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。本章内容主要是研究在不同计算机上的进程相互通信的机制: 网络进程间通信(network IPC)。   套接字描述符套接字描述符在UNIX系统上被当做一种文件描述符，UNIX系统一切皆文件。调用socket函数，创建一个套接字   123#incl">
+<meta name="keywords" content="UNIX,C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用的命令总结">
-<meta property="og:url" content="https://joewt.com/2018/02/11/decompression/index.html">
+<meta property="og:title" content="网络IPC: 套接字(十六)">
+<meta property="og:url" content="https://joewt.com/2018/08/03/network-IPC/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
-<meta property="og:description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
+<meta property="og:description" content="引言UNIX系统提供的经典进程间通信机制(IPC): 管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。本章内容主要是研究在不同计算机上的进程相互通信的机制: 网络进程间通信(network IPC)。   套接字描述符套接字描述符在UNIX系统上被当做一种文件描述符，UNIX系统一切皆文件。调用socket函数，创建一个套接字   123#incl">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-02T01:12:48.824Z">
+<meta property="og:updated_time" content="2018-08-03T08:43:27.619Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="常用的命令总结">
-<meta name="twitter:description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
+<meta name="twitter:title" content="网络IPC: 套接字(十六)">
+<meta name="twitter:description" content="引言UNIX系统提供的经典进程间通信机制(IPC): 管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。本章内容主要是研究在不同计算机上的进程相互通信的机制: 网络进程间通信(network IPC)。   套接字描述符套接字描述符在UNIX系统上被当做一种文件描述符，UNIX系统一切皆文件。调用socket函数，创建一个套接字   123#incl">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://joewt.com/2018/02/11/decompression/"/>
+  <link rel="canonical" href="https://joewt.com/2018/08/03/network-IPC/"/>
 
 
 
 
 
-  <title>常用的命令总结 | JOE'S BLOG</title>
+  <title>网络IPC: 套接字(十六) | JOE'S BLOG</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://joewt.com/2018/02/11/decompression/">
+    <link itemprop="mainEntityOfPage" href="https://joewt.com/2018/08/03/network-IPC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JOE">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">常用的命令总结</h1>
+          <h1 class="post-title" itemprop="name headline">网络IPC: 套接字(十六)</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-11T20:48:31+08:00">
-                2018-02-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-03T14:03:47+08:00">
+                2018-08-03
               </time>
             
 
@@ -319,8 +319,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux命令/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux命令</span>
+                  <a href="/categories/UNIX环境高级编程/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX环境高级编程</span>
                   </a>
                 </span>
 
@@ -337,8 +337,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/11/decompression/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/02/11/decompression/" itemprop="commentsCount"></span>
+                <a href="/2018/08/03/network-IPC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/08/03/network-IPC/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -402,43 +402,107 @@
       
 
       
-        <h1 id="常用解压缩命令"><a href="#常用解压缩命令" class="headerlink" title="常用解压缩命令"></a>常用解压缩命令</h1><p>平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧   </p>
-<h2 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h2><p>压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ zip -r xxx.zip  xxx.c</span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ zip xxx.zip</span><br></pre></td></tr></table></figure></p>
-<h2 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h2><p>.tar 压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -cvf xxx.tar xxx</span><br></pre></td></tr></table></figure></p>
-<p>.tar 解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xvf xxx.tar</span><br></pre></td></tr></table></figure></p>
-<p>.tar.gz 压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zcvf xxx.tar.gz xxx</span><br></pre></td></tr></table></figure></p>
-<p>.tar.gz 解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf xxx.tar.gz</span><br></pre></td></tr></table></figure></p>
-<p>.tar.bz2 压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -jcvf xxx.tar.gz2 xxx</span><br></pre></td></tr></table></figure></p>
-<p>.tar.bz2 解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -jxvf xxx.tar.gz2</span><br></pre></td></tr></table></figure></p>
-<h2 id="rar"><a href="#rar" class="headerlink" title="rar"></a>rar</h2><p>.rar 压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rar -a xxx.rar xxx</span><br></pre></td></tr></table></figure></p>
-<p>.rar 解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rar -x xxx.rar</span><br></pre></td></tr></table></figure></p>
-<h1 id="资源查看"><a href="#资源查看" class="headerlink" title="资源查看"></a>资源查看</h1><p>查看文件大小<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ du -ah --max-depth=1</span><br></pre></td></tr></table></figure></p>
-<p>监控系统资源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vmstat 1 3</span><br></pre></td></tr></table></figure></p>
-<p>查看内存使用状况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ free -m</span><br></pre></td></tr></table></figure>
-<p>查看CPU</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /proc/cpuinfo</span><br></pre></td></tr></table></figure>
-<p>判断系统位数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ file /bin/ls</span><br></pre></td></tr></table></figure>
-<p>查看Linux系统发行版</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release -a</span><br></pre></td></tr></table></figure>
-<p>列出当前系统打开文件的工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lsof abc.txt 				//显示开启文件abc.txt的进程</span><br><span class="line">lsof -c abc  				//显示abc进程现在打开的文件</span><br><span class="line">lsof -c -p  				//1234 列出进程号为1234的进程所打开的文件</span><br><span class="line">lsof -g gid  				//显示归属gid的进程情况</span><br><span class="line">lsof +d /usr/local/  	    //显示目录下被进程开启的文件</span><br><span class="line">lsof +D /usr/local/ 	    //同上，但是会搜索目录下的目录，时间较长</span><br><span class="line">lsof -d 4 					//显示使用fd为4的进程</span><br><span class="line">lsof -i 					//用以显示符合条件的进程情况</span><br></pre></td></tr></table></figure></p>
-<p>获取 IPv4流量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -i 4</span><br></pre></td></tr></table></figure></p>
-<p>仅显示TCP流量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -iTCP</span><br></pre></td></tr></table></figure></p>
-<p>显示指定用户打开了什么<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -u mysql</span><br></pre></td></tr></table></figure></p>
-<p>杀死指定用户所做的一切事情</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 `lsof -t -u nginx`</span><br></pre></td></tr></table></figure>
-<p>查看指定的命令正在使用的文件和网络连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -c mysql</span><br></pre></td></tr></table></figure>
-<p>查看指定进程ID已打开的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -p 12356</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>lsof <code>which httpd</code> //那个进程在使用apache的可执行文件<br>lsof /etc/passwd //那个进程在占用/etc/passwd<br>lsof /dev/hda6 //那个进程在占用hda6<br>lsof /dev/cdrom //那个进程在占用光驱<br>lsof -c sendmail //查看sendmail进程的文件使用情况<br>lsof -c courier -u ^zahn //显示出那些文件被以courier打头的进程打开，但是并不属于用户zahn<br>lsof -p 30297 //显示那些文件被pid为30297的进程打开<br>lsof -D /tmp 显示所有在/tmp文件夹中打开的instance和文件的进程。但是symbol文件并不在列<br>lsof -u1000 //查看uid是100的用户的进程的文件使用情况<br>lsof -utony //查看用户tony的进程的文件使用情况<br>lsof -u^tony //查看不是用户tony的进程的文件使用情况(^是取反的意思)<br>lsof -i //显示所有打开的端口<br>lsof -i:80 //显示所有打开80端口的进程<br>lsof -i -U //显示所有打开的端口和UNIX domain文件<br>lsof -i UDP@[url]www.akadia.com:123 //显示那些进程打开了到www.akadia.com的UDP的123(ntp)端口的链接<br>lsof -i tcp@ohaha.ks.edu.tw:ftp -r //不断查看目前ftp连接的情况(-r，lsof会永远不断的执行，直到收到中断信号,+r，lsof会一直执行，直到没有档案被显示,缺省是15s刷新)<br>lsof -i tcp@ohaha.ks.edu.tw:ftp -n //lsof -n 不将IP转换为hostname，缺省是不加上-n参数  </p>
-</blockquote>
-<h1 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h1><p>查看 XSI IPC 3种形式的限定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Linux系统</span><br><span class="line">$ ipcs -l</span><br><span class="line">FreeBSD系统</span><br><span class="line">$ ipcs -T</span><br><span class="line">Solaris系统</span><br><span class="line">$ sysdef -y</span><br></pre></td></tr></table></figure></p>
-<h2 id="没了"><a href="#没了" class="headerlink" title="没了"></a>没了</h2>
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>UNIX系统提供的经典进程间通信机制(IPC): 管道、FIFO、消息队列、信号量以及共享存储。这些机制允许在同一台计算机上运行的进程可以相互通信。本章内容主要是研究在不同计算机上的进程相互通信的机制: 网络进程间通信(network IPC)。  </p>
+<h2 id="套接字描述符"><a href="#套接字描述符" class="headerlink" title="套接字描述符"></a>套接字描述符</h2><p>套接字描述符在UNIX系统上被当做一种文件描述符，UNIX系统一切皆文件。<br>调用socket函数，创建一个套接字  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">int socket(int damain, int type, int protocol);</span><br><span class="line">//成功：返回描述符，出错：返回-1</span><br></pre></td></tr></table></figure>
+<p>参数domain确定通信特征，包括地址格式  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">域</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AF_INET</td>
+<td style="text-align:left">IPv4</td>
+</tr>
+<tr>
+<td style="text-align:left">AF_INET6</td>
+<td style="text-align:left">IPv6</td>
+</tr>
+<tr>
+<td style="text-align:left">AF_UNIX</td>
+<td style="text-align:left">UNIX域</td>
+</tr>
+<tr>
+<td style="text-align:left">AF_UPSPEC</td>
+<td style="text-align:left">未指定</td>
+</tr>
+</tbody>
+</table>
+<p>参数type确定套接字类型，进一步确定通信特征   </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">SOCK_DGRAM</td>
+<td style="text-align:left">固定长度、无连接、不可靠的报文传递</td>
+</tr>
+<tr>
+<td style="text-align:left">SOCK_RAW</td>
+<td style="text-align:left">IP协议的数据报接口</td>
+</tr>
+<tr>
+<td style="text-align:left">SOCK_SEQPACKET</td>
+<td style="text-align:left">固定长度、有序的、可靠的、面向连接的报文传递</td>
+</tr>
+<tr>
+<td style="text-align:left">SOCK_STREAM</td>
+<td style="text-align:left">有序的、可靠的、双向的、面向连接的字节流</td>
+</tr>
+</tbody>
+</table>
+<p>参数protocal通常是0、表示为给定的域和套接字类型选择默认协议  </p>
+<p>数据报(SOCK_DGRAM)接口，类似于UDP通信，两个对等进程之间通信时不需要逻辑连接。只需要向对等进程所使用的套接字送出一个报文。<br>字节流(SOCK_STREAM),类似于TCP，在交换数据前，需要建立一个逻辑连接。  </p>
+<p>套接字通信时双向的。可以采用shutdown函数来禁止一个套接字的I/O。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">int shutdown(int sockfd, int how);</span><br><span class="line">//成功：返回0 失败：返回-1</span><br></pre></td></tr></table></figure>
+<p>how参数  </p>
+<ul>
+<li>SHUT_RE(关闭读端)，无法从套接字读取数据</li>
+<li>SHUT_WR(关闭写端)，无法使用套接字发送数据</li>
+<li>SHUT_RDWR，无法读，也无法读  </li>
+</ul>
+<p>有两个函数用于点分十进制和二进制地址格式之前的相互转换  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;arpa/inet.h&gt;</span><br><span class="line">const char *inet_ntop(int domain, const void *restrict addr,</span><br><span class="line">                    char *restrict str, socklen_t size);</span><br><span class="line">                    //成功：返回地址字符串指针，出错：返回NULL</span><br><span class="line"></span><br><span class="line">int inet_pton(int domain, const char *restrict str,</span><br><span class="line">                void *restrict addr);</span><br><span class="line">                    //成功：返回1，格式无效返回0，失败：返回-1</span><br></pre></td></tr></table></figure>
+<h2 id="将套接字与地址关联"><a href="#将套接字与地址关联" class="headerlink" title="将套接字与地址关联"></a>将套接字与地址关联</h2><p>使用bind函数来关联地址和套接字  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">int bind(int sockfd, const struct sockaddr *addr, socklen_t len);</span><br><span class="line">//成功：返回0，失败：返回-1</span><br></pre></td></tr></table></figure>
+<h2 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h2><p>使用connect函数来建立连接  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">int connect(int sockfd, const struct sockaddr *addr, socklen_t len);</span><br><span class="line">//成功：返回0，失败：返回-1</span><br></pre></td></tr></table></figure>
+<p>在connect中指定的地址是我们想与之通信的服务器地址。如果sockfd没有绑定到一个地址，connect会给调用者绑定一个默认地址。  </p>
+<p>服务器调用listen函数宣告它愿意接受连接请求  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">int listen(int sockfd, int backlog);</span><br><span class="line">//成功：返回0，失败：返回-1</span><br></pre></td></tr></table></figure>
+<p>参数backlog提供了一个提示，提示系统该进程所要入队的未完成连接请求数量。实际值由系统决定<br>一旦队列满，系统就会拒绝多余的连接请求，所以backlog的值应该基于服务器期望负载和处理量来选择，其中处理量是指接受连接请求与启动服务的数量。<br>一旦服务器调用了listen，所用的套接字就能接收连接请求。使用accept函数来获得连接请求并建立连接。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">int accept(int sockfd, struct sockaddr *restrict addr,</span><br><span class="line">            socklen_t *restrict len);</span><br><span class="line">            //成功：返回文件描述符，出错：返回-1</span><br></pre></td></tr></table></figure>
+<p>函数accept返回的是套接字描述符，该描述符连接到调用connect的客户端。这个新的套接字描述符和原始套接字(sockfd)具有相同的套接字类型和地址族。传给accept的原始套接字没有关联到这个连接，而是继续保持可用状态并接收其他连接请求。<br>如果不关心客户端标识，可以将参赛addr和len设为NULL。否则，在调用accept之前，将addr参数设为足够大的缓冲区来存放地址，并且将len指向的整数设为这个缓冲区的字节大小。返回时，accept会在缓冲区填充客户端的地址，并且更新指向len的整数来反映该地址的大小。<br>如果没有连接请求等待，accept会阻塞直到一个请求到来。如果sockfd处于非阻塞模式，accept会返回-1，并将errno设置为EAGAIN或EWOULDBLOCK。<br>如果服务器调用accept，并且当前没有连接请求，服务器会阻塞直到一个请求到来。另外，服务器可以使用poll或select来等待一个请求的到来。在这种情况下，一个带有等待连接请求的套接字会以可读的方式出现。  </p>
+<h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">ssize_t send(int sockfd, const void *buf, size_t nbytes, int flags);</span><br><span class="line">//成功: 返回发送的字节数，失败：返回-1</span><br></pre></td></tr></table></figure>
+<p>对于支持报文边界的协议，如果尝试发送单个报文的长度超过协议锁支持的最大长度，那么send会失败，并将errno设为EMSGSIZE。对于字节流协议，send会阻塞直到整个数据传输完成。函数sendto和send类似。区别在于sendto可以在无连接的套接字上指定一个目标地址。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">ssize_t sendto(int sockfd, const void *buf, size_t nbytes, int flags, const struct sockaddr * destaddr, socklen_t destlen);</span><br><span class="line">//成功：返回发送的字节数，失败：返回-1</span><br></pre></td></tr></table></figure>
+<p>使用recv函数接收数据   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">ssize_t recv(int sockfd, void *buf, size_t nbytes, int flags);</span><br><span class="line">//返回数据的字节长度，无数据或等放已经按序结束，返回0，出错：返回-1</span><br></pre></td></tr></table></figure>
+<h2 id="非阻塞和异步I-O"><a href="#非阻塞和异步I-O" class="headerlink" title="非阻塞和异步I/O"></a>非阻塞和异步I/O</h2><p>通常，recv函数没有数据可用时会阻塞等待。同样的，当套接字输出队列没有足够空间来发送消息时，send函数会阻塞。在套接字非阻塞模式下，行为会改变。在这种情况下，这些函数不会阻塞而是会失败，将errno设置为EWOULDBLOCK或者EAGAIN。当这种情况发生时，可以用poll或select来判断能否接收或者传输数据。  </p>
+<p>Single UNIX Specification 包含通用异步I/O机制的支持。套接字机制有自己的处理异步I/O的方式。<br>在基于套接字的异步I/O中，当从套接字中读取数据时，或者当套接字写队列中空间变得可用时，可以安排要发送的信号SIGIO。<br>启用异步I/O的步骤  </p>
+<ol>
+<li>建立套接字所有权，这样信号可以被传递到合适的进程。  <ul>
+<li>在fcntl中使用F_SETOWN命令</li>
+<li>在ioctl中使用FIOSETOWN命令</li>
+<li>在ioctl中使用SIOCSGRP命令 </li>
+</ul>
+</li>
+<li>通知套接字当I/O操作不会阻塞时发信号。  <ul>
+<li>在fcntl中使用F_SETFL命令并且启用文件标志<code>O_ASYNC</code>。</li>
+<li>在ioctl中使用FIOASYNC命令。</li>
+</ul>
+</li>
+</ol>
+<p>但没有得到普遍支持</p>
+
       
     </div>
     
@@ -482,7 +546,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="https://joewt.com/2018/02/11/decompression/" title="常用的命令总结">https://joewt.com/2018/02/11/decompression/</a>
+    <a href="https://joewt.com/2018/08/03/network-IPC/" title="网络IPC: 套接字(十六)">https://joewt.com/2018/08/03/network-IPC/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -497,7 +561,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/UNIX/" rel="tag"># UNIX</a>
+          
+            <a href="/tags/C/" rel="tag"># C</a>
           
         </div>
       
@@ -525,8 +591,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/08/Progress-env/" rel="next" title="进程环境(七)">
-                <i class="fa fa-chevron-left"></i> 进程环境(七)
+              <a href="/2018/07/10/daemons/" rel="next" title="守护进程(十三)">
+                <i class="fa fa-chevron-left"></i> 守护进程(十三)
               </a>
             
           </div>
@@ -534,10 +600,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/12/progress-control/" rel="prev" title="进程控制(八)">
-                进程控制(八) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -741,7 +803,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用解压缩命令"><span class="nav-number">1.</span> <span class="nav-text">常用解压缩命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">1.1.</span> <span class="nav-text">zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar"><span class="nav-number">1.2.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rar"><span class="nav-number">1.3.</span> <span class="nav-text">rar</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#资源查看"><span class="nav-number">2.</span> <span class="nav-text">资源查看</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间通信"><span class="nav-number">3.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#没了"><span class="nav-number">3.1.</span> <span class="nav-text">没了</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#套接字描述符"><span class="nav-number">2.</span> <span class="nav-text">套接字描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将套接字与地址关联"><span class="nav-number">3.</span> <span class="nav-text">将套接字与地址关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立连接"><span class="nav-number">4.</span> <span class="nav-text">建立连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据传输"><span class="nav-number">5.</span> <span class="nav-text">数据传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非阻塞和异步I-O"><span class="nav-number">6.</span> <span class="nav-text">非阻塞和异步I/O</span></a></li></ol></div>
             
 
           </div>

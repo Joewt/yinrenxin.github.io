@@ -84,14 +84,14 @@
 <meta name="description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用的命令总结">
+<meta property="og:title" content="常用的命令总结及各种实用工具">
 <meta property="og:url" content="https://joewt.com/2018/02/11/decompression/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
 <meta property="og:description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-02T01:12:48.824Z">
+<meta property="og:updated_time" content="2018-08-11T15:25:57.014Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="常用的命令总结">
+<meta name="twitter:title" content="常用的命令总结及各种实用工具">
 <meta name="twitter:description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>常用的命令总结 | JOE'S BLOG</title>
+  <title>常用的命令总结及各种实用工具 | JOE'S BLOG</title>
   
 
 
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">常用的命令总结</h1>
+          <h1 class="post-title" itemprop="name headline">常用的命令总结及各种实用工具</h1>
         
 
         <div class="post-meta">
@@ -438,6 +438,13 @@
 <p>lsof <code>which httpd</code> //那个进程在使用apache的可执行文件<br>lsof /etc/passwd //那个进程在占用/etc/passwd<br>lsof /dev/hda6 //那个进程在占用hda6<br>lsof /dev/cdrom //那个进程在占用光驱<br>lsof -c sendmail //查看sendmail进程的文件使用情况<br>lsof -c courier -u ^zahn //显示出那些文件被以courier打头的进程打开，但是并不属于用户zahn<br>lsof -p 30297 //显示那些文件被pid为30297的进程打开<br>lsof -D /tmp 显示所有在/tmp文件夹中打开的instance和文件的进程。但是symbol文件并不在列<br>lsof -u1000 //查看uid是100的用户的进程的文件使用情况<br>lsof -utony //查看用户tony的进程的文件使用情况<br>lsof -u^tony //查看不是用户tony的进程的文件使用情况(^是取反的意思)<br>lsof -i //显示所有打开的端口<br>lsof -i:80 //显示所有打开80端口的进程<br>lsof -i -U //显示所有打开的端口和UNIX domain文件<br>lsof -i UDP@[url]www.akadia.com:123 //显示那些进程打开了到www.akadia.com的UDP的123(ntp)端口的链接<br>lsof -i tcp@ohaha.ks.edu.tw:ftp -r //不断查看目前ftp连接的情况(-r，lsof会永远不断的执行，直到收到中断信号,+r，lsof会一直执行，直到没有档案被显示,缺省是15s刷新)<br>lsof -i tcp@ohaha.ks.edu.tw:ftp -n //lsof -n 不将IP转换为hostname，缺省是不加上-n参数  </p>
 </blockquote>
 <h1 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h1><p>查看 XSI IPC 3种形式的限定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Linux系统</span><br><span class="line">$ ipcs -l</span><br><span class="line">FreeBSD系统</span><br><span class="line">$ ipcs -T</span><br><span class="line">Solaris系统</span><br><span class="line">$ sysdef -y</span><br></pre></td></tr></table></figure></p>
+<h1 id="抓包工具"><a href="#抓包工具" class="headerlink" title="抓包工具"></a>抓包工具</h1><p>tcpdump抓包工具使用  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tcpdump -i any tcp port 9501</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-i 绑定的网卡，any表示全部网卡 lo 表示本地的</li>
+<li>tcp 只监听tcp协议</li>
+<li>port 指定端口</li>
+</ul>
 <h2 id="没了"><a href="#没了" class="headerlink" title="没了"></a>没了</h2>
       
     </div>
@@ -482,7 +489,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="https://joewt.com/2018/02/11/decompression/" title="常用的命令总结">https://joewt.com/2018/02/11/decompression/</a>
+    <a href="https://joewt.com/2018/02/11/decompression/" title="常用的命令总结及各种实用工具">https://joewt.com/2018/02/11/decompression/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -741,7 +748,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用解压缩命令"><span class="nav-number">1.</span> <span class="nav-text">常用解压缩命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">1.1.</span> <span class="nav-text">zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar"><span class="nav-number">1.2.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rar"><span class="nav-number">1.3.</span> <span class="nav-text">rar</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#资源查看"><span class="nav-number">2.</span> <span class="nav-text">资源查看</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间通信"><span class="nav-number">3.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#没了"><span class="nav-number">3.1.</span> <span class="nav-text">没了</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用解压缩命令"><span class="nav-number">1.</span> <span class="nav-text">常用解压缩命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">1.1.</span> <span class="nav-text">zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar"><span class="nav-number">1.2.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rar"><span class="nav-number">1.3.</span> <span class="nav-text">rar</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#资源查看"><span class="nav-number">2.</span> <span class="nav-text">资源查看</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间通信"><span class="nav-number">3.</span> <span class="nav-text">进程间通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#抓包工具"><span class="nav-number">4.</span> <span class="nav-text">抓包工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#没了"><span class="nav-number">4.1.</span> <span class="nav-text">没了</span></a></li></ol></li></ol></div>
             
 
           </div>

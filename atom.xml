@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://joewt.com/"/>
-  <updated>2018-08-03T08:50:12.179Z</updated>
+  <updated>2018-08-27T12:16:52.636Z</updated>
   <id>https://joewt.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记一次性能优化点</title>
+    <link href="https://joewt.com/2018/08/27/mysql-optimize-1/"/>
+    <id>https://joewt.com/2018/08/27/mysql-optimize-1/</id>
+    <published>2018-08-27T11:39:08.000Z</published>
+    <updated>2018-08-27T12:16:52.636Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>最近学习了个小项目, 打算把它作为我们队的论坛系统，但部署到服务器上时发现 打开一个页面要等好久。在此记录下如何解决的，最后的处理结果也是非常简单。  </p></blockquote><a id="more"></a><p><a href="https://bbs.hnitoj.cn" target="_blank" rel="noopener">线上地址</a>  </p><p><a href="https://github.com/yinrenxin/laravel-larabbs" target="_blank" rel="noopener">项目地址</a>  </p><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>这个项目是用Laravel框架，本地开发使用Homestead，开发起来非常方便。线上部署使用了<a href="http://laradock.io/introduction/" target="_blank" rel="noopener">Laradock</a>比较好用的一个Docker化的一个PHP运行环境  </p><p>因为某个还未解决的问题，没有使用Laradock里的MySQL容器，我就想着使用另外一台服务器运行MySQL，当整个部署完成后，MySQL远程连接开启。启动项目：）   </p><h2 id="问题展现"><a href="#问题展现" class="headerlink" title="问题展现"></a>问题展现</h2><p>。。。。怎么有点慢，打开 Laravel Debugbar，发现页面加载耗时10S(……)，再次查看，发现每次请求,第一条sql耗时将近10S,后面的sql语句还算正常。  </p><h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>通过查询相关资料，原来是MySQL还要进行DNS解析，这就好办了禁用DNS解析就行通过在mysql的配置文件里添加  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-name-resolve</span><br></pre></td></tr></table></figure><p>如果禁用DNS查询MySQL怎么知道远程连接的客户端在哪个位置呢，这个也好解决，只要在配置MySQL远程连接时指定一个固定的IP就行(必须使用IP地址)。  </p><p>之后再打开应用就快很多了。</p><blockquote><p>When a new thread connects to mysqld, mysqld will spawn a new thread to handle the request. This thread will first check if the hostname is in the hostname cache. If not the thread will call gethostbyaddr_r() and gethostbyname_r() to resolve the hostname.</p><p>If the operating system doesn’t support the above thread-safe calls, the thread will lock a mutex and call gethostbyaddr() and gethostbyname() instead. Note that in this case no other thread can resolve other hostnames that is not in the hostname cache until the first thread is ready.</p><p>You can disable DNS host lookup by starting mysqld with –skip-name-resolve. In this case you can however only use IP names in the MySQL privilege tables.</p><p>If you have a very slow DNS and many hosts, you can get more performance by either disabling DNS lookop with –skip-name-resolve or by increasing the HOST_CACHE_SIZE define (default: 128) and recompile mysqld.</p><p>You can disable the hostname cache with –skip-host-cache. You can clear the hostname cache with FLUSH HOSTS or mysqladmin flush-hosts.</p><p>If you don’t want to allow connections over TCP/IP, you can do this by starting mysqld with –skip-networking.</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;最近学习了个小项目, 打算把它作为我们队的论坛系统，但部署到服务器上时发现 打开一个页面要等好久。在此记录下如何解决的，最后的处理结果也是非常简单。  &lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="MYSQL优化" scheme="https://joewt.com/categories/MYSQL%E4%BC%98%E5%8C%96/"/>
+    
+    
+      <category term="MYSQL" scheme="https://joewt.com/tags/MYSQL/"/>
+    
+  </entry>
   
   <entry>
     <title>网络IPC: 套接字(十六)</title>

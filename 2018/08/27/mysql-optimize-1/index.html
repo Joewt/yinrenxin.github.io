@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="UNIX,C," />
+  <meta name="keywords" content="MYSQL," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="apue 配置问题mac 系统配置执行 make all 将 ./apue.3e/include/下的  apue.h 复制到 /usr/local/include/下将 ./apue.3e/lib/下的 error.c 复制到 /usr/local/include/ 下然后修改 apue.h文件  在最后添加 #include “error.c”">
-<meta name="keywords" content="UNIX,C">
+<meta name="description" content="最近学习了个小项目, 打算把它作为我们队的论坛系统，但部署到服务器上时发现 打开一个页面要等好久。在此记录下如何解决的，最后的处理结果也是非常简单。">
+<meta name="keywords" content="MYSQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="apue配置">
-<meta property="og:url" content="https://joewt.com/2018/02/03/apue-deploy/index.html">
+<meta property="og:title" content="记一次性能优化点">
+<meta property="og:url" content="https://joewt.com/2018/08/27/mysql-optimize-1/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
-<meta property="og:description" content="apue 配置问题mac 系统配置执行 make all 将 ./apue.3e/include/下的  apue.h 复制到 /usr/local/include/下将 ./apue.3e/lib/下的 error.c 复制到 /usr/local/include/ 下然后修改 apue.h文件  在最后添加 #include “error.c”">
+<meta property="og:description" content="最近学习了个小项目, 打算把它作为我们队的论坛系统，但部署到服务器上时发现 打开一个页面要等好久。在此记录下如何解决的，最后的处理结果也是非常简单。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-04T14:30:16.789Z">
+<meta property="og:updated_time" content="2018-08-27T12:16:52.636Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="apue配置">
-<meta name="twitter:description" content="apue 配置问题mac 系统配置执行 make all 将 ./apue.3e/include/下的  apue.h 复制到 /usr/local/include/下将 ./apue.3e/lib/下的 error.c 复制到 /usr/local/include/ 下然后修改 apue.h文件  在最后添加 #include “error.c”">
+<meta name="twitter:title" content="记一次性能优化点">
+<meta name="twitter:description" content="最近学习了个小项目, 打算把它作为我们队的论坛系统，但部署到服务器上时发现 打开一个页面要等好久。在此记录下如何解决的，最后的处理结果也是非常简单。">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://joewt.com/2018/02/03/apue-deploy/"/>
+  <link rel="canonical" href="https://joewt.com/2018/08/27/mysql-optimize-1/"/>
 
 
 
 
 
-  <title>apue配置 | JOE'S BLOG</title>
+  <title>记一次性能优化点 | JOE'S BLOG</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://joewt.com/2018/02/03/apue-deploy/">
+    <link itemprop="mainEntityOfPage" href="https://joewt.com/2018/08/27/mysql-optimize-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JOE">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">apue配置</h1>
+          <h1 class="post-title" itemprop="name headline">记一次性能优化点</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-03T08:55:00+08:00">
-                2018-02-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-27T19:39:08+08:00">
+                2018-08-27
               </time>
             
 
@@ -319,8 +319,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UNIX/" itemprop="url" rel="index">
-                    <span itemprop="name">UNIX</span>
+                  <a href="/categories/MYSQL优化/" itemprop="url" rel="index">
+                    <span itemprop="name">MYSQL优化</span>
                   </a>
                 </span>
 
@@ -337,8 +337,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/03/apue-deploy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/02/03/apue-deploy/" itemprop="commentsCount"></span>
+                <a href="/2018/08/27/mysql-optimize-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/08/27/mysql-optimize-1/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -402,11 +402,27 @@
       
 
       
-        <h3 id="apue-配置问题"><a href="#apue-配置问题" class="headerlink" title="apue 配置问题"></a>apue 配置问题</h3><h5 id="mac-系统配置"><a href="#mac-系统配置" class="headerlink" title="mac 系统配置"></a>mac 系统配置</h5><p>执行 make all</p>
-<p>将 ./apue.3e/include/下的  apue.h 复制到 /usr/local/include/下<br>将 ./apue.3e/lib/下的 error.c 复制到 /usr/local/include/ 下<br>然后修改 apue.h文件  在最后添加 #include “error.c”<br><a id="more"></a></p>
-<h5 id="Linux-系统的配置如上"><a href="#Linux-系统的配置如上" class="headerlink" title="Linux 系统的配置如上"></a>Linux 系统的配置如上</h5><p>使用的是centos7 系统 编译源码的时候发现如下错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gcc -ansi -I../include -Wall -DLINUX -D_GNU_SOURCE  barrier.c -o barrier  -L../lib -lapue -pthread -lrt -lbsd</span><br><span class="line">/tmp/ccF6O2ef.o: In function `thr_fn&apos;:</span><br><span class="line">barrier.c:(.text+0x80): undefined reference to `heapsort&apos;</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br><span class="line">make[1]: *** [barrier] Error 1</span><br><span class="line">make[1]: Leaving directory `/home/learnApue/apue.3e/threads&apos;</span><br><span class="line">make: *** [all] Error 1</span><br></pre></td></tr></table></figure></p>
-<p>解决办法 <a href="https://pkgs.org/" target="_blank" rel="noopener">这里</a> 下载两个包<br>按照顺序安装<br>安装方法 rpm -Uvh xxxx.rpm  </p>
-<p>这样就可以使用了</p>
+        <blockquote>
+<p>最近学习了个小项目, 打算把它作为我们队的论坛系统，但部署到服务器上时发现 打开一个页面要等好久。在此记录下如何解决的，最后的处理结果也是非常简单。  </p>
+</blockquote>
+<a id="more"></a>
+<p><a href="https://bbs.hnitoj.cn" target="_blank" rel="noopener">线上地址</a>  </p>
+<p><a href="https://github.com/yinrenxin/laravel-larabbs" target="_blank" rel="noopener">项目地址</a>  </p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>这个项目是用Laravel框架，本地开发使用Homestead，开发起来非常方便。线上部署使用了<a href="http://laradock.io/introduction/" target="_blank" rel="noopener">Laradock</a>比较好用的一个Docker化的一个PHP运行环境  </p>
+<p>因为某个还未解决的问题，没有使用Laradock里的MySQL容器，我就想着使用另外一台服务器运行MySQL，当整个部署完成后，MySQL远程连接开启。启动项目：）   </p>
+<h2 id="问题展现"><a href="#问题展现" class="headerlink" title="问题展现"></a>问题展现</h2><p>。。。。怎么有点慢，打开 Laravel Debugbar，发现页面加载耗时10S(……)，再次查看，发现每次请求,第一条sql耗时将近10S,后面的sql语句还算正常。  </p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>通过查询相关资料，原来是MySQL还要进行DNS解析，这就好办了禁用DNS解析就行通过在mysql的配置文件里添加  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-name-resolve</span><br></pre></td></tr></table></figure>
+<p>如果禁用DNS查询MySQL怎么知道远程连接的客户端在哪个位置呢，这个也好解决，只要在配置MySQL远程连接时指定一个固定的IP就行(必须使用IP地址)。  </p>
+<p>之后再打开应用就快很多了。</p>
+<blockquote>
+<p>When a new thread connects to mysqld, mysqld will spawn a new thread to handle the request. This thread will first check if the hostname is in the hostname cache. If not the thread will call gethostbyaddr_r() and gethostbyname_r() to resolve the hostname.</p>
+<p>If the operating system doesn’t support the above thread-safe calls, the thread will lock a mutex and call gethostbyaddr() and gethostbyname() instead. Note that in this case no other thread can resolve other hostnames that is not in the hostname cache until the first thread is ready.</p>
+<p>You can disable DNS host lookup by starting mysqld with –skip-name-resolve. In this case you can however only use IP names in the MySQL privilege tables.</p>
+<p>If you have a very slow DNS and many hosts, you can get more performance by either disabling DNS lookop with –skip-name-resolve or by increasing the HOST_CACHE_SIZE define (default: 128) and recompile mysqld.</p>
+<p>You can disable the hostname cache with –skip-host-cache. You can clear the hostname cache with FLUSH HOSTS or mysqladmin flush-hosts.</p>
+<p>If you don’t want to allow connections over TCP/IP, you can do this by starting mysqld with –skip-networking.</p>
+</blockquote>
 
       
     </div>
@@ -451,7 +467,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="https://joewt.com/2018/02/03/apue-deploy/" title="apue配置">https://joewt.com/2018/02/03/apue-deploy/</a>
+    <a href="https://joewt.com/2018/08/27/mysql-optimize-1/" title="记一次性能优化点">https://joewt.com/2018/08/27/mysql-optimize-1/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -466,9 +482,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/UNIX/" rel="tag"># UNIX</a>
-          
-            <a href="/tags/C/" rel="tag"># C</a>
+            <a href="/tags/MYSQL/" rel="tag"># MYSQL</a>
           
         </div>
       
@@ -496,15 +510,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/08/03/network-IPC/" rel="next" title="网络IPC: 套接字(十六)">
+                <i class="fa fa-chevron-left"></i> 网络IPC: 套接字(十六)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/03/python-mysql/" rel="prev" title="python-mysql">
-                python-mysql <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -708,7 +722,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#apue-配置问题"><span class="nav-number">1.</span> <span class="nav-text">apue 配置问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mac-系统配置"><span class="nav-number">1.0.1.</span> <span class="nav-text">mac 系统配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Linux-系统的配置如上"><span class="nav-number">1.0.2.</span> <span class="nav-text">Linux 系统的配置如上</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#部署"><span class="nav-number">1.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题展现"><span class="nav-number">2.</span> <span class="nav-text">问题展现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题解决"><span class="nav-number">3.</span> <span class="nav-text">问题解决</span></a></li></ol></div>
             
 
           </div>

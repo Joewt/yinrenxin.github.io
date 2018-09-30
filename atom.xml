@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://joewt.com/"/>
-  <updated>2018-09-30T11:56:38.616Z</updated>
+  <updated>2018-09-30T12:53:39.885Z</updated>
   <id>https://joewt.com/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>PHP的基本变量</title>
+    <link href="https://joewt.com/2018/10/01/php-extension-2.1/"/>
+    <id>https://joewt.com/2018/10/01/php-extension-2.1/</id>
+    <published>2018-09-30T16:08:43.000Z</published>
+    <updated>2018-09-30T12:53:39.885Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="zval"><a href="#zval" class="headerlink" title="zval"></a>zval</h2><p>PHP在内核中是通过zval这个结构体来存储变量的，PHP的变量是弱类型的，首先来看看PHP5的zval设计   </p><h5 id="PHP5的zval"><a href="#PHP5的zval" class="headerlink" title="PHP5的zval"></a>PHP5的zval</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct _zval_struct&#123;</span><br><span class="line">/*变量信息*/</span><br><span class="line">zvalue_value value;</span><br><span class="line">zend_uint refcount__gc;</span><br><span class="line">zend_uchar type;         /* 类型 */</span><br><span class="line">zend_uchar is_ref__gc;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">typedef union _zvalue_value &#123;</span><br><span class="line">long lval;</span><br><span class="line">double dval;</span><br><span class="line">struct&#123;</span><br><span class="line">char *val;</span><br><span class="line">int len;</span><br><span class="line">&#125; str;</span><br><span class="line">HashTable *ht;       /*HashTable 数组*/</span><br><span class="line">zend_object_value obj;</span><br><span class="line">zend_ast *ast;</span><br><span class="line">&#125;zvalue_value;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;zval&quot;&gt;&lt;a href=&quot;#zval&quot; class=&quot;headerlink&quot; title=&quot;zval&quot;&gt;&lt;/a&gt;zval&lt;/h2&gt;&lt;p&gt;PHP在内核中是通过zval这个结构体来存储变量的，PHP的变量是弱类型的，首先来看看PHP5的zval设计   &lt;/p&gt;
+&lt;h5 id=&quot;PHP5的zval&quot;&gt;&lt;a href=&quot;#PHP5的zval&quot; class=&quot;headerlink&quot; title=&quot;PHP5的zval&quot;&gt;&lt;/a&gt;PHP5的zval&lt;/h5&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;struct _zval_struct&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	/*变量信息*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	zvalue_value value;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	zend_uint refcount__gc;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	zend_uchar type;         /* 类型 */&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	zend_uchar is_ref__gc;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="PHP扩展开发" scheme="https://joewt.com/categories/PHP%E6%89%A9%E5%B1%95%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="C" scheme="https://joewt.com/tags/C/"/>
+    
+      <category term="PHP" scheme="https://joewt.com/tags/PHP/"/>
+    
+  </entry>
+  
+  <entry>
     <title>认识PHP的一些基本原理</title>
     <link href="https://joewt.com/2018/09/30/php-extension-1-1/"/>
     <id>https://joewt.com/2018/09/30/php-extension-1-1/</id>
     <published>2018-09-30T10:08:43.000Z</published>
-    <updated>2018-09-30T11:56:38.616Z</updated>
+    <updated>2018-09-30T12:41:02.095Z</updated>
     
     <content type="html"><![CDATA[<h2 id="从PHP的执行原理开始"><a href="#从PHP的执行原理开始" class="headerlink" title="从PHP的执行原理开始"></a>从PHP的执行原理开始</h2><p>PHP是一门解释型语言,执行过程如下：<br>第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328<br>第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征<br>第三步：将AST生成对应的opcode，并被虚拟机执行。opcode是PHP定义的一组指令标识，对应相应的handler。opcodes是opcode的集合形式，是PHP执行过程的中间代码，类似Java的字节码。PHP优化中有一个常见的“开启opcache”，指的就是opcodes的缓存  </p><a id="more"></a><h2 id="PHP7内核架构"><a href="#PHP7内核架构" class="headerlink" title="PHP7内核架构"></a>PHP7内核架构</h2><p>主要来自于《PHP7底层设计与源码实现》</p><p><img src="http://ojg7pw3bl.bkt.clouddn.com/image/php/php7source.png" alt=""></p><ul><li><p>Zend引擎：词法/语法分析、AST编译和opcodes的执行均在Zend引擎中实现。引擎为PHP提供了基础服务，PHP的可靠性和高性能都依赖引擎的基础支撑。  </p></li><li><p>PHP层：来自外部的交互通过PHP层来处理。  </p></li><li>SAPI：SAPI(Server API),包含了常见的cli SAPI，cgi SAPI和fmpSAPI。SAPI提供了一个和外部通信的接口。  </li><li>扩展部分：Zend引擎提供了核心能力和接口规范。在此基础上进行扩展开发。</li></ul><p>以下为几种常见的SAPI  </p><ul><li>cli： PHP的命令行交互接口</li><li>fpm-fcgi: fmp全称为FastCGI Process Manager，PHP官方提供的FastCGI进程管理器。举例来说，当有http请求发送到nginx服务器，nginx按照FastCGI协议把请求交给php-fpm进程处理  </li><li>apache2handler: Apache扩展，编译后生产动态链接库，配置到Apache下，当有http请求到Apache时，根据配置会调用此动态链接库，执行PHP代码，完成与PHP的交互</li></ul><h2 id="PHP的生命周期"><a href="#PHP的生命周期" class="headerlink" title="PHP的生命周期"></a>PHP的生命周期</h2><p>在cli模式下，PHP的执行过程主要分为5大阶段：  </p><ol><li>模块初始化阶段  php_module_startup</li><li>请求初始化阶段  php_request_startup</li><li>执行阶段  php_execute_script</li><li>请求关闭阶段  php_request_shutdown</li><li>模块关闭阶段  php_module_shutdown</li></ol>]]></content>
     

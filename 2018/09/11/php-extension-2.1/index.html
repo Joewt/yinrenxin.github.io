@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="zvalPHP在内核中是通过zval这个结构体来存储变量的，PHP的变量是弱类型的，首先来看看PHP5的zval设计    PHP5的zval1234567struct _zval_struct&amp;#123;	/*变量信息*/	zvalue_value value;	zend_uint refcount__gc;	zend_uchar type;         /* 类型 */	zend_ucha">
+<meta name="description" content="zvalPHP在内核中是通过zval这个结构体来存储变量的，PHP的变量是弱类型的，首先来看看PHP5的zval设计    PHP5的zval12345678910/* 考虑到结构体对齐 大小为24字节*/struct _zval_struct&amp;#123;	/*变量信息*/	zvalue_value value;     // 16字节	zend_uint refcount__gc;  // 4字">
 <meta name="keywords" content="C,PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP的基本变量">
-<meta property="og:url" content="https://joewt.com/2018/10/01/php-extension-2.1/index.html">
+<meta property="og:url" content="https://joewt.com/2018/09/11/php-extension-2.1/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
-<meta property="og:description" content="zvalPHP在内核中是通过zval这个结构体来存储变量的，PHP的变量是弱类型的，首先来看看PHP5的zval设计    PHP5的zval1234567struct _zval_struct&amp;#123;	/*变量信息*/	zvalue_value value;	zend_uint refcount__gc;	zend_uchar type;         /* 类型 */	zend_ucha">
+<meta property="og:description" content="zvalPHP在内核中是通过zval这个结构体来存储变量的，PHP的变量是弱类型的，首先来看看PHP5的zval设计    PHP5的zval12345678910/* 考虑到结构体对齐 大小为24字节*/struct _zval_struct&amp;#123;	/*变量信息*/	zvalue_value value;     // 16字节	zend_uint refcount__gc;  // 4字">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-09-30T12:53:39.885Z">
+<meta property="og:updated_time" content="2018-09-30T14:46:17.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP的基本变量">
-<meta name="twitter:description" content="zvalPHP在内核中是通过zval这个结构体来存储变量的，PHP的变量是弱类型的，首先来看看PHP5的zval设计    PHP5的zval1234567struct _zval_struct&amp;#123;	/*变量信息*/	zvalue_value value;	zend_uint refcount__gc;	zend_uchar type;         /* 类型 */	zend_ucha">
+<meta name="twitter:description" content="zvalPHP在内核中是通过zval这个结构体来存储变量的，PHP的变量是弱类型的，首先来看看PHP5的zval设计    PHP5的zval12345678910/* 考虑到结构体对齐 大小为24字节*/struct _zval_struct&amp;#123;	/*变量信息*/	zvalue_value value;     // 16字节	zend_uint refcount__gc;  // 4字">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="https://joewt.com/2018/10/01/php-extension-2.1/"/>
+  <link rel="canonical" href="https://joewt.com/2018/09/11/php-extension-2.1/"/>
 
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://joewt.com/2018/10/01/php-extension-2.1/">
+    <link itemprop="mainEntityOfPage" href="https://joewt.com/2018/09/11/php-extension-2.1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JOE">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-01T00:08:43+08:00">
-                2018-10-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-11T00:08:43+08:00">
+                2018-09-11
               </time>
             
 
@@ -337,8 +337,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/01/php-extension-2.1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/10/01/php-extension-2.1/" itemprop="commentsCount"></span>
+                <a href="/2018/09/11/php-extension-2.1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/09/11/php-extension-2.1/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -403,9 +403,45 @@
 
       
         <h2 id="zval"><a href="#zval" class="headerlink" title="zval"></a>zval</h2><p>PHP在内核中是通过zval这个结构体来存储变量的，PHP的变量是弱类型的，首先来看看PHP5的zval设计   </p>
-<h5 id="PHP5的zval"><a href="#PHP5的zval" class="headerlink" title="PHP5的zval"></a>PHP5的zval</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct _zval_struct&#123;</span><br><span class="line">	/*变量信息*/</span><br><span class="line">	zvalue_value value;</span><br><span class="line">	zend_uint refcount__gc;</span><br><span class="line">	zend_uchar type;         /* 类型 */</span><br><span class="line">	zend_uchar is_ref__gc;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="PHP5的zval"><a href="#PHP5的zval" class="headerlink" title="PHP5的zval"></a>PHP5的zval</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> 考虑到结构体对齐 大小为24字节</span><br><span class="line">*/</span><br><span class="line">struct _zval_struct&#123;</span><br><span class="line">	/*变量信息*/</span><br><span class="line">	zvalue_value value;     // 16字节</span><br><span class="line">	zend_uint refcount__gc;  // 4字节</span><br><span class="line">	zend_uchar type;         /* 类型   1字节*/</span><br><span class="line">	zend_uchar is_ref__gc;   // 1字节</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">typedef union _zvalue_value &#123;</span><br><span class="line">	long lval;</span><br><span class="line">	double dval;</span><br><span class="line">	struct&#123;</span><br><span class="line">		char *val;</span><br><span class="line">		int len;</span><br><span class="line">	&#125; str;</span><br><span class="line">	HashTable *ht;       /*HashTable 数组*/</span><br><span class="line">	zend_object_value obj;</span><br><span class="line">	zend_ast *ast;</span><br><span class="line">&#125;zvalue_value;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> 以下说的大小是在 x86-64下</span><br><span class="line"> 在内存对齐的情况下_zvalue_value的大小为16字节</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">typedef union _zvalue_value &#123;</span><br><span class="line">	long lval;    // 8字节</span><br><span class="line">	double dval;  // 8字节</span><br><span class="line">	struct&#123;</span><br><span class="line">		char *val;</span><br><span class="line">		int len;</span><br><span class="line">	&#125; str;        // 12字节</span><br><span class="line">	HashTable *ht;       /*HashTable 数组  8字节*/</span><br><span class="line">	zend_object_value obj;   // 12字节</span><br><span class="line">	zend_ast *ast;     // 8字节</span><br><span class="line">&#125;zvalue_value;</span><br></pre></td></tr></table></figure>
+<p>PHP5的zval核心由一个zvalue_value类型的联合体和zend_uchar类型的type组成，<br><code>refcount__gc</code>是用来进行垃圾回收的，<code>is_ref__gc</code> 表示是否是引用类型<br>PHP5.3 为了解决循环引用实际申请的结构体为<code>_zval_gc_info</code>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">该大小为 32字节</span><br><span class="line">*/</span><br><span class="line">typedef struct _zval_gc_info &#123;</span><br><span class="line">	zval z;</span><br><span class="line">	union &#123;</span><br><span class="line">		gc_root_buffer     *buffered;</span><br><span class="line">		struct _zval_gc_info *next;</span><br><span class="line">	&#125; u;    // 4字节</span><br><span class="line">&#125;zval_gc_info;</span><br></pre></td></tr></table></figure>
+<p>zval_gc_info 在内存池中分配，内存池会为每个zval_gc_info额外申请一个大小为16字节的zend_mm_block结构体，用来存放内存相关信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _zend_mm_block_info &#123;</span><br><span class="line">	size_t _size;</span><br><span class="line">	size_t _prev;</span><br><span class="line">&#125; zend_mm_block_info;</span><br><span class="line"></span><br><span class="line">typedef struct _zend_mm_block&#123;</span><br><span class="line">	zend_mm_block_info info;</span><br><span class="line">&#125; zend_mm_block;</span><br></pre></td></tr></table></figure>
+<p>最终一个变量在PHP5中占48字节  </p>
+<h3 id="PHP7的zval"><a href="#PHP7的zval" class="headerlink" title="PHP7的zval"></a>PHP7的zval</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">typedef union _zend_value &#123;</span><br><span class="line">	zend_long         lval;             /* 整形 */</span><br><span class="line">	double            dval;             /* 浮点型 */</span><br><span class="line">	zend_refcounted  *counted;          /* 引用计数 */</span><br><span class="line">	zend_string      *str;              /* 字符串类型 */</span><br><span class="line">	zend_array       *arr;              /* 数组类型 */</span><br><span class="line">	zend_object      *obj;              /* 对象类型 */</span><br><span class="line">	zend_resource    *res;              /* 资源类型 *</span><br><span class="line">	zend_reference   *ref;              /* 引用类型 */</span><br><span class="line">	zend_ast_ref     *ast;              /* 抽象语法树 */</span><br><span class="line">	zval             *zv;               /* zval类型 */</span><br><span class="line">	void             *ptr;              /* 指针类型 */</span><br><span class="line">	zend_class_entry *ce;               /* class类型 */</span><br><span class="line">	zend_function    *func;             /* function类型 */</span><br><span class="line">	struct &#123;</span><br><span class="line">		uint32_t w1;</span><br><span class="line">		uint32_t w2;</span><br><span class="line">	&#125; ww;</span><br><span class="line">&#125; zend_value;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">struct _zval_struct &#123;</span><br><span class="line">	zend_value        value;			/* value */</span><br><span class="line">	union &#123;</span><br><span class="line">		struct &#123;</span><br><span class="line">			ZEND_ENDIAN_LOHI_4(</span><br><span class="line">				zend_uchar    type,			/* zval类型 */</span><br><span class="line">				zend_uchar    type_flags,</span><br><span class="line">				zend_uchar    const_flags,</span><br><span class="line">				zend_uchar    reserved)	    /* call info for EX(This) */</span><br><span class="line">		&#125; v;</span><br><span class="line">		uint32_t type_info;</span><br><span class="line">	&#125; u1;</span><br><span class="line">	union &#123;</span><br><span class="line">		uint32_t     next;                 /* hash collision chain */</span><br><span class="line">		uint32_t     cache_slot;           /* literal cache slot */</span><br><span class="line">		uint32_t     lineno;               /* line number (for ast nodes) */</span><br><span class="line">		uint32_t     num_args;             /* arguments number for EX(This) */</span><br><span class="line">		uint32_t     fe_pos;               /* foreach position */</span><br><span class="line">		uint32_t     fe_iter_idx;          /* foreach iterator index */</span><br><span class="line">		uint32_t     access_flags;         /* class constant access flags */</span><br><span class="line">		uint32_t     property_guard;       /* single property guard */</span><br><span class="line">		uint32_t     extra;                /* not further specified */</span><br><span class="line">	&#125; u2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>可以看到PHP7中zval定义的好像比较复杂但都是联合体，所以实际占用大小只有16字节<br>接下类看看各个字段的含义。  </p>
+<p>u1字段的含义  </p>
+<ol>
+<li>type: 记录变量类型  </li>
+<li>type_flag: 对应变量类型的特有的标记  </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IS_TYPE_CONSTANT        /* 是常量类型 */</span><br><span class="line">IS_TYPE_IMMUTABLE       /* 不可变的类型 */</span><br><span class="line">IS_TYPE_REFCOUNTED      /* 需要引用计数的类型 */</span><br><span class="line">IS_TYPE_COLLECTABLE     /* 可能包含循环引用的类型(IS_ARRAY, IS_OBJECT) */</span><br><span class="line">IS_TYPE_COPYABLE        /* 可被复制的类型 */</span><br></pre></td></tr></table></figure>
+<ol>
+<li>const_flag: 常量类型的标记</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#define IS_CONSTANT_UNQUALIFIED    0x010</span><br><span class="line">#define IS_CONSTANT_VISITED_MARK   0x020</span><br><span class="line">#define IS_CONSTANT_CLASS          0x080</span><br><span class="line">#define IS_CONSTANT_IN_NAMESPACE   0x100</span><br></pre></td></tr></table></figure>
+<ol>
+<li>reserved: 保留字段</li>
+</ol>
+<p>u2字段的含义，主要是辅助字段  </p>
+<ol>
+<li>next: 用于哈希冲突中记录下一个元素的位置</li>
+<li>cache_slot: 运行时缓存</li>
+<li>lineno:  文件执行的行号，应用在AST节点上</li>
+<li>num_args: 函数调用时传入参数的个数</li>
+<li>fe_pos:  遍历数组时的当前位置</li>
+<li>fe_iter_idx: 与fe_pos类似，针对对象使用</li>
+<li>access_flags: 对象类的访问标志, public protected private</li>
+<li>property_guard: 防止类中魔术方法的循环调用</li>
+</ol>
+<h2 id="PHP7-变量类型"><a href="#PHP7-变量类型" class="headerlink" title="PHP7 变量类型"></a>PHP7 变量类型</h2><p>PHP7 通过定义20种宏，来u1.v.type字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/* regular data types */</span><br><span class="line">#define IS_UNDEF                    0</span><br><span class="line">#define IS_NULL                     1</span><br><span class="line">#define IS_FALSE                    2</span><br><span class="line">#define IS_TRUE                     3</span><br><span class="line">#define IS_LONG                     4</span><br><span class="line">#define IS_DOUBLE                   5</span><br><span class="line">#define IS_STRING                   6</span><br><span class="line">#define IS_ARRAY                    7</span><br><span class="line">#define IS_OBJECT                   8</span><br><span class="line">#define IS_RESOURCE                 9</span><br><span class="line">#define IS_REFERENCE                10</span><br><span class="line"></span><br><span class="line">/* constant expressions */</span><br><span class="line">#define IS_CONSTANT                 11</span><br><span class="line">#define IS_CONSTANT_AST             12</span><br><span class="line"></span><br><span class="line">/* fake types */</span><br><span class="line">#define _IS_BOOL                    13</span><br><span class="line">#define IS_CALLABLE                 14</span><br><span class="line">#define IS_ITERABLE                 19</span><br><span class="line">#define IS_VOID                     18</span><br><span class="line"></span><br><span class="line">/* internal types */</span><br><span class="line">#define IS_INDIRECT                 15  /* 间接类型 */</span><br><span class="line">#define IS_PTR                      17  /* 指针类型 */</span><br><span class="line">#define _IS_ERROR                   20  /* 错误类型 *</span><br></pre></td></tr></table></figure>
+<h3 id="整形和浮点型"><a href="#整形和浮点型" class="headerlink" title="整形和浮点型"></a>整形和浮点型</h3><p>整形和浮点型在zval是直接存储的，实现的比较简单</p>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><p>字符串类型的结构如下共占32字节  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct _zend_string&#123;</span><br><span class="line">	zend_refcounted_h gc;     // 用于引用计数 8字节</span><br><span class="line">	zend_ulong        h;      // 哈希值 8字节</span><br><span class="line">	size_t            len;    // 字符串长度 8字节</span><br><span class="line">	char              val[1]; // 柔性数组，1字节 字符串的值存储位置</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -450,7 +486,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="https://joewt.com/2018/10/01/php-extension-2.1/" title="PHP的基本变量">https://joewt.com/2018/10/01/php-extension-2.1/</a>
+    <a href="https://joewt.com/2018/09/11/php-extension-2.1/" title="PHP的基本变量">https://joewt.com/2018/09/11/php-extension-2.1/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -495,7 +531,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/30/php-extension-1-1/" rel="next" title="认识PHP的一些基本原理">
+              <a href="/2018/09/01/php-extension-1-1/" rel="next" title="认识PHP的一些基本原理">
                 <i class="fa fa-chevron-left"></i> 认识PHP的一些基本原理
               </a>
             
@@ -707,7 +743,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#zval"><span class="nav-number">1.</span> <span class="nav-text">zval</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PHP5的zval"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">PHP5的zval</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#zval"><span class="nav-number">1.</span> <span class="nav-text">zval</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP5的zval"><span class="nav-number">1.1.</span> <span class="nav-text">PHP5的zval</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP7的zval"><span class="nav-number">1.2.</span> <span class="nav-text">PHP7的zval</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP7-变量类型"><span class="nav-number">2.</span> <span class="nav-text">PHP7 变量类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整形和浮点型"><span class="nav-number">2.1.</span> <span class="nav-text">整形和浮点型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串类型"><span class="nav-number">2.2.</span> <span class="nav-text">字符串类型</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C,PHP," />
 
 
 
@@ -81,17 +81,20 @@
 
 
 
-<meta name="description" content="爱生活，爱coding，爱学妹">
-<meta name="keywords" content="UNIX, C, PHP, Python, GO">
-<meta property="og:type" content="website">
-<meta property="og:title" content="JOE&#39;S BLOG">
-<meta property="og:url" content="https://joewt.com/tags/PHP/index.html">
+<meta name="description" content="从PHP的执行原理开始PHP是一门解释型语言,执行过程如下：第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征第三步：将AST生成对应的opcode，并被虚拟">
+<meta name="keywords" content="C,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="认识PHP的一些基本原理">
+<meta property="og:url" content="https://joewt.com/2018/09/30/php-extension-1-1/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
-<meta property="og:description" content="爱生活，爱coding，爱学妹">
+<meta property="og:description" content="从PHP的执行原理开始PHP是一门解释型语言,执行过程如下：第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征第三步：将AST生成对应的opcode，并被虚拟">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/image/php/php7source.png">
+<meta property="og:updated_time" content="2018-09-30T11:56:38.616Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JOE&#39;S BLOG">
-<meta name="twitter:description" content="爱生活，爱coding，爱学妹">
+<meta name="twitter:title" content="认识PHP的一些基本原理">
+<meta name="twitter:description" content="从PHP的执行原理开始PHP是一门解释型语言,执行过程如下：第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征第三步：将AST生成对应的opcode，并被虚拟">
+<meta name="twitter:image" content="http://ojg7pw3bl.bkt.clouddn.com/image/php/php7source.png">
 
 
 
@@ -121,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://joewt.com/tags/PHP/"/>
+  <link rel="canonical" href="https://joewt.com/2018/09/30/php-extension-1-1/"/>
 
 
 
 
 
-  <title>Tag: PHP | JOE'S BLOG</title>
+  <title>认识PHP的一些基本原理 | JOE'S BLOG</title>
   
 
 
@@ -148,7 +151,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -252,110 +255,299 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>PHP<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://joewt.com/2018/09/30/php-extension-1-1/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JOE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/img/favicon1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JOE'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/09/30/php-extension-1-1/" itemprop="url">
-              
-                <span itemprop="name">认识PHP的一些基本原理</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">认识PHP的一些基本原理</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-30T18:08:43+08:00"
-              content="2018-09-30" >
-          09-30
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-30T18:08:43+08:00">
+                2018-09-30
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP扩展开发/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP扩展开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/30/php-extension-1-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/09/30/php-extension-1-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/06/20/thinkphpMeetsSwoole/" itemprop="url">
-              
-                <span itemprop="name">TP5集成Swoole</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-20T20:45:28+08:00"
-              content="2018-06-20" >
-          06-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/13/swoole-install/" itemprop="url">
-              
-                <span itemprop="name">swoole安装</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-13T10:08:51+08:00"
-              content="2018-04-13" >
-          04-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h2 id="从PHP的执行原理开始"><a href="#从PHP的执行原理开始" class="headerlink" title="从PHP的执行原理开始"></a>从PHP的执行原理开始</h2><p>PHP是一门解释型语言,执行过程如下：<br>第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328<br>第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征<br>第三步：将AST生成对应的opcode，并被虚拟机执行。opcode是PHP定义的一组指令标识，对应相应的handler。opcodes是opcode的集合形式，是PHP执行过程的中间代码，类似Java的字节码。PHP优化中有一个常见的“开启opcache”，指的就是opcodes的缓存  </p>
+<a id="more"></a>
+<h2 id="PHP7内核架构"><a href="#PHP7内核架构" class="headerlink" title="PHP7内核架构"></a>PHP7内核架构</h2><p>主要来自于《PHP7底层设计与源码实现》</p>
+<p><img src="http://ojg7pw3bl.bkt.clouddn.com/image/php/php7source.png" alt=""></p>
+<ul>
+<li><p>Zend引擎：词法/语法分析、AST编译和opcodes的执行均在Zend引擎中实现。引擎为PHP提供了基础服务，PHP的可靠性和高性能都依赖引擎的基础支撑。  </p>
+</li>
+<li><p>PHP层：来自外部的交互通过PHP层来处理。  </p>
+</li>
+<li>SAPI：SAPI(Server API),包含了常见的cli SAPI，cgi SAPI和fmpSAPI。SAPI提供了一个和外部通信的接口。  </li>
+<li>扩展部分：Zend引擎提供了核心能力和接口规范。在此基础上进行扩展开发。</li>
+</ul>
+<p>以下为几种常见的SAPI  </p>
+<ul>
+<li>cli： PHP的命令行交互接口</li>
+<li>fpm-fcgi: fmp全称为FastCGI Process Manager，PHP官方提供的FastCGI进程管理器。举例来说，当有http请求发送到nginx服务器，nginx按照FastCGI协议把请求交给php-fpm进程处理  </li>
+<li>apache2handler: Apache扩展，编译后生产动态链接库，配置到Apache下，当有http请求到Apache时，根据配置会调用此动态链接库，执行PHP代码，完成与PHP的交互</li>
+</ul>
+<h2 id="PHP的生命周期"><a href="#PHP的生命周期" class="headerlink" title="PHP的生命周期"></a>PHP的生命周期</h2><p>在cli模式下，PHP的执行过程主要分为5大阶段：  </p>
+<ol>
+<li>模块初始化阶段  php_module_startup</li>
+<li>请求初始化阶段  php_request_startup</li>
+<li>执行阶段  php_execute_script</li>
+<li>请求关闭阶段  php_request_shutdown</li>
+<li>模块关闭阶段  php_module_shutdown</li>
+</ol>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢土豪</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/assets/img/alipay.png" alt="JOE Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    JOE
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://joewt.com/2018/09/30/php-extension-1-1/" title="认识PHP的一些基本原理">https://joewt.com/2018/09/30/php-extension-1-1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C</a>
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/27/mysql-optimize-1/" rel="next" title="记一次性能优化点">
+                <i class="fa fa-chevron-left"></i> 记一次性能优化点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -363,6 +555,17 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -383,8 +586,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -509,6 +721,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从PHP的执行原理开始"><span class="nav-number">1.</span> <span class="nav-text">从PHP的执行原理开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP7内核架构"><span class="nav-number">2.</span> <span class="nav-text">PHP7内核架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP的生命周期"><span class="nav-number">3.</span> <span class="nav-text">PHP的生命周期</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -660,6 +888,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -698,6 +930,30 @@
 
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'Joewt',
+            repo: 'blogComment',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'aeba4f8f14a7d3464ef3ea9faef0d67409229e47',
+            
+                client_id: '12908903defa4c3347b8'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
     
 
 

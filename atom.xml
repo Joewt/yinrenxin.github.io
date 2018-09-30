@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://joewt.com/"/>
-  <updated>2018-08-27T12:16:52.636Z</updated>
+  <updated>2018-09-30T11:56:38.616Z</updated>
   <id>https://joewt.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>认识PHP的一些基本原理</title>
+    <link href="https://joewt.com/2018/09/30/php-extension-1-1/"/>
+    <id>https://joewt.com/2018/09/30/php-extension-1-1/</id>
+    <published>2018-09-30T10:08:43.000Z</published>
+    <updated>2018-09-30T11:56:38.616Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="从PHP的执行原理开始"><a href="#从PHP的执行原理开始" class="headerlink" title="从PHP的执行原理开始"></a>从PHP的执行原理开始</h2><p>PHP是一门解释型语言,执行过程如下：<br>第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328<br>第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征<br>第三步：将AST生成对应的opcode，并被虚拟机执行。opcode是PHP定义的一组指令标识，对应相应的handler。opcodes是opcode的集合形式，是PHP执行过程的中间代码，类似Java的字节码。PHP优化中有一个常见的“开启opcache”，指的就是opcodes的缓存  </p><a id="more"></a><h2 id="PHP7内核架构"><a href="#PHP7内核架构" class="headerlink" title="PHP7内核架构"></a>PHP7内核架构</h2><p>主要来自于《PHP7底层设计与源码实现》</p><p><img src="http://ojg7pw3bl.bkt.clouddn.com/image/php/php7source.png" alt=""></p><ul><li><p>Zend引擎：词法/语法分析、AST编译和opcodes的执行均在Zend引擎中实现。引擎为PHP提供了基础服务，PHP的可靠性和高性能都依赖引擎的基础支撑。  </p></li><li><p>PHP层：来自外部的交互通过PHP层来处理。  </p></li><li>SAPI：SAPI(Server API),包含了常见的cli SAPI，cgi SAPI和fmpSAPI。SAPI提供了一个和外部通信的接口。  </li><li>扩展部分：Zend引擎提供了核心能力和接口规范。在此基础上进行扩展开发。</li></ul><p>以下为几种常见的SAPI  </p><ul><li>cli： PHP的命令行交互接口</li><li>fpm-fcgi: fmp全称为FastCGI Process Manager，PHP官方提供的FastCGI进程管理器。举例来说，当有http请求发送到nginx服务器，nginx按照FastCGI协议把请求交给php-fpm进程处理  </li><li>apache2handler: Apache扩展，编译后生产动态链接库，配置到Apache下，当有http请求到Apache时，根据配置会调用此动态链接库，执行PHP代码，完成与PHP的交互</li></ul><h2 id="PHP的生命周期"><a href="#PHP的生命周期" class="headerlink" title="PHP的生命周期"></a>PHP的生命周期</h2><p>在cli模式下，PHP的执行过程主要分为5大阶段：  </p><ol><li>模块初始化阶段  php_module_startup</li><li>请求初始化阶段  php_request_startup</li><li>执行阶段  php_execute_script</li><li>请求关闭阶段  php_request_shutdown</li><li>模块关闭阶段  php_module_shutdown</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;从PHP的执行原理开始&quot;&gt;&lt;a href=&quot;#从PHP的执行原理开始&quot; class=&quot;headerlink&quot; title=&quot;从PHP的执行原理开始&quot;&gt;&lt;/a&gt;从PHP的执行原理开始&lt;/h2&gt;&lt;p&gt;PHP是一门解释型语言,执行过程如下：&lt;br&gt;第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328&lt;br&gt;第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征&lt;br&gt;第三步：将AST生成对应的opcode，并被虚拟机执行。opcode是PHP定义的一组指令标识，对应相应的handler。opcodes是opcode的集合形式，是PHP执行过程的中间代码，类似Java的字节码。PHP优化中有一个常见的“开启opcache”，指的就是opcodes的缓存  &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="PHP扩展开发" scheme="https://joewt.com/categories/PHP%E6%89%A9%E5%B1%95%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="C" scheme="https://joewt.com/tags/C/"/>
+    
+      <category term="PHP" scheme="https://joewt.com/tags/PHP/"/>
+    
+  </entry>
   
   <entry>
     <title>记一次性能优化点</title>
@@ -114,9 +138,9 @@
       <category term="Swoole" scheme="https://joewt.com/categories/Swoole/"/>
     
     
-      <category term="swoole" scheme="https://joewt.com/tags/swoole/"/>
-    
       <category term="PHP" scheme="https://joewt.com/tags/PHP/"/>
+    
+      <category term="swoole" scheme="https://joewt.com/tags/swoole/"/>
     
   </entry>
   
@@ -195,9 +219,9 @@
       <category term="Swoole" scheme="https://joewt.com/categories/Swoole/"/>
     
     
-      <category term="swoole" scheme="https://joewt.com/tags/swoole/"/>
-    
       <category term="PHP" scheme="https://joewt.com/tags/PHP/"/>
+    
+      <category term="swoole" scheme="https://joewt.com/tags/swoole/"/>
     
   </entry>
   

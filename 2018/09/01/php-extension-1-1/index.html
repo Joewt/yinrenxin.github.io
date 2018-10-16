@@ -90,7 +90,7 @@
 <meta property="og:description" content="从PHP的执行原理开始PHP是一门解释型语言,执行过程如下：第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征第三步：将AST生成对应的opcode，并被虚拟">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/image/php/php7source.png">
-<meta property="og:updated_time" content="2018-09-30T14:23:55.350Z">
+<meta property="og:updated_time" content="2018-10-03T15:04:57.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="认识PHP的一些基本原理">
 <meta name="twitter:description" content="从PHP的执行原理开始PHP是一门解释型语言,执行过程如下：第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征第三步：将AST生成对应的opcode，并被虚拟">
@@ -430,6 +430,7 @@
 <li>请求关闭阶段  php_request_shutdown</li>
 <li>模块关闭阶段  php_module_shutdown</li>
 </ol>
+<p>web模式没有1或5</p>
 
       
     </div>

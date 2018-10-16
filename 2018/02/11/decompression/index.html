@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
+<meta name="description" content="常用命令和工具 gdb zip tar ldd lsof ps  pstack strace ipcs top free vmstat iostat sar readelf objdump nm size">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用的命令总结及各种实用工具">
 <meta property="og:url" content="https://joewt.com/2018/02/11/decompression/index.html">
 <meta property="og:site_name" content="JOE&#39;S BLOG">
-<meta property="og:description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
+<meta property="og:description" content="常用命令和工具 gdb zip tar ldd lsof ps  pstack strace ipcs top free vmstat iostat sar readelf objdump nm size">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-11T15:25:57.014Z">
+<meta property="og:updated_time" content="2018-10-16T08:08:07.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用的命令总结及各种实用工具">
-<meta name="twitter:description" content="常用解压缩命令平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧    zip压缩1$ zip -r xxx.zip  xxx.c">
+<meta name="twitter:description" content="常用命令和工具 gdb zip tar ldd lsof ps  pstack strace ipcs top free vmstat iostat sar readelf objdump nm size">
 
 
 
@@ -402,9 +402,92 @@
       
 
       
-        <h1 id="常用解压缩命令"><a href="#常用解压缩命令" class="headerlink" title="常用解压缩命令"></a>常用解压缩命令</h1><p>平常下个压缩文件 .zip .tar.gz可能居多。也就熟练了unzip、tar -zxvf 的使用，但碰到个其他格式的，很少用到的，还要去google(记性不好,虽然 -h 就有帮助)。索性自己写个吧   </p>
-<h2 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h2><p>压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ zip -r xxx.zip  xxx.c</span><br></pre></td></tr></table></figure></p>
+        <h1 id="常用命令和工具"><a href="#常用命令和工具" class="headerlink" title="常用命令和工具"></a>常用命令和工具</h1><ul>
+<li>gdb</li>
+<li>zip tar</li>
+<li>ldd</li>
+<li>lsof</li>
+<li>ps </li>
+<li>pstack</li>
+<li>strace</li>
+<li>ipcs</li>
+<li>top</li>
+<li>free</li>
+<li>vmstat</li>
+<li>iostat</li>
+<li>sar</li>
+<li>readelf</li>
+<li>objdump</li>
+<li>nm</li>
+<li>size</li>
+</ul>
 <a id="more"></a>
+<h1 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h1><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>如果要使用gdb对 c/c++ 进行调试 需要在编译选项上加 -g   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -g -o main main.c</span><br></pre></td></tr></table></figure>
+<p>然后使用如下命令使用  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gdb main &lt;core.xxx&gt;</span><br></pre></td></tr></table></figure>
+<p>core文件是程序非法执行后产生的 core dump 文件  </p>
+<h2 id="core-dump"><a href="#core-dump" class="headerlink" title="core dump"></a>core dump</h2><p>/etc/profile 下添加<br>ulimit -S -c unlimited &gt; /dev/null 2&gt;&amp;1</p>
+<p>/etc/sysctl.conf 添加<br>kernel.core<em>pattern = ./core</em>%t<em>%p</em>%e<br>kernel.core_uses_pid = 1</p>
+<h2 id="gdb交互命令"><a href="#gdb交互命令" class="headerlink" title="gdb交互命令"></a>gdb交互命令</h2><ul>
+<li>run：简记为 r ，其作用是运行程序，当遇到断点后，程序会在断点处停止运行，等待用户输入下一步的命令。</li>
+<li>continue （简写c ）：继续执行，到下一个断点处（或运行结束）</li>
+<li>next：（简写 n），单步跟踪程序，当遇到函数调用时，也不进入此函数体；此命令同 step 的主要区别是，step 遇到用户自定义的函数，将步进到函数中去运行，而 next 则直接调用函数，不会进入到函数体内。</li>
+<li>step （简写s）：单步调试如果有函数调用，则进入函数；与命令n不同，n是不进入调用的函数的</li>
+<li>until：当你厌倦了在一个循环体内单步跟踪时，这个命令可以运行程序直到退出循环体。</li>
+<li>until+行号： 运行至某行，不仅仅用来跳出循环</li>
+<li>finish： 运行程序，直到当前函数完成返回，并打印函数返回时的堆栈地址和返回值及参数值等信息。</li>
+<li>call 函数(参数)：调用程序中可见的函数，并传递“参数”，如：call  gdb_test(55)</li>
+<li>quit：简记为 q ，退出gdb</li>
+</ul>
+<h3 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h3><ul>
+<li>break n （简写b n）:在第n行处设置断点<pre><code>（可以带上代码路径和代码名称： b OAGUPDATE.cpp:578）
+</code></pre></li>
+<li>b fn1 if a＞b：条件断点设置</li>
+<li>break func（break缩写为b）：在函数func()的入口处设置断点，如：break cb_button</li>
+<li>delete 断点号n：删除第n个断点</li>
+<li>disable 断点号n：暂停第n个断点</li>
+<li>enable 断点号n：开启第n个断点</li>
+<li>clear 行号n：清除第n行的断点</li>
+<li>info b （info breakpoints） ：显示当前程序的断点设置情况</li>
+<li>delete breakpoints：清除所有断点：</li>
+</ul>
+<h3 id="查看源代码"><a href="#查看源代码" class="headerlink" title="查看源代码"></a>查看源代码</h3><ul>
+<li>list ：简记为 l ，其作用就是列出程序的源代码，默认每次显示10行。</li>
+<li>list 行号：将显示当前文件以“行号”为中心的前后10行代码，如：list 12</li>
+<li>list 函数名：将显示“函数名”所在函数的源代码，如：list main</li>
+<li>list ：不带参数，将接着上一次 list 命令的，输出下边的内容。</li>
+</ul>
+<h3 id="打印表达式"><a href="#打印表达式" class="headerlink" title="打印表达式"></a>打印表达式</h3><ul>
+<li>print 表达式：简记为 p ，其中“表达式”可以是任何当前正在被测试程序的有效表达式，比如当前正在调试C语言的程序，那么“表达式”可以是任何C语言的有效表达式，包括数字，变量甚至是函数调用。</li>
+<li>print a：将显示整数 a 的值</li>
+<li>print ++a：将把 a 中的值加1,并显示出来</li>
+<li>print name：将显示字符串 name 的值</li>
+<li>print gdb_test(22)：将以整数22作为参数调用 gdb_test() 函数</li>
+<li>print gdb_test(a)：将以变量 a 作为参数调用 gdb_test() 函数</li>
+<li>display 表达式：在单步运行时将非常有用，使用display命令设置一个表达式后，它将在每次单步进行指令后，紧接着输出被设置的表达式及值。如： display a</li>
+<li>watch 表达式：设置一个监视点，一旦被监视的“表达式”的值改变，gdb将强行终止正在被调试的程序。如： watch a</li>
+<li>whatis ：查询变量或函数</li>
+<li>info function： 查询函数</li>
+<li>扩展info locals： 显示当前堆栈页的所有变量</li>
+</ul>
+<h3 id="查询运行信息"><a href="#查询运行信息" class="headerlink" title="查询运行信息"></a>查询运行信息</h3><ul>
+<li>where/bt ：当前运行的堆栈列表；</li>
+<li>bt backtrace 显示当前调用堆栈</li>
+<li>up/down 改变堆栈显示的深度</li>
+<li>set args 参数:指定运行时的参数</li>
+<li>show args：查看设置好的参数</li>
+<li>info program： 来查看程序的是否在运行，进程号，被暂停的原因。</li>
+</ul>
+<h3 id="分割窗口"><a href="#分割窗口" class="headerlink" title="分割窗口"></a>分割窗口</h3><ul>
+<li>layout：用于分割窗口，可以一边查看代码，一边测试：</li>
+<li>layout src：显示源代码窗口</li>
+<li>layout asm：显示反汇编窗口</li>
+<li>layout regs：显示源代码/反汇编和CPU寄存器窗口</li>
+<li>layout split：显示源代码和反汇编窗口</li>
+<li>Ctrl + L：刷新窗口</li>
+</ul>
+<h1 id="压缩解压缩"><a href="#压缩解压缩" class="headerlink" title="压缩解压缩"></a>压缩解压缩</h1><h2 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h2><p>压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ zip -r xxx.zip  xxx.c</span><br></pre></td></tr></table></figure></p>
 <p>解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ zip xxx.zip</span><br></pre></td></tr></table></figure></p>
 <h2 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h2><p>.tar 压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -cvf xxx.tar xxx</span><br></pre></td></tr></table></figure></p>
 <p>.tar 解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xvf xxx.tar</span><br></pre></td></tr></table></figure></p>
@@ -424,22 +507,33 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ file /bin/ls</span><br></pre></td></tr></table></figure>
 <p>查看Linux系统发行版</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release -a</span><br></pre></td></tr></table></figure>
-<p>列出当前系统打开文件的工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lsof abc.txt 				//显示开启文件abc.txt的进程</span><br><span class="line">lsof -c abc  				//显示abc进程现在打开的文件</span><br><span class="line">lsof -c -p  				//1234 列出进程号为1234的进程所打开的文件</span><br><span class="line">lsof -g gid  				//显示归属gid的进程情况</span><br><span class="line">lsof +d /usr/local/  	    //显示目录下被进程开启的文件</span><br><span class="line">lsof +D /usr/local/ 	    //同上，但是会搜索目录下的目录，时间较长</span><br><span class="line">lsof -d 4 					//显示使用fd为4的进程</span><br><span class="line">lsof -i 					//用以显示符合条件的进程情况</span><br></pre></td></tr></table></figure></p>
-<p>获取 IPv4流量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -i 4</span><br></pre></td></tr></table></figure></p>
-<p>仅显示TCP流量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -iTCP</span><br></pre></td></tr></table></figure></p>
-<p>显示指定用户打开了什么<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -u mysql</span><br></pre></td></tr></table></figure></p>
-<p>杀死指定用户所做的一切事情</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 `lsof -t -u nginx`</span><br></pre></td></tr></table></figure>
-<p>查看指定的命令正在使用的文件和网络连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -c mysql</span><br></pre></td></tr></table></figure>
-<p>查看指定进程ID已打开的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -p 12356</span><br></pre></td></tr></table></figure>
-<blockquote>
+<h1 id="ldd-查看程序依赖库"><a href="#ldd-查看程序依赖库" class="headerlink" title="ldd 查看程序依赖库"></a>ldd 查看程序依赖库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ldd main</span><br></pre></td></tr></table></figure>
+<h1 id="strace-跟踪进程调用"><a href="#strace-跟踪进程调用" class="headerlink" title="strace 跟踪进程调用"></a>strace 跟踪进程调用</h1><p>strace可以跟踪到一个进程产生的系统调用,包括参数，返回值，执行消耗的时间  </p>
+<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">-c 统计每一系统调用的所执行的时间,次数和出错的次数等.</span><br><span class="line">-d 输出strace关于标准错误的调试信息.</span><br><span class="line">-f 跟踪由fork调用所产生的子进程.</span><br><span class="line">-ff 如果提供-o filename,则所有进程的跟踪结果输出到相应的filename.pid中,pid是各进程的进程号.</span><br><span class="line">-F 尝试跟踪vfork调用.在-f时,vfork不被跟踪.</span><br><span class="line">-h 输出简要的帮助信息.</span><br><span class="line">-i 输出系统调用的入口指针.</span><br><span class="line">-q 禁止输出关于脱离的消息.</span><br><span class="line">-r 打印出相对时间关于,,每一个系统调用.</span><br><span class="line">-t 在输出中的每一行前加上时间信息.</span><br><span class="line">-tt 在输出中的每一行前加上时间信息,微秒级.</span><br><span class="line">-ttt 微秒级输出,以秒了表示时间.</span><br><span class="line">-T 显示每一调用所耗的时间.</span><br><span class="line">-v 输出所有的系统调用.一些调用关于环境变量,状态,输入输出等调用由于使用频繁,默认不输出.</span><br><span class="line">-V 输出strace的版本信息.</span><br><span class="line">-x 以十六进制形式输出非标准字符串</span><br><span class="line">-xx 所有字符串以十六进制形式输出.</span><br><span class="line">-a column</span><br><span class="line">设置返回值的输出位置.默认 为40.</span><br><span class="line">-e expr</span><br><span class="line">指定一个表达式,用来控制如何跟踪.格式如下:</span><br><span class="line">[qualifier=][!]value1[,value2]...</span><br><span class="line">qualifier只能是 trace,abbrev,verbose,raw,signal,read,write其中之一.value是用来限定的符号或数字.默认的 qualifier是 trace.感叹号是否定符号.例如:</span><br><span class="line">-eopen等价于 -e trace=open,表示只跟踪open调用.而-etrace!=open表示跟踪除了open以外的其他调用.有两个特殊的符号 all 和 none.</span><br><span class="line">注意有些shell使用!来执行历史记录里的命令,所以要使用\\.</span><br><span class="line">-e trace=set</span><br><span class="line">只跟踪指定的系统 调用.例如:-e trace=open,close,rean,write表示只跟踪这四个系统调用.默认的为set=all.</span><br><span class="line">-e trace=file</span><br><span class="line">只跟踪有关文件操作的系统调用.</span><br><span class="line">-e trace=process</span><br><span class="line">只跟踪有关进程控制的系统调用.</span><br><span class="line">-e trace=network</span><br><span class="line">跟踪与网络有关的所有系统调用.</span><br><span class="line">-e strace=signal</span><br><span class="line">跟踪所有与系统信号有关的 系统调用</span><br><span class="line">-e trace=ipc</span><br><span class="line">跟踪所有与进程通讯有关的系统调用</span><br><span class="line">-e abbrev=set</span><br><span class="line">设定 strace输出的系统调用的结果集.-v 等与 abbrev=none.默认为abbrev=all.</span><br><span class="line">-e raw=set</span><br><span class="line">将指 定的系统调用的参数以十六进制显示.</span><br><span class="line">-e signal=set</span><br><span class="line">指定跟踪的系统信号.默认为all.如 signal=!SIGIO(或者signal=!io),表示不跟踪SIGIO信号.</span><br><span class="line">-e read=set</span><br><span class="line">输出从指定文件中读出 的数据.例如:</span><br><span class="line">-e read=3,5</span><br><span class="line">-e write=set</span><br><span class="line">输出写入到指定文件中的数据.</span><br><span class="line">-o filename</span><br><span class="line">将strace的输出写入文件filename</span><br><span class="line">-p pid</span><br><span class="line">跟踪指定的进程pid.</span><br><span class="line">-s strsize</span><br><span class="line">指定输出的字符串的最大长度.默认为32.文件名一直全部输出.</span><br><span class="line">-u username</span><br><span class="line">以username 的UID和GID执行被跟踪的命令</span><br></pre></td></tr></table></figure>
+<h2 id="几个实例说明"><a href="#几个实例说明" class="headerlink" title="几个实例说明"></a>几个实例说明</h2><p>跟踪可执行程序 并输出到当前文件下 -f -F 表示同时跟踪 fork vfork出来的进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ strace -f -F -o ./trace.txt ./main</span><br></pre></td></tr></table></figure></p>
+<p>跟踪服务进程,跟踪11111进程的所有系统调用，并统计时间，以及开始时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ strace -o output.txt -T -tt -e trace=all -p 11111</span><br></pre></td></tr></table></figure>
+<h1 id="lsof-一切皆文件"><a href="#lsof-一切皆文件" class="headerlink" title="lsof  一切皆文件"></a>lsof  一切皆文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lsof abc.txt 				//显示开启文件abc.txt的进程</span><br><span class="line">lsof -c abc  				//显示abc进程现在打开的文件</span><br><span class="line">lsof -c -p  				//1234 列出进程号为1234的进程所打开的文件</span><br><span class="line">lsof -g gid  				//显示归属gid的进程情况</span><br><span class="line">lsof +d /usr/local/  	    //显示目录下被进程开启的文件</span><br><span class="line">lsof +D /usr/local/ 	    //同上，但是会搜索目录下的目录，时间较长</span><br><span class="line">lsof -d 4 					//显示使用fd为4的进程</span><br><span class="line">lsof -i 					//用以显示符合条件的进程情况</span><br></pre></td></tr></table></figure>
+<h2 id="获取-IPv4流量"><a href="#获取-IPv4流量" class="headerlink" title="获取 IPv4流量"></a>获取 IPv4流量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -i 4</span><br></pre></td></tr></table></figure>
+<h2 id="仅显示TCP流量"><a href="#仅显示TCP流量" class="headerlink" title="仅显示TCP流量"></a>仅显示TCP流量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -iTCP</span><br></pre></td></tr></table></figure>
+<h2 id="显示指定用户打开了什么"><a href="#显示指定用户打开了什么" class="headerlink" title="显示指定用户打开了什么"></a>显示指定用户打开了什么</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -u mysql</span><br></pre></td></tr></table></figure>
+<h2 id="杀死指定用户所做的一切事情"><a href="#杀死指定用户所做的一切事情" class="headerlink" title="杀死指定用户所做的一切事情"></a>杀死指定用户所做的一切事情</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 `lsof -t -u nginx`</span><br></pre></td></tr></table></figure>
+<h2 id="查看指定的命令正在使用的文件和网络连接"><a href="#查看指定的命令正在使用的文件和网络连接" class="headerlink" title="查看指定的命令正在使用的文件和网络连接"></a>查看指定的命令正在使用的文件和网络连接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -c mysql</span><br></pre></td></tr></table></figure>
+<h2 id="查看指定进程ID已打开的内容"><a href="#查看指定进程ID已打开的内容" class="headerlink" title="查看指定进程ID已打开的内容"></a>查看指定进程ID已打开的内容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -p 12356</span><br></pre></td></tr></table></figure>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><blockquote>
 <p>lsof <code>which httpd</code> //那个进程在使用apache的可执行文件<br>lsof /etc/passwd //那个进程在占用/etc/passwd<br>lsof /dev/hda6 //那个进程在占用hda6<br>lsof /dev/cdrom //那个进程在占用光驱<br>lsof -c sendmail //查看sendmail进程的文件使用情况<br>lsof -c courier -u ^zahn //显示出那些文件被以courier打头的进程打开，但是并不属于用户zahn<br>lsof -p 30297 //显示那些文件被pid为30297的进程打开<br>lsof -D /tmp 显示所有在/tmp文件夹中打开的instance和文件的进程。但是symbol文件并不在列<br>lsof -u1000 //查看uid是100的用户的进程的文件使用情况<br>lsof -utony //查看用户tony的进程的文件使用情况<br>lsof -u^tony //查看不是用户tony的进程的文件使用情况(^是取反的意思)<br>lsof -i //显示所有打开的端口<br>lsof -i:80 //显示所有打开80端口的进程<br>lsof -i -U //显示所有打开的端口和UNIX domain文件<br>lsof -i UDP@[url]www.akadia.com:123 //显示那些进程打开了到www.akadia.com的UDP的123(ntp)端口的链接<br>lsof -i tcp@ohaha.ks.edu.tw:ftp -r //不断查看目前ftp连接的情况(-r，lsof会永远不断的执行，直到收到中断信号,+r，lsof会一直执行，直到没有档案被显示,缺省是15s刷新)<br>lsof -i tcp@ohaha.ks.edu.tw:ftp -n //lsof -n 不将IP转换为hostname，缺省是不加上-n参数  </p>
 </blockquote>
-<h1 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h1><p>查看 XSI IPC 3种形式的限定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Linux系统</span><br><span class="line">$ ipcs -l</span><br><span class="line">FreeBSD系统</span><br><span class="line">$ ipcs -T</span><br><span class="line">Solaris系统</span><br><span class="line">$ sysdef -y</span><br></pre></td></tr></table></figure></p>
-<h1 id="抓包工具"><a href="#抓包工具" class="headerlink" title="抓包工具"></a>抓包工具</h1><p>tcpdump抓包工具使用  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tcpdump -i any tcp port 9501</span><br></pre></td></tr></table></figure>
+<h1 id="进程间通信ipcs"><a href="#进程间通信ipcs" class="headerlink" title="进程间通信ipcs"></a>进程间通信ipcs</h1><p>ipcs是Linux下显示进程间通信设施状态的工具。可以显示消息队列、共享内存和信号量的信息  </p>
+<p>查看 XSI IPC 3种形式的限定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Linux系统</span><br><span class="line">$ ipcs -l</span><br><span class="line">FreeBSD系统</span><br><span class="line">$ ipcs -T</span><br><span class="line">Solaris系统</span><br><span class="line">$ sysdef -y</span><br></pre></td></tr></table></figure></p>
+<h1 id="sar"><a href="#sar" class="headerlink" title="sar"></a>sar</h1><p>System Activity Reporter（系统活动情况报告）</p>
+<h1 id="readelf-elf文件分析"><a href="#readelf-elf文件分析" class="headerlink" title="readelf elf文件分析"></a>readelf elf文件分析</h1><p>显示文件头信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ readelf -h main| grep Machine</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">vagrant@ubuntu-xenial:~/php-dev/demo$ readelf -h main.out</span><br><span class="line">ELF Header:</span><br><span class="line">  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 </span><br><span class="line">  Class:                             ELF32</span><br><span class="line">  Data:                              2&apos;s complement, little endian</span><br><span class="line">  Version:                           1 (current)</span><br><span class="line">  OS/ABI:                            UNIX - System V</span><br><span class="line">  ABI Version:                       0</span><br><span class="line">  Type:                              EXEC (Executable file)</span><br><span class="line">  Machine:                           Intel 80386</span><br><span class="line">  Version:                           0x1</span><br><span class="line">  Entry point address:               0x8048310</span><br><span class="line">  Start of program headers:          52 (bytes into file)</span><br><span class="line">  Start of section headers:          6984 (bytes into file)</span><br><span class="line">  Flags:                             0x0</span><br><span class="line">  Size of this header:               52 (bytes)</span><br><span class="line">  Size of program headers:           32 (bytes)</span><br><span class="line">  Number of program headers:         9</span><br><span class="line">  Size of section headers:           40 (bytes)</span><br><span class="line">  Number of section headers:         36</span><br><span class="line">  Section header string table index: 33</span><br></pre></td></tr></table></figure>
+<h2 id="几个使用方法"><a href="#几个使用方法" class="headerlink" title="几个使用方法"></a>几个使用方法</h2><p>查看应用程序在编译的时候是否加了 -g 选项  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ readelf -S main| grep debug</span><br></pre></td></tr></table></figure>
+<p>完整输出  </p>
+<p>``<br>$ readelf -all main<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 抓包工具</span><br><span class="line"></span><br><span class="line">tcpdump抓包工具使用</span><br></pre></td></tr></table></figure></p>
+<p>sudo tcpdump -i any tcp port 9501<br>```</p>
 <ul>
 <li>-i 绑定的网卡，any表示全部网卡 lo 表示本地的</li>
 <li>tcp 只监听tcp协议</li>
@@ -748,7 +842,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用解压缩命令"><span class="nav-number">1.</span> <span class="nav-text">常用解压缩命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">1.1.</span> <span class="nav-text">zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar"><span class="nav-number">1.2.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rar"><span class="nav-number">1.3.</span> <span class="nav-text">rar</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#资源查看"><span class="nav-number">2.</span> <span class="nav-text">资源查看</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间通信"><span class="nav-number">3.</span> <span class="nav-text">进程间通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#抓包工具"><span class="nav-number">4.</span> <span class="nav-text">抓包工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#没了"><span class="nav-number">4.1.</span> <span class="nav-text">没了</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令和工具"><span class="nav-number">1.</span> <span class="nav-text">常用命令和工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gdb"><span class="nav-number">2.</span> <span class="nav-text">gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-dump"><span class="nav-number">2.2.</span> <span class="nav-text">core dump</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdb交互命令"><span class="nav-number">2.3.</span> <span class="nav-text">gdb交互命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置断点"><span class="nav-number">2.3.1.</span> <span class="nav-text">设置断点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看源代码"><span class="nav-number">2.3.2.</span> <span class="nav-text">查看源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印表达式"><span class="nav-number">2.3.3.</span> <span class="nav-text">打印表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询运行信息"><span class="nav-number">2.3.4.</span> <span class="nav-text">查询运行信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割窗口"><span class="nav-number">2.3.5.</span> <span class="nav-text">分割窗口</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#压缩解压缩"><span class="nav-number">3.</span> <span class="nav-text">压缩解压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">3.1.</span> <span class="nav-text">zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar"><span class="nav-number">3.2.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rar"><span class="nav-number">3.3.</span> <span class="nav-text">rar</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#资源查看"><span class="nav-number">4.</span> <span class="nav-text">资源查看</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ldd-查看程序依赖库"><span class="nav-number">5.</span> <span class="nav-text">ldd 查看程序依赖库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#strace-跟踪进程调用"><span class="nav-number">6.</span> <span class="nav-text">strace 跟踪进程调用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参数说明"><span class="nav-number">6.1.</span> <span class="nav-text">参数说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个实例说明"><span class="nav-number">6.2.</span> <span class="nav-text">几个实例说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lsof-一切皆文件"><span class="nav-number">7.</span> <span class="nav-text">lsof  一切皆文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取-IPv4流量"><span class="nav-number">7.1.</span> <span class="nav-text">获取 IPv4流量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仅显示TCP流量"><span class="nav-number">7.2.</span> <span class="nav-text">仅显示TCP流量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示指定用户打开了什么"><span class="nav-number">7.3.</span> <span class="nav-text">显示指定用户打开了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#杀死指定用户所做的一切事情"><span class="nav-number">7.4.</span> <span class="nav-text">杀死指定用户所做的一切事情</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看指定的命令正在使用的文件和网络连接"><span class="nav-number">7.5.</span> <span class="nav-text">查看指定的命令正在使用的文件和网络连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看指定进程ID已打开的内容"><span class="nav-number">7.6.</span> <span class="nav-text">查看指定进程ID已打开的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多"><span class="nav-number">7.7.</span> <span class="nav-text">更多</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间通信ipcs"><span class="nav-number">8.</span> <span class="nav-text">进程间通信ipcs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sar"><span class="nav-number">9.</span> <span class="nav-text">sar</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#readelf-elf文件分析"><span class="nav-number">10.</span> <span class="nav-text">readelf elf文件分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个使用方法"><span class="nav-number">10.1.</span> <span class="nav-text">几个使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#没了"><span class="nav-number">10.2.</span> <span class="nav-text">没了</span></a></li></ol></li></ol></div>
             
 
           </div>

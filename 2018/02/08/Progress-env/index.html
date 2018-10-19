@@ -89,17 +89,17 @@
 <meta property="og:site_name" content="JOE&#39;S BLOG">
 <meta property="og:description" content="进程环境主要介绍了如下内容:  当程序执行时，其main函数是如何被调用的； 命令行参数是如何传递给应用程序的； 典型的存储空间布局是什么样式； 如何分配另外的存储空间； 进程如何使用环境变量； 进程的各种不同终止方式等">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure7.2.png">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure7.3.png">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure7.4.png">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure7.5.png">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure7.6.png">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure7-6.1.png">
-<meta property="og:updated_time" content="2018-02-08T11:59:28.249Z">
+<meta property="og:image" content="http://img.hnitoj.cn/figure7.2.png">
+<meta property="og:image" content="http://img.hnitoj.cn/figure7.3.png">
+<meta property="og:image" content="http://img.hnitoj.cn/figure7.4.png">
+<meta property="og:image" content="http://img.hnitoj.cn/figure7.5.png">
+<meta property="og:image" content="http://img.hnitoj.cn/figure7.6.png">
+<meta property="og:image" content="http://img.hnitoj.cn/figure7-6.1.png">
+<meta property="og:updated_time" content="2018-10-19T07:09:33.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程环境(七)">
 <meta name="twitter:description" content="进程环境主要介绍了如下内容:  当程序执行时，其main函数是如何被调用的； 命令行参数是如何传递给应用程序的； 典型的存储空间布局是什么样式； 如何分配另外的存储空间； 进程如何使用环境变量； 进程的各种不同终止方式等">
-<meta name="twitter:image" content="http://ojg7pw3bl.bkt.clouddn.com/figure7.2.png">
+<meta name="twitter:image" content="http://img.hnitoj.cn/figure7.2.png">
 
 
 
@@ -460,17 +460,17 @@
 <ul>
 <li>成功: 返回0</li>
 <li><p>出错: 返回非0<br>atexit的参数是一个函数地址，当调用此函数时无需向它传递任何参数，也不期望它返回一个值。exit调用这些函数的顺序刚好相反  </p>
-<p>下图说明了一个c语言程序是如何启动和停止的<br><img src="http://ojg7pw3bl.bkt.clouddn.com/figure7.2.png" alt=""><br>内核使程序执行的唯一方法是调用一个exec函数。进程自愿终止的唯一方法是显示或隐式地（通过调用exit）调用_exit或_Exit；进程也可以非自愿地由一个信号终止(如SINGUP、SINGINT等)<br>如下程序说明如何使用atexit函数</p>
+<p>下图说明了一个c语言程序是如何启动和停止的<br><img src="http://img.hnitoj.cn/figure7.2.png" alt=""><br>内核使程序执行的唯一方法是调用一个exec函数。进程自愿终止的唯一方法是显示或隐式地（通过调用exit）调用_exit或_Exit；进程也可以非自愿地由一个信号终止(如SINGUP、SINGINT等)<br>如下程序说明如何使用atexit函数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">static void my_exit1(void);</span><br><span class="line">static void my_exit2(void);</span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    if (atexit(my_exit2) != 0)</span><br><span class="line">        err_sys(&quot;不能注册my_exit2&quot;);</span><br><span class="line">    if (atexit(my_exit1) != 0)</span><br><span class="line">        err_sys(&quot;不能注册my_exit1&quot;);</span><br><span class="line">    if (atexit(my_exit1) != 0)</span><br><span class="line">        err_sys(&quot;不能注册my_exit1&quot;);</span><br><span class="line"></span><br><span class="line">    printf(&quot;main is done\n&quot;);</span><br><span class="line">    exit(0);</span><br><span class="line">&#125;</span><br><span class="line">static void my_exit1(void)</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;first exit handler\n&quot;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">static void my_exit2(void)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    printf(&quot;second exit handler\n&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行结果如下<br><img src="http://ojg7pw3bl.bkt.clouddn.com/figure7.3.png" alt=""></p>
+<p>运行结果如下<br><img src="http://img.hnitoj.cn/figure7.3.png" alt=""></p>
 </li>
 </ul>
 </li>
 </ol>
 <h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h2><p>当执行一个程序时，调用exec的进程可将命令行参数传递给该新程序。这是UNIX shell的一部分操作。<br>如下程序将其所有命令行参数都回显到标准输出上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">int main(int argc, char *artv[])</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    int i;</span><br><span class="line">    for (i=0;i&lt;argc;i++)</span><br><span class="line">        printf(&quot;argv[%d]: %s\n&quot;,i,argv[i]);</span><br><span class="line">    exit(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://ojg7pw3bl.bkt.clouddn.com/figure7.4.png" alt=""></p>
+<p><img src="http://img.hnitoj.cn/figure7.4.png" alt=""></p>
 <h2 id="环境表"><a href="#环境表" class="headerlink" title="环境表"></a>环境表</h2><p>每个程序都接收到一个环境表。与参数表一样，环境表也是一个字符指针数组，其中每个指针包含一个以null结束的C字符串的地址。全局变量environ包含了该指针数组的地址:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extern char **environ</span><br></pre></td></tr></table></figure></p>
-<p>如果该环境包含5个字符串，那么它看起来就像如下图所示。其中，每个字符串的结尾处都显式地有一个null字符。我们称environ为环境指针，指针数组为环境表，其中个指针指向的字符串为环境字符串。<br><img src="http://ojg7pw3bl.bkt.clouddn.com/figure7.5.png" alt=""></p>
+<p>如果该环境包含5个字符串，那么它看起来就像如下图所示。其中，每个字符串的结尾处都显式地有一个null字符。我们称environ为环境指针，指针数组为环境表，其中个指针指向的字符串为环境字符串。<br><img src="http://img.hnitoj.cn/figure7.5.png" alt=""></p>
 <h2 id="C程序的存储空间布局"><a href="#C程序的存储空间布局" class="headerlink" title="C程序的存储空间布局"></a>C程序的存储空间布局</h2><p>C程序一直由下列几部分组成:</p>
 <ul>
 <li>正文段。这是由CPU执行的机器指令部分。通常，正文段是可共享的，所以即使是频繁执行的程序(如文本编辑器、C编辑器和shell等)在存储器中也只需有一个副本，另外，正文段常常是只读的，以防止程序由于意外而修改指令。</li>
@@ -484,13 +484,13 @@
 </li>
 <li>栈。自动变量以及每次函数调用时所需保存的信息都存放在此段中。每次函数调用时，其返回地址以及调用者的环境信息(如某些机器的寄存器的值)都存放在栈中。然后，最近被调用的函数在栈上为其自动和临时变量分配存储空间。通常以这种使用栈，C递归函数可以工作。递归函数每次调用自身时，就用一个新的栈帧，因此一次函数调用实例中的变量不会影响另一次函数调用实例中的变量。</li>
 <li><p>堆。通常在堆中进行动态存储分配。由于历史上形式惯例，堆位于未初始化数据段h额栈之间。</p>
-<p>  下图显示了一种典型的存储空间安排<br>  <img src="http://ojg7pw3bl.bkt.clouddn.com/figure7.6.png" alt=""><br>  对于32位Intelx86处理器上的Linux，正文段从0x08048000单元开始，栈底则在0xC0000000之下开始(在这种特定的结构中，栈从高地址向低地址方向增长)。堆顶和栈顶之间未用的虚拟空间很大  </p>
+<p>  下图显示了一种典型的存储空间安排<br>  <img src="http://img.hnitoj.cn/figure7.6.png" alt=""><br>  对于32位Intelx86处理器上的Linux，正文段从0x08048000单元开始，栈底则在0xC0000000之下开始(在这种特定的结构中，栈从高地址向低地址方向增长)。堆顶和栈顶之间未用的虚拟空间很大  </p>
 <ul>
 <li>a.out中还有若干其他类型的段，如包含符号表的段、包含调试信息的段以及包含动态共享库链接表的段等。这些部分并不装载到进程执行的程序映像中。</li>
 </ul>
 </li>
 </ul>
-<p>size命令报告正文段、数据段和bss段的长度(以字节为单位)，例如<br><img src="http://ojg7pw3bl.bkt.clouddn.com/figure7-6.1.png" alt=""></p>
+<p>size命令报告正文段、数据段和bss段的长度(以字节为单位)，例如<br><img src="http://img.hnitoj.cn/figure7-6.1.png" alt=""></p>
 <h2 id="共享库"><a href="#共享库" class="headerlink" title="共享库"></a>共享库</h2><p>共享库使得可执行文件中不在包含公用的库函数，而只需在所有进程都可引用的存储区中保持这种库例程的一个副本。程序第一次执行或者第一次调用某个库函数时，用动态链接方式将程序与共享库函数相链接。这减少了每个可执行文件的长度，但增加了一些运行时间开销。这种时间开销发生在程序第一次被执行时，或者每个共享库函数第一次被调用时。共享库的另一个优点是可以用库函数的新版本代替老版本而无需对使用该库的程序重新连接编辑(假定参数的数目和类型都没有发生改变)</p>
 <h2 id="存储空间分配"><a href="#存储空间分配" class="headerlink" title="存储空间分配"></a>存储空间分配</h2><p>ISO C说明了3个用于存储空间动态分配的函数。</p>
 <ol>

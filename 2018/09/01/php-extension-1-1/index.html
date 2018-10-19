@@ -89,12 +89,12 @@
 <meta property="og:site_name" content="JOE&#39;S BLOG">
 <meta property="og:description" content="从PHP的执行原理开始PHP是一门解释型语言,执行过程如下：第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征第三步：将AST生成对应的opcode，并被虚拟">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/image/php/php7source.png">
-<meta property="og:updated_time" content="2018-10-03T15:04:57.577Z">
+<meta property="og:image" content="http://img.hnitoj.cn/image/php/php7source.png">
+<meta property="og:updated_time" content="2018-10-19T07:09:33.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="认识PHP的一些基本原理">
 <meta name="twitter:description" content="从PHP的执行原理开始PHP是一门解释型语言,执行过程如下：第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征第三步：将AST生成对应的opcode，并被虚拟">
-<meta name="twitter:image" content="http://ojg7pw3bl.bkt.clouddn.com/image/php/php7source.png">
+<meta name="twitter:image" content="http://img.hnitoj.cn/image/php/php7source.png">
 
 
 
@@ -407,7 +407,7 @@
         <h2 id="从PHP的执行原理开始"><a href="#从PHP的执行原理开始" class="headerlink" title="从PHP的执行原理开始"></a>从PHP的执行原理开始</h2><p>PHP是一门解释型语言,执行过程如下：<br>第一步：源码通过词法分析得到Token。Token是PHP代码被切割成的有意义的标识。在zend_language_parse.h文件中做了定义，比如echo对应的Token是T_ECHO，值为328<br>第二步：语法分析将Token和符合文法规则的代码生成抽象语法树。在PHP7中，AST是新特征<br>第三步：将AST生成对应的opcode，并被虚拟机执行。opcode是PHP定义的一组指令标识，对应相应的handler。opcodes是opcode的集合形式，是PHP执行过程的中间代码，类似Java的字节码。PHP优化中有一个常见的“开启opcache”，指的就是opcodes的缓存  </p>
 <a id="more"></a>
 <h2 id="PHP7内核架构"><a href="#PHP7内核架构" class="headerlink" title="PHP7内核架构"></a>PHP7内核架构</h2><p>主要来自于《PHP7底层设计与源码实现》</p>
-<p><img src="http://ojg7pw3bl.bkt.clouddn.com/image/php/php7source.png" alt=""></p>
+<p><img src="http://img.hnitoj.cn/image/php/php7source.png" alt=""></p>
 <ul>
 <li><p>Zend引擎：词法/语法分析、AST编译和opcodes的执行均在Zend引擎中实现。引擎为PHP提供了基础服务，PHP的可靠性和高性能都依赖引擎的基础支撑。  </p>
 </li>

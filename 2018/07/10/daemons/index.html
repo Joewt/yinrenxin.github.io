@@ -89,14 +89,14 @@
 <meta property="og:site_name" content="JOE&#39;S BLOG">
 <meta property="og:description" content="前言守护进程(daemon)是在系统引导装入时启动，仅在系统关闭时才终止。守护进程是在后台运行的。   守护进程特征在命令行下输入 ps -axj(BSD系统)  查看系统中各个进程的状态。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-1.png">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-2.png">
-<meta property="og:image" content="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-3.png">
-<meta property="og:updated_time" content="2018-07-09T16:27:55.709Z">
+<meta property="og:image" content="http://img.hnitoj.cn/apue/img/chapter13/figure13-1.png">
+<meta property="og:image" content="http://img.hnitoj.cn/apue/img/chapter13/figure13-2.png">
+<meta property="og:image" content="http://img.hnitoj.cn/apue/img/chapter13/figure13-3.png">
+<meta property="og:updated_time" content="2018-10-19T07:09:33.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="守护进程(十三)">
 <meta name="twitter:description" content="前言守护进程(daemon)是在系统引导装入时启动，仅在系统关闭时才终止。守护进程是在后台运行的。   守护进程特征在命令行下输入 ps -axj(BSD系统)  查看系统中各个进程的状态。">
-<meta name="twitter:image" content="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-1.png">
+<meta name="twitter:image" content="http://img.hnitoj.cn/apue/img/chapter13/figure13-1.png">
 
 
 
@@ -409,10 +409,10 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>守护进程(daemon)是在系统引导装入时启动，仅在系统关闭时才终止。守护进程是在后台运行的。  </p>
 <h2 id="守护进程特征"><a href="#守护进程特征" class="headerlink" title="守护进程特征"></a>守护进程特征</h2><p>在命令行下输入 ps -axj(BSD系统)  查看系统中各个进程的状态。  </p>
 <a id="more"></a>
-<p><img src="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-1.png" alt="">  </p>
+<p><img src="http://img.hnitoj.cn/apue/img/chapter13/figure13-1.png" alt="">  </p>
 <p>父ID为0的个进程通常是内核进程，内核进程存在于系统的整个生命周期，他们以超级用户特权运行，无控制终端，无命令行。  </p>
 <p>在ps的输出中，内核守护进程的名字出现在方括号中。  </p>
-<p><img src="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-2.png" alt="">  </p>
+<p><img src="http://img.hnitoj.cn/apue/img/chapter13/figure13-2.png" alt="">  </p>
 <p>可以看到Linux使用了kthreadd的特殊内核进程来创建其他的内核进程，所以其他内核进程的父进程为2 也就是kthreadd进程。对于需要在进程上下文执行工作但却不被用户层进程上下文调用的每一个内核组件，通常有它自己的内核守护进程。如在Linux中。  </p>
 <ul>
 <li>kswapd 内存换页守护进程。它支持虚拟内存子系统在经过一段时间后将脏页面慢慢写会磁盘。</li>
@@ -438,7 +438,7 @@
 <li>某些守护进程打开/dev/null 使其具有文件描述符0、1、2</li>
 </ol>
 <h2 id="出错记录"><a href="#出错记录" class="headerlink" title="出错记录"></a>出错记录</h2><p>守护进程出错处理，大多数守护进程都使用 BSD的syslog设施。  </p>
-<p><img src="http://ojg7pw3bl.bkt.clouddn.com/apue/img/chapter13/figure13-3.png" alt="">  </p>
+<p><img src="http://img.hnitoj.cn/apue/img/chapter13/figure13-3.png" alt="">  </p>
 <p> 有3种产生日志消息的方式  </p>
 <ol>
 <li>内核例程可以调用log函数。</li>

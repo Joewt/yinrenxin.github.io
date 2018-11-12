@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://joewt.com/"/>
-  <updated>2018-11-06T00:52:52.237Z</updated>
+  <updated>2018-10-24T13:11:17.172Z</updated>
   <id>https://joewt.com/</id>
   
   <author>
@@ -15,29 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Go语言http详解</title>
-    <link href="https://joewt.com/2018/11/09/web-http-golang/"/>
-    <id>https://joewt.com/2018/11/09/web-http-golang/</id>
-    <published>2018-11-08T16:08:43.000Z</published>
-    <updated>2018-11-06T00:52:52.237Z</updated>
-    
-    <content type="html"><![CDATA[<p>Go语言实现的web不需要nginx等，那么它是如何实现的呢?</p><p>先看一个http版的 hello world  </p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    &quot;io&quot;</span><br><span class="line">    &quot;net/http&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func Hello(w http.ResponseWriter, r *http.Request) &#123;</span><br><span class="line">    io.WriteString(w, &quot;hello world&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    http.HandleFunc(&quot;/&quot;, Hello)</span><br><span class="line">    err := http.ListenAndServe(&quot;:8080&quot;, nil)</span><br><span class="line">    if err != nil &#123;</span><br><span class="line">        panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Go语言实现的web不需要nginx等，那么它是如何实现的呢?&lt;/p&gt;
-&lt;p&gt;先看一个http版的 hello world  &lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Go语言" scheme="https://joewt.com/categories/Go%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="Go" scheme="https://joewt.com/tags/Go/"/>
-    
-  </entry>
   
   <entry>
     <title>C语言中几个基本概念</title>

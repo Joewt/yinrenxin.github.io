@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://img.hnitoj.cn/7AB30FB4610D9CD6E007B4CE48D73270.png">
 <meta property="og:image" content="http://img.hnitoj.cn/D28B21B0082E0FBB411BBCEFA515B45E.png">
 <meta property="og:image" content="http://img.hnitoj.cn/FC89DCB14091449DBE1B2B8A345E07EA.png">
-<meta property="og:updated_time" content="2018-10-24T13:11:17.172Z">
+<meta property="og:updated_time" content="2018-11-14T03:30:50.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言中几个基本概念">
 <meta name="twitter:description" content="分清以下几个概念 指针数组 数组指针 指针函数 函数指针 指针常量 常量指针 typedef #define 可变参数 字符串常量   内容主要来自《C专家编程》《C陷阱和缺陷》《C和指针》">
@@ -423,7 +423,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int const a;</span><br><span class="line">const int a;</span><br></pre></td></tr></table></figure>
 <p>首先看如上声明,const 在前还是在后表示的意思都是一样的，表示a是一个常量 类型为int，a的值初始化后就不能修改了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int const *pi;</span><br><span class="line">const int *pi;</span><br></pre></td></tr></table></figure>
-<p>常量指针有2中表示方法意思都是一样的, 以上2个都表示常量指针,<br>可以修改指针的值但不能修改指针指向的值,这个在函数库的原型里可以见到比如printf和scanf,<br>后面的…表示可变参数后面会讲到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int	 printf(const char * __restrict, ...) </span><br><span class="line">int	 scanf(const char * __restrict, ...)</span><br></pre></td></tr></table></figure></p>
+<p>常量指针有2种表示方法意思都是一样的, 以上2个都表示常量指针,<br>可以修改指针的值但不能修改指针指向的值,这个在函数库的原型里可以见到比如printf和scanf,<br>后面的…表示可变参数后面会讲到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int	 printf(const char * __restrict, ...) </span><br><span class="line">int	 scanf(const char * __restrict, ...)</span><br></pre></td></tr></table></figure></p>
 <p>再来看看指针常量的声明,一般只有一种表示方法<br>如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int * const pi;</span><br></pre></td></tr></table></figure></p>
 <p>表示pi 这个指针是常量，pi的值不能修改,但是pi指向的值是可以修改的  </p>
 <p>如果既不想改变指针的值也不想改变指针指向的值，可以声明如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int const * const pi;</span><br></pre></td></tr></table></figure></p>

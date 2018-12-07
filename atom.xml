@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://joewt.com/"/>
-  <updated>2018-11-12T11:00:31.354Z</updated>
+  <updated>2018-12-07T15:38:33.906Z</updated>
   <id>https://joewt.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PHP编译选项和常见错误</title>
+    <link href="https://joewt.com/2018/12/07/php-compile/"/>
+    <id>https://joewt.com/2018/12/07/php-compile/</id>
+    <published>2018-12-07T13:06:48.000Z</published>
+    <updated>2018-12-07T15:38:33.906Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>记录了PHP各个版本的源码编译选项以及编译过程中出现的错误和解决办法</p></blockquote><p>以下为每个版本的PHP的编译错误，以及可能会出现的问题  </p><a id="more"></a><p>PHP7.3.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/Users/joe/php-7.3.0 \</span><br><span class="line">--with-config-file-path=/Users/joe/php-7.3.0 \</span><br><span class="line">--enable-fpm \</span><br><span class="line">--with-fpm-user=www \</span><br><span class="line">--with-fpm-group=www \</span><br><span class="line">--enable-mysqlnd \</span><br><span class="line">--with-mysqli=mysqlnd \</span><br><span class="line">--with-pdo-mysql=mysqlnd \</span><br><span class="line">--enable-mysqlnd-compression-support \</span><br><span class="line">--with-iconv-dir \</span><br><span class="line">--with-freetype-dir \</span><br><span class="line">--with-jpeg-dir \</span><br><span class="line">--with-png-dir \</span><br><span class="line">--with-zlib \</span><br><span class="line">--with-libxml-dir \</span><br><span class="line">--enable-xml \</span><br><span class="line">--disable-rpath \</span><br><span class="line">--enable-bcmath \</span><br><span class="line">--enable-shmop \</span><br><span class="line">--enable-sysvsem \</span><br><span class="line">--enable-inline-optimization \</span><br><span class="line">--with-curl \</span><br><span class="line">--enable-mbregex \</span><br><span class="line">--enable-mbstring \</span><br><span class="line">--enable-intl \</span><br><span class="line">--with-mcrypt \</span><br><span class="line">--with-libmbfl \</span><br><span class="line">--enable-ftp \</span><br><span class="line">--with-gd \</span><br><span class="line">--enable-gd-native-ttf \</span><br><span class="line">--with-openssl \</span><br><span class="line">--with-mhash \</span><br><span class="line">--enable-pcntl \</span><br><span class="line">--enable-sockets \</span><br><span class="line">--with-xmlrpc \</span><br><span class="line">--enable-zip \</span><br><span class="line">--enable-soap \</span><br><span class="line">--with-gettext \</span><br><span class="line">--disable-fileinfo \</span><br><span class="line">--enable-opcache \</span><br><span class="line">--with-pear \</span><br><span class="line">--enable-maintainer-zts \</span><br><span class="line">--with-ldap=shared \</span><br><span class="line">--without-gdbm \</span><br></pre></td></tr></table></figure></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">configure: error: Cannot locate header file libintl.h</span><br><span class="line"></span><br><span class="line">在mac上运行</span><br><span class="line">brew install gettext</span><br><span class="line">之后编辑configure文件找到(大概在3.8w行左右)$PHP_GETTEXT /usr/local /usr</span><br><span class="line">并在后面添加/usr/local/opt/gettext</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">configure: error: Unable to detect ICU prefix or no failed. Please verify ICU install prefix and make sure icu-config works.</span><br><span class="line">在mac上运行</span><br><span class="line">brew install icu4c</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">export LDFLAGS=&quot;-L/usr/local/opt/icu4c/lib&quot;</span><br><span class="line">export CPPFLAGS=&quot;-I/usr/local/opt/icu4c/include&quot;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;记录了PHP各个版本的源码编译选项以及编译过程中出现的错误和解决办法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以下为每个版本的PHP的编译错误，以及可能会出现的问题  &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="PHP扩展开发" scheme="https://joewt.com/categories/PHP%E6%89%A9%E5%B1%95%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="PHP" scheme="https://joewt.com/tags/PHP/"/>
+    
+  </entry>
   
   <entry>
     <title>积极养鱼</title>

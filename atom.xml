@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://joewt.com/"/>
-  <updated>2018-12-07T15:41:01.365Z</updated>
+  <updated>2018-12-14T14:00:22.296Z</updated>
   <id>https://joewt.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>乔酱的检讨</title>
+    <link href="https://joewt.com/2018/12/14/self-criticism/"/>
+    <id>https://joewt.com/2018/12/14/self-criticism/</id>
+    <published>2018-12-14T13:34:32.000Z</published>
+    <updated>2018-12-14T14:00:22.296Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="乔酱认真的检讨"><a href="#乔酱认真的检讨" class="headerlink" title="乔酱认真的检讨"></a>乔酱认真的检讨</h2><p>乔酱爱二鱼，乔酱喜欢二鱼，在乔酱不在的日子，二鱼要记得按时吃饭，多吃肉，多跑步，二鱼记得晚上不要随便出门，出门也要跟室友一起。乔酱不在身边二鱼会不会想乔酱啊</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;乔酱认真的检讨&quot;&gt;&lt;a href=&quot;#乔酱认真的检讨&quot; class=&quot;headerlink&quot; title=&quot;乔酱认真的检讨&quot;&gt;&lt;/a&gt;乔酱认真的检讨&lt;/h2&gt;&lt;p&gt;乔酱爱二鱼，乔酱喜欢二鱼，在乔酱不在的日子，二鱼要记得按时吃饭，多吃肉，多跑步，二鱼记得晚上不要随便
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="https://joewt.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>PHP编译选项和常见错误</title>

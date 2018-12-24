@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://joewt.com/"/>
-  <updated>2018-12-14T14:00:22.296Z</updated>
+  <updated>2018-12-24T14:30:09.137Z</updated>
   <id>https://joewt.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>乔酱的圣诞宣言</title>
+    <link href="https://joewt.com/2018/12/24/joeanderyu/"/>
+    <id>https://joewt.com/2018/12/24/joeanderyu/</id>
+    <published>2018-12-24T14:27:56.000Z</published>
+    <updated>2018-12-24T14:30:09.137Z</updated>
+    
+    <content type="html"><![CDATA[<p>乔酱永远属于二鱼</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;乔酱永远属于二鱼&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="生活" scheme="https://joewt.com/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>乔酱的检讨</title>
@@ -541,31 +565,6 @@
       <category term="python" scheme="https://joewt.com/tags/python/"/>
     
       <category term="mysql" scheme="https://joewt.com/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>apue配置</title>
-    <link href="https://joewt.com/2018/02/03/apue-deploy/"/>
-    <id>https://joewt.com/2018/02/03/apue-deploy/</id>
-    <published>2018-02-03T00:55:00.000Z</published>
-    <updated>2018-02-04T14:30:16.789Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="apue-配置问题"><a href="#apue-配置问题" class="headerlink" title="apue 配置问题"></a>apue 配置问题</h3><h5 id="mac-系统配置"><a href="#mac-系统配置" class="headerlink" title="mac 系统配置"></a>mac 系统配置</h5><p>执行 make all</p><p>将 ./apue.3e/include/下的  apue.h 复制到 /usr/local/include/下<br>将 ./apue.3e/lib/下的 error.c 复制到 /usr/local/include/ 下<br>然后修改 apue.h文件  在最后添加 #include “error.c”<br><a id="more"></a></p><h5 id="Linux-系统的配置如上"><a href="#Linux-系统的配置如上" class="headerlink" title="Linux 系统的配置如上"></a>Linux 系统的配置如上</h5><p>使用的是centos7 系统 编译源码的时候发现如下错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gcc -ansi -I../include -Wall -DLINUX -D_GNU_SOURCE  barrier.c -o barrier  -L../lib -lapue -pthread -lrt -lbsd</span><br><span class="line">/tmp/ccF6O2ef.o: In function `thr_fn&apos;:</span><br><span class="line">barrier.c:(.text+0x80): undefined reference to `heapsort&apos;</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br><span class="line">make[1]: *** [barrier] Error 1</span><br><span class="line">make[1]: Leaving directory `/home/learnApue/apue.3e/threads&apos;</span><br><span class="line">make: *** [all] Error 1</span><br></pre></td></tr></table></figure></p><p>解决办法 <a href="https://pkgs.org/" target="_blank" rel="noopener">这里</a> 下载两个包<br>按照顺序安装<br>安装方法 rpm -Uvh xxxx.rpm  </p><p>这样就可以使用了</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;apue-配置问题&quot;&gt;&lt;a href=&quot;#apue-配置问题&quot; class=&quot;headerlink&quot; title=&quot;apue 配置问题&quot;&gt;&lt;/a&gt;apue 配置问题&lt;/h3&gt;&lt;h5 id=&quot;mac-系统配置&quot;&gt;&lt;a href=&quot;#mac-系统配置&quot; class=&quot;headerlink&quot; title=&quot;mac 系统配置&quot;&gt;&lt;/a&gt;mac 系统配置&lt;/h5&gt;&lt;p&gt;执行 make all&lt;/p&gt;
-&lt;p&gt;将 ./apue.3e/include/下的  apue.h 复制到 /usr/local/include/下&lt;br&gt;将 ./apue.3e/lib/下的 error.c 复制到 /usr/local/include/ 下&lt;br&gt;然后修改 apue.h文件  在最后添加 #include “error.c”&lt;br&gt;
-    
-    </summary>
-    
-      <category term="UNIX" scheme="https://joewt.com/categories/UNIX/"/>
-    
-    
-      <category term="UNIX" scheme="https://joewt.com/tags/UNIX/"/>
-    
-      <category term="C" scheme="https://joewt.com/tags/C/"/>
     
   </entry>
   
